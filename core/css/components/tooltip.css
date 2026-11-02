@@ -1,0 +1,10 @@
+/* Tooltip – внешний вид (форк темы Basecoat «vega»). Структура и поведение: vendor/basecoat/components/tooltip.css */
+@layer components {
+    [data-tooltip]::before {
+        @apply bg-foreground text-background inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs has-[.kbd]:pe-1.5 [&_.kbd]:relative [&_.kbd]:isolate [&_.kbd]:z-50 [&_.kbd]:rounded-sm;
+    }
+
+    [data-tooltip][data-arrow]::after {
+        @apply bg-foreground absolute z-60 size-2.5 rotate-45 rounded-[2px];
+    }
+}

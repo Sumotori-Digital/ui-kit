@@ -1,0 +1,91 @@
+/* Hero – главная цифра экрана: подпись, крупное значение, мини-график, изменение к прошлому периоду */
+@layer components {
+    .hero {
+        @apply ring-foreground/10 bg-card text-card-foreground grid gap-2 rounded-xl p-6 shadow-xs ring-1;
+    }
+
+    .hero-label {
+        @apply text-muted-foreground text-sm font-medium;
+    }
+
+    .hero-main {
+        @apply flex flex-wrap items-end justify-between gap-x-8 gap-y-4;
+    }
+
+    .hero-spark {
+        @apply min-w-0 flex-1 basis-64;
+    }
+
+    .hero-value {
+        @apply text-5xl leading-none font-semibold tracking-tight tabular-nums sm:text-6xl;
+    }
+
+    .hero[data-variant='destructive'] .hero-value {
+        @apply text-destructive;
+    }
+
+    .hero > p[data-trend] {
+        @apply inline-flex items-center gap-1 text-sm font-medium [&>svg]:size-4;
+    }
+
+    .hero > p[data-trend='good'] {
+        @apply text-success;
+    }
+
+    .hero > p[data-trend='bad'] {
+        @apply text-destructive;
+    }
+
+    .hero-hint {
+        @apply text-muted-foreground text-xs;
+    }
+
+    .hero-spark svg {
+        @apply block overflow-visible;
+    }
+
+    .spark-zero {
+        stroke: var(--border);
+        stroke-width: 1;
+    }
+
+    .spark-area {
+        fill: color-mix(in oklab, #2a78d6 10%, transparent);
+    }
+
+    .spark-line {
+        fill: none;
+        stroke: #2a78d6;
+        stroke-width: 2;
+        stroke-linejoin: round;
+    }
+
+    .spark-dot {
+        fill: #2a78d6;
+        stroke: var(--card);
+        stroke-width: 2;
+    }
+
+    svg[data-state='pending'] .spark-line {
+        stroke-dasharray: 1;
+        stroke-dashoffset: 1;
+    }
+
+    svg[data-state='playing'] .spark-line {
+        stroke-dasharray: 1;
+        animation: chart-draw 1200ms ease-out both;
+    }
+
+    svg[data-state='pending'] :is(.spark-dot, .spark-area) {
+        opacity: 0;
+    }
+
+    svg[data-state='playing'] .spark-area {
+        animation: chart-fade 900ms 300ms ease-out both;
+    }
+
+    svg[data-state='playing'] .spark-dot {
+        animation: chart-fade 300ms 1100ms ease-out both;
+    }
+
+}

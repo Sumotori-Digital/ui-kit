@@ -1,0 +1,38 @@
+/* Только для страницы /styleguide: секции, подписи, демо-площадки. В фичах не использовать */
+@layer components {
+    /* Секция: h2 + вводный абзац, дальше блоки «.sg-title → демо» */
+    .sg-section {
+        @apply scroll-mt-20 border-b pb-10 mb-10 last:border-0 last:pb-0 last:mb-0;
+    }
+
+    .sg-section > h2 {
+        @apply text-xl font-semibold tracking-tight mb-1;
+    }
+
+    .sg-section > h2 + p {
+        @apply text-sm text-muted-foreground;
+    }
+
+    /* Подпись блока – только с явным классом, иначе стили расползаются на h3 внутри компонентов (.item, поповер) */
+    .sg-title {
+        @apply mt-8 mb-3 text-sm font-medium text-muted-foreground;
+    }
+
+    /* Подпись под демо */
+    .sg-note {
+        @apply mt-2 text-xs text-muted-foreground;
+    }
+
+    /* Как вызвать фрагмент */
+    .sg-usage {
+        @apply mt-2 overflow-x-auto rounded-md border bg-muted/50 px-3 py-2 font-mono text-xs text-muted-foreground;
+    }
+
+    .sg-demo {
+        @apply flex flex-wrap items-center gap-3 rounded-lg border bg-card p-4;
+    }
+
+    .sg-swatch {
+        @apply h-14 rounded-md border shadow-xs;
+    }
+}

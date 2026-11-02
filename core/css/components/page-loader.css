@@ -1,0 +1,40 @@
+/* Полноэкранная загрузка скрывает промежуточное состояние компонентов при навигации. */
+@layer components {
+    .page-loader {
+        display: none;
+    }
+
+    .js .page-loader {
+        @apply fixed inset-0 z-100 flex items-center justify-center bg-background;
+        display: flex;
+        opacity: 1;
+        visibility: visible;
+        transition:
+            opacity 120ms ease,
+            visibility 120ms ease;
+    }
+
+    .js.page-ready .page-loader {
+        @apply pointer-events-none;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .page-loader > div {
+        @apply flex flex-col items-center gap-3 text-sm text-muted-foreground;
+    }
+
+    .page-loader svg {
+        @apply size-6 animate-spin text-primary;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .js .page-loader {
+            transition: none;
+        }
+
+        .page-loader svg {
+            animation: none;
+        }
+    }
+}

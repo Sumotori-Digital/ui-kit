@@ -1,0 +1,11 @@
+/* Checkbox – внешний вид (форк темы Basecoat «vega»). Структура и поведение: vendor/basecoat/components/checkbox.css */
+@layer components {
+    .field > input[type='checkbox']:not([role='switch']),
+    .input[type='checkbox']:not([role='switch']) {
+        @apply border-input checked:bg-primary checked:text-primary-foreground checked:border-primary aria-invalid:checked:border-primary aria-invalid:border-destructive focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 flex size-4 items-center justify-center rounded-[4px] border shadow-xs transition-shadow in-data-[disabled=true]:opacity-50 focus-visible:ring-3 aria-invalid:ring-3;
+    }
+
+    :is(.field > input[type='checkbox']:not([role='switch']), .input[type='checkbox']:not([role='switch'])):checked:after {
+        @apply size-3.5;
+    }
+}

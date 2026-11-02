@@ -1,0 +1,102 @@
+/* Компактное представление списков, которое заменяет таблицы до md. */
+@layer components {
+    .mobile-records {
+        @apply -mx-4 divide-y;
+    }
+
+    /* Списки с таблицей уже снимают боковые отступы у секции карточки. */
+    .card > section:has(> .table-container) > .mobile-records {
+        @apply mx-0;
+    }
+
+    .mobile-records > li {
+        @apply px-4 py-4 first:pt-0 last:pb-0;
+    }
+
+    .mobile-record-head {
+        @apply grid min-w-0 gap-2;
+    }
+
+    .mobile-subrecord-head {
+        @apply grid min-w-0 grid-cols-[minmax(0,1fr)_auto_auto] items-start gap-2;
+    }
+
+    .mobile-record-main {
+        @apply min-w-0;
+    }
+
+    .mobile-record-title {
+        @apply block min-w-0 font-medium text-primary break-words hover:underline;
+    }
+
+    .mobile-record-meta {
+        @apply mt-0.5 text-xs leading-relaxed text-muted-foreground break-words;
+    }
+
+    .mobile-record-status {
+        @apply justify-self-start;
+    }
+
+    .mobile-subrecords {
+        @apply mt-3 grid gap-2;
+    }
+
+    .mobile-subrecord {
+        @apply min-w-0 rounded-lg border bg-muted/20 p-3;
+    }
+
+    .mobile-record-action {
+        @apply mt-3 w-full;
+    }
+
+    .mobile-subrecord-action {
+        @apply mt-3 flex empty:hidden;
+    }
+
+    .mobile-subrecord-action > .btn {
+        @apply w-full;
+    }
+
+    .mobile-record-facts {
+        @apply mt-3 grid grid-cols-2 gap-x-4 gap-y-3 border-t pt-3;
+    }
+
+    .mobile-record-facts dt {
+        @apply text-xs text-muted-foreground;
+    }
+
+    .mobile-record-facts dd {
+        @apply mt-0.5 min-w-0 text-sm break-words;
+    }
+
+    .acceptance-subrecord-head {
+        @apply grid grid-cols-[minmax(0,1fr)_auto] items-start gap-2;
+    }
+
+    .acceptance-subrecord-actions {
+        @apply flex shrink-0 items-center gap-1;
+    }
+
+    .acceptance-subrecord-actions .btn {
+        @apply size-10;
+    }
+
+    .acceptance-photo-strip {
+        @apply -me-3 mt-3 flex gap-2 overflow-x-auto pe-3 pb-2;
+        scrollbar-width: thin;
+    }
+
+    .acceptance-photo-strip .thumb {
+        @apply size-14;
+    }
+
+    @media (max-width: 360px) {
+        .acceptance-subrecord-head {
+            @apply grid-cols-1;
+        }
+
+        .acceptance-subrecord-actions {
+            @apply justify-self-end;
+        }
+    }
+}

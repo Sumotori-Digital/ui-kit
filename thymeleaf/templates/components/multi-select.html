@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <div th:fragment="multiSelect" class="field">
+            <label th:for="${id + '-trigger'}" th:text="${label}"></label>
+            <div
+                th:id="${id}"
+                class="multi-select"
+                x-data="multiSelect"
+                th:data-placeholder="${placeholder ?: 'Все'}"
+                th:data-create="${create}"
+                th:data-name="${name}"
+                @change="sync()"
+            >
+                <div class="multi-select-picker popover">
+                    <button
+                        type="button"
+                        th:id="${id + '-trigger'}"
+                        aria-expanded="false"
+                        th:aria-controls="${id + '-popover'}"
+                    >
+                        <span
+                            th:if="${selectedList == true}"
+                            data-placeholder
+                            th:text="${placeholder ?: 'Все'}"
+                        ></span>
+                        <span
+                            th:if="${selectedList != true}"
+                            class="truncate"
+                            x-text="picked.length === 0 ? placeholder : picked.length <= 2 ? picked.map(item => item.name).join(', ') : 'Выбрано: ' + picked.length"
+                            th:text="${placeholder ?: 'Все'}"
+                        ></span>
+                        <svg th:replace="~{components/icon :: chevron-down}"></svg>
+                    </button>
+                    <div th:id="${id + '-popover'}" data-popover aria-hidden="true">
+                        <div class="input-group">
+                            <span><svg th:replace="~{components/icon :: search}"></svg></span>
+                            <input
+                                type="search"
+                                x-model="query"
+                                placeholder="Поиск…"
+                                autocomplete="off"
+                                @keydown.escape="query = ''"
+                            />
+                        </div>
+                        <button
+                            type="button"
+                            role="option"
+                            th:if="${selectedList == true}"
+                            th:each="o : ${options}"
+                            th:data-id="${o.key}"
+                            th:data-name="${o.value}"
+                            x-show="!query || $el.textContent.toLocaleLowerCase().includes(query.toLocaleLowerCase())"
+                            @click="toggle($el.dataset.id, $el.dataset.name)"
+                        >
+                            <span th:text="${o.value}"></span>
+                            <svg th:replace="~{components/icon :: check}"></svg>
+                        </button>
+                        <label
+                            th:if="${selectedList != true}"
+                            th:each="o : ${options}"
+                            x-show="!query || $el.textContent.toLocaleLowerCase().includes(query.toLocaleLowerCase())"
+                        >
+                            <input
+                                type="checkbox"
+                                class="input"
+                                th:name="${name}"
+                                th:value="${o.key}"
+                                th:checked="${selected != null and #lists.contains(selected.![toString()], o.key)}"
+                            />
+                            <span th:text="${o.value}"></span>
+                        </label>
+                        <div
+                            th:if="${create != null and canEdit}"
+                            data-quick-create
+                            x-ref="quickArea"
+                        >
+                            <button type="button" class="btn" data-variant="ghost" data-size="sm" x-show="!creating" @click="showCreate()">
+                                <svg th:replace="~{components/icon :: plus}"></svg>
+                                Добавить
+                            </button>
+                            <div data-quick-create-form x-show="creating" x-cloak>
+                                <input x-ref="createName" x-model="name" type="text" class="input" placeholder="Название" autocomplete="off" :disabled="busy" @keydown.escape.prevent="hideCreate()" />
+                                <div>
+                                    <button type="button" class="btn" data-size="sm" :disabled="busy || !name.trim()" @click="add()">Добавить</button>
+                                    <button type="button" class="btn" data-variant="ghost" data-size="sm" :disabled="busy" @click="hideCreate()">Отмена</button>
+                                </div>
+                                <p role="alert" x-show="error" x-text="error"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input
+                    th:each="value : ${selected}"
+                    th:if="${selectedList == true}"
+                    type="hidden"
+                    th:name="${name}"
+                    th:value="${value}"
+                    th:attr="data-selected-id=${value}"
+                />
+                <template th:if="${selectedList == true}" data-check>
+                    <svg th:replace="~{components/icon :: check}"></svg>
+                </template>
+                <ul
+                    class="multi-select-list"
+                    x-show="picked.length"
+                    x-cloak
+                    th:if="${selectedList == true}"
+                >
+                    <template x-for="item in picked" :key="item.id">
+                        <li>
+                            <span x-text="item.name" :title="item.name"></span>
+                            <button
+                                type="button"
+                                class="btn"
+                                data-variant="ghost"
+                                data-size="icon-sm"
+                                aria-label="Удалить"
+                                @click="remove(item.id)"
+                            >
+                                <svg th:replace="~{components/icon :: x}"></svg>
+                            </button>
+                        </li>
+                    </template>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>

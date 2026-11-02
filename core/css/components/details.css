@@ -1,0 +1,66 @@
+/* Details – наш компонент: пары ключ-значение в карточке. <dl class="details"><dt/><dd/></dl> */
+@layer components {
+    .details {
+        @apply grid grid-cols-[auto_1fr] gap-x-6 gap-y-2 text-sm;
+    }
+
+    .details > dt {
+        @apply text-muted-foreground;
+    }
+
+    .details > dd {
+        @apply font-medium;
+    }
+
+    .details[data-layout="rows"] {
+        @apply grid-cols-1;
+    }
+
+    .details[data-layout="rows"] > div {
+        @apply flex items-baseline justify-between gap-4;
+    }
+
+    .details[data-layout="rows"] > div > dt {
+        @apply text-muted-foreground;
+    }
+
+    .details[data-layout="rows"] > div > dd {
+        @apply text-right font-medium tabular-nums;
+    }
+
+    .details[data-layout="rows"] > div[data-total] {
+        @apply mt-1 border-t pt-3;
+    }
+
+    .details[data-layout="rows"] > div[data-total] > dt {
+        @apply font-medium text-foreground;
+    }
+
+    .details[data-layout="rows"] > div[data-total] > dd {
+        @apply font-semibold;
+    }
+
+    .details[data-layout="grid"] {
+        @apply grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-3;
+    }
+
+    .details[data-layout="grid"] > div {
+        @apply flex min-w-0 flex-col gap-1;
+    }
+
+    .details[data-layout="grid"] > div > dt {
+        @apply text-muted-foreground text-xs;
+    }
+
+    .details[data-layout="grid"] > div > dd {
+        @apply font-medium break-words;
+    }
+
+    .details[data-layout="grid"] > div > dd[data-empty] {
+        @apply text-muted-foreground font-normal;
+    }
+
+    .details[data-layout="grid"] > div > dd:has(> .badge) {
+        @apply flex flex-wrap gap-1;
+    }
+}

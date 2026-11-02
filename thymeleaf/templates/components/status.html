@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <span
+            th:fragment="status"
+            class="status"
+            th:classappend="${cls}"
+            th:data-kind="${kind}"
+            th:data-status="${#strings.toLowerCase(code)}"
+            th:text="${#messages.msgOrNull((kind ?: '') + 'Status.' + code) ?: (#messages.msgOrNull('status.' + code) ?: code)}"
+        ></span>
+
+        <span
+            th:fragment="statusBadge"
+            class="status"
+            th:classappend="${cls}"
+            data-variant="badge"
+            th:data-kind="${kind}"
+            th:data-status="${#strings.toLowerCase(code)}"
+            th:text="${#messages.msgOrNull((kind ?: '') + 'Status.' + code) ?: (#messages.msgOrNull('status.' + code) ?: code)}"
+        ></span>
+
+        <span
+            th:fragment="typeBadge"
+            class="badge"
+            th:classappend="${cls}"
+            th:data-variant="${variant} ?: 'secondary'"
+            th:text="#{${key + '.' + code}}"
+        ></span>
+
+        <span
+            th:fragment="flagBadge"
+            class="badge"
+            th:classappend="${cls}"
+            th:data-variant="${variant} ?: 'destructive'"
+        >
+            <svg th:replace="~{components/icon :: ${icon ?: 'triangle-alert'}}"></svg>
+            <th:block th:text="${text}"></th:block>
+        </span>
+    </body>
+</html>

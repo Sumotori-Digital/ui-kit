@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <form
+            th:fragment="filters"
+            th:id="${id + '-form'}"
+            class="card"
+            data-size="sm"
+            data-variant="toolbar"
+            th:action="@{${url}}"
+            method="get"
+            th:attr="x-data='{ open: ' + ${open} + ' }'"
+            th:hx-get="@{${url}}"
+            th:hx-include="${search} ?: '#f-q'"
+            th:hx-target="${target}"
+            th:hx-select="${target}"
+            hx-swap="outerHTML"
+            hx-push-url="true"
+        >
+            <header
+                role="button"
+                tabindex="0"
+                th:aria-controls="${id}"
+                x-bind:aria-expanded="open"
+                @click="open = !open"
+                @keydown.enter.prevent="open = !open"
+                @keydown.space.prevent="open = !open"
+            >
+                <h2 class="flex items-center gap-2">
+                    <svg
+                        th:replace="~{components/icon :: sliders-horizontal(cls='size-4 text-muted-foreground')}"
+                    ></svg>
+                    Фильтры
+                    <span
+                        class="font-normal text-muted-foreground"
+                        th:if="${open}"
+                        x-show="!open"
+                        th:text="'Найдено: ' + ${found}"
+                    ></span>
+                </h2>
+                <div class="card-action text-muted-foreground">
+                    <span
+                        x-show="!open"
+                        th:attr="x-cloak=${open} ? true : null"
+                        class="contents"
+                    >
+                        <svg
+                            th:replace="~{components/icon :: chevron-down(cls='size-4')}"
+                        ></svg>
+                    </span>
+                    <span
+                        x-show="open"
+                        th:attr="x-cloak=${open} ? null : true"
+                        class="contents"
+                    >
+                        <svg
+                            th:replace="~{components/icon :: chevron-up(cls='size-4')}"
+                        ></svg>
+                    </span>
+                </div>
+            </header>
+            <section
+                th:id="${id}"
+                x-show="open"
+                th:attr="x-cloak=${open} ? null : true"
+                class="grid gap-4 sm:grid-cols-2"
+                th:classappend="${cols == 3} ? 'lg:grid-cols-3' : 'lg:grid-cols-4'"
+                th:insert="${fields}"
+            ></section>
+            <footer
+                x-show="open"
+                th:attr="x-cloak=${open} ? null : true"
+                class="justify-end gap-2 border-t"
+            >
+                <a th:href="@{${resetUrl ?: url}}" class="btn" data-variant="outline">
+                    <svg th:replace="~{components/icon :: x}"></svg>
+                    Сбросить
+                </a>
+                <button type="submit" class="btn">
+                    <svg
+                        th:replace="~{components/icon :: loader(cls='htmx-indicator animate-spin')}"
+                    ></svg>
+                    Применить
+                </button>
+            </footer>
+        </form>
+    </body>
+</html>

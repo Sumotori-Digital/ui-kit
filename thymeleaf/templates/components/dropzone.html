@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <div th:fragment="dropzone" class="field">
+            <label th:for="${id}" th:text="${label}"></label>
+            <div
+                class="dropzone"
+                th:attr="data-multiple=${multiple} ? 'true' : 'false', data-compress=${compress} ? 'true' : null, data-instant=${instant} ? 'true' : null"
+                x-data="{ over: false, entries: [], seq: 0,
+                          add(list) {
+                              const files = [...list];
+                              const root = this.$root;
+                              if (root.dataset.instant === 'true') {
+                                  root.dispatchEvent(new CustomEvent('dropzone-files', { bubbles: true, detail: files }));
+                                  return;
+                              }
+                              const ready = root.dataset.compress === 'true' ? Promise.all(files.map(f => compressPhoto(f))) : Promise.resolve(files);
+                              ready.then(list => {
+                                  if (root.dataset.multiple !== 'true') this.entries = [];
+                                  for (const file of list) {
+                                      if (!this.entries.some(e => e.file.name === file.name && e.file.size === file.size))
+                                          this.entries.push({ id: this.seq++, file });
+                                  }
+                                  this.sync();
+                              });
+                          },
+                          remove(id) { this.entries = this.entries.filter(e => e.id !== id); this.sync() },
+                          sync() {
+                              const dt = new DataTransfer();
+                              this.entries.forEach(e => dt.items.add(e.file));
+                              this.$refs.input.files = dt.files;
+                          },
+                          drop(e) { this.over = false; this.add(e.dataTransfer.files) },
+                          size(f) { return f.size < 1048576 ? Math.round(f.size / 1024) + ' КБ' : (f.size / 1048576).toFixed(1) + ' МБ' },
+                          stem(name) { return name.replace(/\.[^.]+$/, '') },
+                          ext(name) { const m = name.match(/\.([^.]+)$/); return m ? m[1] : '' } }"
+                x-bind:data-over="over"
+                @dragover.prevent="over = true"
+                @dragleave="over = false"
+                @drop.prevent="drop($event)"
+            >
+                <label th:for="${id}">
+                    <input
+                        th:id="${id}"
+                        th:name="${instant} ? null : ${name}"
+                        type="file"
+                        th:accept="${accept}"
+                        th:multiple="${multiple}"
+                        th:required="${required}"
+                        th:attr="form=${formId}"
+                        x-ref="input"
+                        @change="add($el.files); if ($root.dataset.instant === 'true') $el.value = ''"
+                    />
+                    <svg th:replace="~{components/icon :: upload}"></svg>
+                    <p>
+                        <strong
+                            th:text="${multiple} ? 'Выберите файлы' : 'Выберите файл'"
+                        ></strong>
+                        или перетащите сюда
+                    </p>
+                    <p th:if="${hint}" th:text="${hint}"></p>
+                </label>
+                <ul x-show="entries.length" x-cloak>
+                    <template x-for="(e, i) in entries" :key="e.id">
+                        <li>
+                            <input
+                                th:if="${nameLabel}"
+                                type="text"
+                                name="names"
+                                class="input"
+                                th:aria-label="${nameLabel}"
+                                th:required="${nameRequired}"
+                                maxlength="200"
+                                th:attr="form=${formId}"
+                                x-init="$el.value = stem(e.file.name)"
+                            />
+                            <th:block th:if="${row}">
+                                <th:block th:insert="${row}"></th:block>
+                            </th:block>
+                            <span
+                                th:unless="${row != null or nameLabel != null}"
+                                class="truncate"
+                                x-text="e.file.name"
+                            ></span>
+                            <span
+                                class="badge"
+                                data-variant="secondary"
+                                data-slot="ext"
+                                x-text="ext(e.file.name)"
+                                x-show="ext(e.file.name)"
+                            ></span>
+                            <span data-slot="size" x-text="size(e.file)"></span>
+                            <button
+                                type="button"
+                                class="btn"
+                                data-variant="ghost"
+                                data-size="icon-sm"
+                                aria-label="Убрать файл"
+                                @click="remove(e.id)"
+                            >
+                                <svg th:replace="~{components/icon :: x}"></svg>
+                            </button>
+                        </li>
+                    </template>
+                </ul>
+                <div th:if="${camera}" data-camera>
+                    <input
+                        th:id="${id + '-camera'}"
+                        type="file"
+                        th:accept="${accept}"
+                        capture="environment"
+                        x-ref="camera"
+                        @change="add($el.files); $el.value = ''"
+                    />
+                    <button
+                        type="button"
+                        class="btn w-full sm:w-auto"
+                        data-variant="outline"
+                        @click="$refs.camera.click()"
+                    >
+                        <svg th:replace="~{components/icon :: camera}"></svg>
+                        Снять фото
+                    </button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

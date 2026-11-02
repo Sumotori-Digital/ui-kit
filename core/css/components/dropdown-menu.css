@@ -1,0 +1,55 @@
+/* Dropdown Menu – внешний вид (форк темы Basecoat «vega»). Структура и поведение: vendor/basecoat/components/dropdown-menu.css */
+@layer components {
+    .dropdown-menu > [data-popover] {
+        @apply bg-popover text-popover-foreground ring-foreground/10 gap-0 overflow-x-hidden overflow-y-auto rounded-md p-1 shadow-md ring-1 duration-100;
+    }
+
+    .dropdown-menu :is([role='menuitem'], [role='menuitemcheckbox'], [role='menuitemradio']) {
+        @apply gap-2 rounded-sm px-2 py-1.5 text-sm focus-visible:bg-accent focus-visible:text-accent-foreground [&_svg:not([class*='size-'])]:size-4;
+    }
+
+    .dropdown-menu :is([role='menuitem'], [role='menuitemcheckbox'], [role='menuitemradio']).active {
+        @apply bg-muted text-foreground;
+    }
+
+    .dropdown-menu [data-variant='destructive'] {
+        @apply text-destructive;
+    }
+
+    .dropdown-menu [data-variant='destructive']:is(:focus-visible, .active) {
+        @apply bg-destructive/10 text-destructive;
+    }
+
+    .dropdown-menu [data-variant='destructive'] svg {
+        @apply text-destructive;
+    }
+
+    .dropdown-menu :is([role='menuitemcheckbox'], [role='menuitemradio']) {
+        @apply py-1.5 pe-8 ps-2;
+    }
+
+    .dropdown-menu :is([role='menuitem'], [role='menuitemcheckbox'], [role='menuitemradio'])[data-inset],
+    .dropdown-menu [role='heading'][data-inset] {
+        @apply ps-8;
+    }
+
+    .dropdown-menu [data-indicator] {
+        @apply absolute inset-e-2 flex items-center justify-center;
+    }
+
+    .dropdown-menu [role='heading'] {
+        @apply text-muted-foreground px-2 py-1.5 text-xs font-medium;
+    }
+
+    .dropdown-menu [role='separator'] {
+        @apply bg-border -mx-1 my-1 h-px;
+    }
+
+    .dropdown-menu :is([data-shortcut], kbd:last-child, .kbd:last-child) {
+        @apply text-muted-foreground font-sans text-xs tracking-widest;
+    }
+
+    .dropdown-menu :is([role='menuitem'], [role='menuitemcheckbox'], [role='menuitemradio']):is(:focus-visible, .active) :is([data-shortcut], kbd:last-child, .kbd:last-child) {
+        @apply text-accent-foreground;
+    }
+}

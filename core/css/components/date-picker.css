@@ -1,0 +1,37 @@
+@layer components {
+    .date-picker {
+        @apply relative;
+    }
+
+    .date-picker > [data-popover] {
+        @apply w-72 min-w-0 gap-3 p-3;
+    }
+
+    .date-picker > [data-popover] > header {
+        @apply flex items-center justify-between text-sm font-medium tabular-nums;
+    }
+
+    .date-picker > [data-popover] > [role='group'] {
+        @apply grid grid-cols-7 gap-1;
+    }
+
+    .date-picker > [data-popover] > [role='group'][data-view] {
+        @apply grid-cols-3;
+    }
+
+    .date-picker > [data-popover] > header > .btn:disabled {
+        @apply opacity-100;
+    }
+
+    .date-picker > [data-popover] > [role='group'] > span {
+        @apply text-muted-foreground py-1 text-center text-xs;
+    }
+
+    .date-picker > [data-popover] > [role='group'] > .btn {
+        @apply w-full px-0 tabular-nums;
+    }
+
+    .date-picker > [data-popover] > [role='group'] > .btn:disabled {
+        @apply invisible;
+    }
+}

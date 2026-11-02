@@ -1,0 +1,21 @@
+@layer components {
+    .scan-field {
+        @apply flex gap-2;
+    }
+
+    .scan-field > .input-group {
+        @apply min-w-0 flex-1;
+    }
+
+    .scanner-view {
+        @apply relative overflow-hidden rounded-md bg-muted;
+    }
+
+    .scanner-view > video {
+        @apply block aspect-square w-full object-cover;
+    }
+
+    .scanner-view > span {
+        @apply pointer-events-none absolute inset-[20%] rounded-lg border-2 border-white/90 shadow-[0_0_0_9999px_rgb(0_0_0/0.35)];
+    }
+}

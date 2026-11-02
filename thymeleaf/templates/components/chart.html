@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<body>
+<figure th:fragment="columnChart" class="chart-figure" x-data="columnChart">
+    <script type="application/json" x-ref="data" th:utext="${json}"></script>
+    <div class="chart" x-ref="plot" role="group" th:aria-label="${label}"></div>
+    <ul class="chart-legend">
+        <li class="chart-legend-item" th:each="s : ${data.series}" th:attr="data-series=${s.key}">
+            <span class="chart-legend-indicator"></span>
+            <span th:text="${s.label}"></span>
+        </li>
+    </ul>
+    <div class="chart-tooltip" x-ref="tip" hidden></div>
+</figure>
+<figure th:fragment="profitChart" class="chart-figure" x-data="profitChart">
+    <script type="application/json" x-ref="data" th:utext="${json}"></script>
+    <div class="chart chart-tall" x-ref="plot" role="group" th:aria-label="${label}"></div>
+    <ul class="chart-legend">
+        <li class="chart-legend-item" data-series="profit">
+            <span class="chart-legend-indicator"></span>
+            <span>Результат месяца</span>
+        </li>
+        <li class="chart-legend-item" data-series="loss">
+            <span class="chart-legend-indicator"></span>
+            <span>Отрицательный результат</span>
+        </li>
+        <li class="chart-legend-item" data-series="cumulative">
+            <span class="chart-legend-indicator chart-legend-line"></span>
+            <span>Итог с начала периода</span>
+        </li>
+    </ul>
+    <div class="chart-tooltip" x-ref="tip" hidden></div>
+</figure>
+</body>
+</html>

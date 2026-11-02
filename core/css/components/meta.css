@@ -1,0 +1,10 @@
+/* Вторичные сведения разделяются отступами и переносятся целыми пунктами. */
+@layer components {
+    .meta-line {
+        @apply flex flex-wrap items-baseline gap-x-4 gap-y-1 text-xs text-muted-foreground;
+    }
+
+    .meta-line > span {
+        @apply min-w-0 break-words;
+    }
+}

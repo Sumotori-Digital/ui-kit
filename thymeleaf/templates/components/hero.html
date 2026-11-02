@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<body>
+<section th:fragment="hero" class="hero" th:attr="data-variant=${variant}">
+    <p class="hero-label" th:text="${label}"></p>
+    <div class="hero-main">
+        <p class="hero-value" x-data="countUp" th:attr="data-value=${amount}, data-format=${format ?: 'money'}" th:text="${value}"></p>
+        <div th:if="${spark != null and !#strings.isEmpty(spark)}" class="hero-spark" x-data="sparkline" th:attr="data-points=${spark}"></div>
+    </div>
+    <p th:if="${change != null and change.known()}" th:attr="data-trend=${change.good() ? 'good' : 'bad'}">
+        <th:block th:if="${change.up()}"><svg th:replace="~{components/icon :: trending-up}"></svg></th:block>
+        <th:block th:unless="${change.up()}"><svg th:replace="~{components/icon :: trending-down}"></svg></th:block>
+        <span th:text="${(change.percent().signum() > 0 ? '+' : (change.percent().signum() < 0 ? '−' : '')) + change.percent().abs() + '% к прошлому периоду'}"></span>
+    </p>
+    <p th:if="${hint}" class="hero-hint" th:text="${hint}"></p>
+</section>
+</body>
+</html>

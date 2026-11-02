@@ -1,0 +1,51 @@
+/* Кликабельный показатель для обзорной страницы. */
+@layer components {
+    .home-section + .home-section,
+    .home-overview-grid + .home-section {
+        @apply mt-8;
+    }
+
+    .home-section-heading {
+        @apply mb-3 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4;
+    }
+
+    .home-section-heading h2 {
+        @apply text-base font-semibold;
+    }
+
+    .home-section-heading p {
+        @apply text-sm text-muted-foreground;
+    }
+
+    .dashboard-metrics {
+        @apply grid gap-3 sm:grid-cols-2 xl:grid-cols-4;
+    }
+
+    .dashboard-metric {
+        @apply flex min-w-0 flex-col rounded-xl bg-card p-5 text-card-foreground shadow-xs ring-1 ring-foreground/10 transition-colors hover:bg-primary/5 hover:ring-primary/25 focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring/50;
+    }
+
+    .dashboard-metric[data-variant='accent'] {
+        @apply bg-primary/5 ring-primary/15;
+    }
+
+    .dashboard-metric-label {
+        @apply text-sm font-medium text-muted-foreground;
+    }
+
+    .dashboard-metric-value {
+        @apply mt-3 text-3xl font-semibold tracking-tight tabular-nums;
+    }
+
+    .dashboard-metric[data-variant='accent'] .dashboard-metric-value {
+        @apply text-primary;
+    }
+
+    .dashboard-metric-footer {
+        @apply mt-2 flex items-center justify-between gap-2 text-xs text-muted-foreground;
+    }
+
+    .dashboard-metric-footer > svg {
+        @apply size-4 shrink-0;
+    }
+}

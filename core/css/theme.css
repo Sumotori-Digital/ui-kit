@@ -1,0 +1,52 @@
+/*
+ * Токены дизайн-системы: единственное место, где задаются цвета, радиус и шрифт.
+ * Переопределяют дефолты Basecoat (vendor/basecoat/base/base.css). Тема одна – светлая.
+ * Цвета из static/images/logo.svg: синий #005DAA, серый #B1B3B5.
+ */
+
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url("/fonts/InterVariable.woff2") format("woff2");
+}
+
+@theme {
+    --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+
+    /* Семантические цвета статусов, которых нет в Basecoat */
+    --color-success: var(--success);
+    --color-success-foreground: var(--success-foreground);
+    --color-warning: var(--warning);
+    --color-warning-foreground: var(--warning-foreground);
+}
+
+:root {
+    --radius: 0.5rem;
+
+    --primary: oklch(0.477 0.144 252.3);            /* #005DAA */
+    --primary-foreground: oklch(0.985 0 0);
+    --ring: oklch(0.65 0.13 252.3);
+
+    --sidebar-primary: var(--primary);
+    --sidebar-primary-foreground: var(--primary-foreground);
+
+    --success: oklch(0.55 0.15 150);
+    --success-foreground: oklch(0.985 0 0);
+    --warning: oklch(0.72 0.16 70);
+    --warning-foreground: oklch(0.2 0 0);
+
+    /* Палитра статусов: один оттенок – одно состояние, внутри раздела цвета не повторяются */
+    --status-slate: oklch(0.55 0.02 252.3);
+    --status-teal: oklch(0.60 0.10 195);
+    --status-cyan: oklch(0.68 0.11 215);
+    --status-blue: var(--primary);
+    --status-indigo: oklch(0.50 0.14 275);
+    --status-violet: oklch(0.55 0.16 305);
+    --status-fuchsia: oklch(0.58 0.19 340);
+    --status-amber: var(--warning);
+    --status-orange: oklch(0.63 0.17 40);
+    --status-green: var(--success);
+    --status-red: var(--destructive);
+}

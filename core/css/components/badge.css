@@ -1,0 +1,28 @@
+/* Badge – внешний вид (форк темы Basecoat «vega»). Структура и поведение: vendor/basecoat/components/badge.css */
+@layer components {
+    .badge {
+        @apply h-5 gap-1 rounded-4xl border border-transparent px-2 py-0.5 text-xs font-medium transition-all [&>svg]:size-3!;
+    }
+
+    .badge:not([data-variant]),
+    .badge[data-variant='primary'] {
+        @apply bg-primary text-primary-foreground [a]:hover:bg-primary/80;
+    }
+
+    .badge[data-variant='secondary'] {
+        @apply bg-secondary text-secondary-foreground [a]:hover:bg-secondary/80;
+    }
+
+    .badge[data-variant='outline'] {
+        @apply border-border text-foreground [a]:hover:bg-muted [a]:hover:text-muted-foreground;
+    }
+
+    .badge[data-variant='destructive'] {
+        @apply bg-destructive/10 [a]:hover:bg-destructive/20 focus-visible:ring-destructive/20 text-destructive;
+    }
+
+    /* Наши варианты: в Basecoat есть только destructive */
+    .badge[data-variant='warning'] {
+        @apply border-transparent bg-warning/15 text-warning-foreground;
+    }
+}

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <div th:fragment="quickActions" class="quick-actions">
+            <button
+                type="button"
+                class="btn"
+                data-variant="ghost"
+                data-size="icon-sm"
+                th:popovertarget="'qa-' + ${id}"
+                aria-expanded="false"
+                aria-label="Быстрые действия"
+                data-tooltip="Быстрые действия"
+                data-align="end"
+            >
+                <svg th:replace="~{components/icon :: zap}"></svg>
+            </button>
+            <div
+                th:id="'qa-' + ${id}"
+                popover
+                class="quick-actions-menu"
+                th:aria-labelledby="'qa-' + ${id} + '-title'"
+            >
+                <header>
+                    <h3 th:id="'qa-' + ${id} + '-title'" th:text="${title}"></h3>
+                    <p th:if="${subtitle}" th:text="${subtitle}"></p>
+                </header>
+                <div class="quick-actions-grid" th:insert="${items}"></div>
+            </div>
+        </div>
+    </body>
+</html>

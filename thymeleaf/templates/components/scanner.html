@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <button
+            th:fragment="cameraButton(target)"
+            type="button"
+            class="btn"
+            data-variant="outline"
+            th:attr="data-scan-camera=${target}"
+        >
+            <svg th:replace="~{components/icon :: camera}"></svg>
+            Камера
+        </button>
+
+        <button
+            th:fragment="barcodeButton(target)"
+            type="button"
+            class="btn"
+            data-variant="outline"
+            th:attr="data-scan-camera=${target}"
+            data-scan-format="barcode"
+        >
+            <svg th:replace="~{components/icon :: camera}"></svg>
+            Камера
+        </button>
+
+        <div th:fragment="scanField" class="field" th:classappend="${cls}">
+            <label th:for="${id}" th:text="${label}"></label>
+            <div class="scan-field">
+                <div class="input-group">
+                    <span
+                        ><svg
+                            th:replace="~{components/icon :: ${barcode == true ? 'barcode' : 'scan-line'}}"
+                        ></svg
+                    ></span>
+                    <input
+                        th:id="${id}"
+                        th:name="${name}"
+                        type="text"
+                        autocomplete="off"
+                        th:placeholder="${placeholder} ?: 'Отсканируйте код'"
+                        th:required="${submit}"
+                        th:autofocus="${autofocus}"
+                        th:attr="inputmode=${barcode} ? 'numeric' : null, data-scan-submit=${submit} ? '' : null"
+                        th:x-model="${pick} ? 'code' : null"
+                        th:x-on:keydown.enter.prevent="${pick} ? 'pick()' : null"
+                    />
+                </div>
+                <th:block th:if="${barcode}">
+                    <button th:replace="~{:: barcodeButton(target=${id})}"></button>
+                </th:block>
+                <th:block th:unless="${barcode}">
+                    <button th:replace="~{:: cameraButton(target=${id})}"></button>
+                </th:block>
+            </div>
+            <p th:if="${hint}" th:text="${hint}"></p>
+        </div>
+
+        <div
+            th:fragment="barcodeField"
+            class="field"
+            th:with="invalid=${#fields.hasErrors(name)}, rules=${@fieldRules.of(#object, name)}"
+            th:attr="data-invalid=${invalid} ? 'true' : null"
+        >
+            <label th:for="${name}" th:text="${label}"></label>
+            <div class="scan-field">
+                <div class="input-group">
+                    <span><svg th:replace="~{components/icon :: barcode}"></svg></span>
+                    <input
+                        type="text"
+                        inputmode="numeric"
+                        autocomplete="off"
+                        th:field="*{__${name}__}"
+                        th:placeholder="${placeholder}"
+                        th:attr="aria-invalid=${invalid} ? 'true' : null, data-rules=${rules}"
+                        x-on:keydown.enter.prevent
+                    />
+                </div>
+                <button th:replace="~{:: barcodeButton(target=${name})}"></button>
+            </div>
+            <p th:if="${hint}" th:text="${hint}"></p>
+            <p role="alert" th:if="${invalid}" th:errors="*{__${name}__}"></p>
+        </div>
+
+        <th:block th:fragment="scannerDialog">
+            <dialog
+                id="qr-scanner"
+                class="dialog scanner"
+                aria-labelledby="qr-scanner-title"
+                th:attr="data-fallback=@{/js/jsqr.min.js}, data-barcode-fallback=@{/js/zxing.min.js}"
+                onclick="if (event.target === this) this.close();"
+            >
+                <div>
+                    <header>
+                        <h2 id="qr-scanner-title" data-title>Сканирование QR-кода</h2>
+                        <p data-status>Поместите QR-код в рамку</p>
+                    </header>
+                    <section>
+                        <div class="scanner-view">
+                            <video muted playsinline></video>
+                            <span aria-hidden="true"></span>
+                        </div>
+                    </section>
+                    <footer>
+                        <button
+                            type="button"
+                            class="btn"
+                            data-variant="outline"
+                            onclick="this.closest('dialog').close()"
+                        >
+                            Закрыть
+                        </button>
+                    </footer>
+                </div>
+            </dialog>
+        </th:block>
+    </body>
+</html>

@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="metaLine" class="meta-line">
+    <th:block th:each="item : ${items}">
+        <span th:if="${!#strings.isEmpty(item)}" th:text="${item}"></span>
+    </th:block>
+</div>
+</body>
+</html>

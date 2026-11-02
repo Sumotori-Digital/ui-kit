@@ -1,0 +1,6 @@
+/* Toast – внешний вид (форк темы Basecoat «vega»). Структура и поведение: vendor/basecoat/components/toast.css */
+@layer components {
+    .toast-content {
+        @apply bg-popover text-popover-foreground border shadow-lg rounded-2xl;
+    }
+}

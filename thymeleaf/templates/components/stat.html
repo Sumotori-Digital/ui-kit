@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<body>
+<dl th:fragment="stat" class="stat" th:attr="data-variant=${variant}, data-size=${size}">
+    <dt th:text="${label}"></dt>
+    <dd th:text="${value}" th:attr="x-data=${amount != null} ? 'countUp' : null, data-value=${amount}, data-format=${format}"></dd>
+    <p th:if="${change != null and change.known()}" th:attr="data-trend=${change.good() ? 'good' : 'bad'}">
+        <th:block th:if="${change.up()}"><svg th:replace="~{components/icon :: trending-up}"></svg></th:block>
+        <th:block th:unless="${change.up()}"><svg th:replace="~{components/icon :: trending-down}"></svg></th:block>
+        <span th:text="${(change.percent().signum() > 0 ? '+' : (change.percent().signum() < 0 ? '−' : '')) + change.percent().abs() + '% к прошлому периоду'}"></span>
+    </p>
+    <p th:if="${hint}" th:text="${hint}"></p>
+</dl>
+</body>
+</html>

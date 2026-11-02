@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<body>
+<nav th:fragment="pagination" class="pagination" aria-label="Пагинация" th:if="${pages > 1}">
+    <a th:href="@{${url}(page=${page - 1})}" th:attr="aria-disabled=${page <= 1} ? 'true' : null" aria-label="Назад">
+        <svg th:replace="~{components/icon :: chevron-left(cls='size-4')}"></svg>
+    </a>
+    <th:block th:each="i : ${#numbers.sequence(1, pages)}">
+        <a th:if="${i == 1 or i == pages or (i - page <= 1 and page - i <= 1)}"
+           th:href="@{${url}(page=${i})}" th:attr="aria-current=${i == page} ? 'page' : null" th:text="${i}"></a>
+        <span th:if="${(i == 2 and page > 3) or (i == pages - 1 and page < pages - 2)}">…</span>
+    </th:block>
+    <a th:href="@{${url}(page=${page + 1})}" th:attr="aria-disabled=${page >= pages} ? 'true' : null" aria-label="Вперёд">
+        <svg th:replace="~{components/icon :: chevron-right(cls='size-4')}"></svg>
+    </a>
+</nav>
+</body>
+</html>

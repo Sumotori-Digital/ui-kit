@@ -1,0 +1,2541 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ui-kit</title>
+    <script>document.documentElement.classList.add('js')</script>
+    <link rel="stylesheet" href="catalog.css">
+    <script src="../core/js/basecoat.min.js" defer></script>
+    <script src="../core/js/htmx.min.js" defer></script>
+    <script src="../core/js/charts.js" defer></script>
+    <script src="../core/js/ui-kit.js" defer></script>
+    <script src="../core/js/alpine.min.js" defer></script>
+    <script src="../core/js/validation.js" defer></script>
+</head>
+<body class="min-h-dvh">
+<div class="mx-auto max-w-7xl p-4 md:p-6">
+<main class="min-w-0 flex-1 overflow-x-clip p-4 md:p-6">
+    <div class="page-header">
+        <div>
+            <h1>ui-kit</h1>
+        </div>
+    </div>
+
+    <div class="grid gap-6 lg:grid-cols-[12rem_1fr] lg:gap-10">
+        <nav aria-label="Разделы стайлгайда" class="min-w-0 lg:sticky lg:top-20 lg:self-start">
+            <ul class="-mx-4 flex gap-1 overflow-x-auto px-4 text-sm lg:mx-0 lg:flex-col lg:overflow-visible lg:px-0">
+                
+                <li>
+                    <a href="#tokens" class="block whitespace-nowrap rounded-md px-3 py-1.5 text-muted-foreground hover:bg-muted hover:text-foreground">Токены</a>
+                </li>
+                <li>
+                    <a href="#typography" class="block whitespace-nowrap rounded-md px-3 py-1.5 text-muted-foreground hover:bg-muted hover:text-foreground">Типографика</a>
+                </li>
+                <li>
+                    <a href="#buttons" class="block whitespace-nowrap rounded-md px-3 py-1.5 text-muted-foreground hover:bg-muted hover:text-foreground">Кнопки</a>
+                </li>
+                <li>
+                    <a href="#forms" class="block whitespace-nowrap rounded-md px-3 py-1.5 text-muted-foreground hover:bg-muted hover:text-foreground">Формы</a>
+                </li>
+                <li>
+                    <a href="#data" class="block whitespace-nowrap rounded-md px-3 py-1.5 text-muted-foreground hover:bg-muted hover:text-foreground">Данные</a>
+                </li>
+                <li>
+                    <a href="#feedback" class="block whitespace-nowrap rounded-md px-3 py-1.5 text-muted-foreground hover:bg-muted hover:text-foreground">Обратная связь</a>
+                </li>
+                <li>
+                    <a href="#overlays" class="block whitespace-nowrap rounded-md px-3 py-1.5 text-muted-foreground hover:bg-muted hover:text-foreground">Оверлеи</a>
+                </li>
+                <li>
+                    <a href="#navigation" class="block whitespace-nowrap rounded-md px-3 py-1.5 text-muted-foreground hover:bg-muted hover:text-foreground">Навигация</a>
+                </li>
+                <li>
+                    <a href="#htmx" class="block whitespace-nowrap rounded-md px-3 py-1.5 text-muted-foreground hover:bg-muted hover:text-foreground">HTMX + Alpine</a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <div class="min-w-0">
+            
+            <section id="tokens" class="sg-section">
+    <h2>Токены</h2>
+    <p>Цвета задаются семантическими CSS-переменными из <code>css/theme.css</code>, никаких <code>bg-blue-600</code> в шаблонах. Чтобы изменить фирменные цвета, достаточно поправить один файл.</p>
+
+    <h3 class="sg-title">Бренд и семантика</h3>
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+        <div>
+            <div class="sg-swatch bg-primary"></div>
+            <div class="mt-1.5 text-sm font-medium">Primary</div>
+            <div class="text-xs text-muted-foreground">#005DAA, действия и акценты</div>
+        </div>
+        <div>
+            <div class="sg-swatch bg-destructive"></div>
+            <div class="mt-1.5 text-sm font-medium">Destructive</div>
+            <div class="text-xs text-muted-foreground">удаление, ошибки</div>
+        </div>
+        <div>
+            <div class="sg-swatch bg-success"></div>
+            <div class="mt-1.5 text-sm font-medium">Success</div>
+            <div class="text-xs text-muted-foreground">успех, активные статусы</div>
+        </div>
+        <div>
+            <div class="sg-swatch bg-warning"></div>
+            <div class="mt-1.5 text-sm font-medium">Warning</div>
+            <div class="text-xs text-muted-foreground">предупреждения</div>
+        </div>
+    </div>
+
+    <h3 class="sg-title">Поверхности и текст</h3>
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+        <div>
+            <div class="sg-swatch bg-background"></div>
+            <div class="mt-1.5 text-sm font-medium">background</div>
+            <div class="text-xs text-muted-foreground">фон страницы</div>
+        </div>
+        <div>
+            <div class="sg-swatch bg-card"></div>
+            <div class="mt-1.5 text-sm font-medium">card</div>
+            <div class="text-xs text-muted-foreground">карточки, панели</div>
+        </div>
+        <div>
+            <div class="sg-swatch bg-muted"></div>
+            <div class="mt-1.5 text-sm font-medium">muted</div>
+            <div class="text-xs text-muted-foreground">вторичный фон, hover</div>
+        </div>
+        <div>
+            <div class="sg-swatch bg-secondary"></div>
+            <div class="mt-1.5 text-sm font-medium">secondary</div>
+            <div class="text-xs text-muted-foreground">вторичные кнопки</div>
+        </div>
+        <div>
+            <div class="sg-swatch bg-foreground"></div>
+            <div class="mt-1.5 text-sm font-medium">foreground</div>
+            <div class="text-xs text-muted-foreground">основной текст</div>
+        </div>
+        <div>
+            <div class="sg-swatch bg-muted-foreground"></div>
+            <div class="mt-1.5 text-sm font-medium">muted-foreground</div>
+            <div class="text-xs text-muted-foreground">вторичный текст</div>
+        </div>
+        <div>
+            <div class="sg-swatch bg-border"></div>
+            <div class="mt-1.5 text-sm font-medium">border</div>
+            <div class="text-xs text-muted-foreground">бордеры</div>
+        </div>
+        <div>
+            <div class="sg-swatch bg-ring"></div>
+            <div class="mt-1.5 text-sm font-medium">ring</div>
+            <div class="text-xs text-muted-foreground">кольцо фокуса</div>
+        </div>
+    </div>
+
+    <h3 class="sg-title">Отступы</h3>
+    <p class="mb-3 text-sm text-muted-foreground">Шкала 4px: <code>gap-1</code> = 4, <code>gap-2</code> = 8, <code>gap-4</code> = 16, <code>gap-6</code> = 24. Внутри компонентов используйте 2-4, между блоками 4-6, между секциями 8-10.</p>
+    <div class="flex items-end gap-3">
+        <div class="flex flex-col items-center gap-1">
+            <div class="bg-primary/30 rounded-sm size-1"></div>
+            <span class="text-xs text-muted-foreground">1</span>
+        </div>
+        <div class="flex flex-col items-center gap-1">
+            <div class="bg-primary/30 rounded-sm size-2"></div>
+            <span class="text-xs text-muted-foreground">2</span>
+        </div>
+        <div class="flex flex-col items-center gap-1">
+            <div class="bg-primary/30 rounded-sm size-3"></div>
+            <span class="text-xs text-muted-foreground">3</span>
+        </div>
+        <div class="flex flex-col items-center gap-1">
+            <div class="bg-primary/30 rounded-sm size-4"></div>
+            <span class="text-xs text-muted-foreground">4</span>
+        </div>
+        <div class="flex flex-col items-center gap-1">
+            <div class="bg-primary/30 rounded-sm size-6"></div>
+            <span class="text-xs text-muted-foreground">6</span>
+        </div>
+        <div class="flex flex-col items-center gap-1">
+            <div class="bg-primary/30 rounded-sm size-8"></div>
+            <span class="text-xs text-muted-foreground">8</span>
+        </div>
+        <div class="flex flex-col items-center gap-1">
+            <div class="bg-primary/30 rounded-sm size-10"></div>
+            <span class="text-xs text-muted-foreground">10</span>
+        </div>
+    </div>
+
+    <h3 class="sg-title">Скругления и тени</h3>
+    <div class="sg-demo">
+        <div class="size-16 rounded-sm border bg-background"><span class="sr-only">sm</span></div>
+        <div class="size-16 rounded-md border bg-background"></div>
+        <div class="size-16 rounded-lg border bg-background"></div>
+        <div class="size-16 rounded-xl border bg-background"></div>
+        <div class="size-16 rounded-full border bg-background"></div>
+        <div class="ml-4 size-16 rounded-lg bg-card shadow-xs"></div>
+        <div class="size-16 rounded-lg bg-card shadow-sm"></div>
+        <div class="size-16 rounded-lg bg-card shadow-md"></div>
+    </div>
+    <p class="sg-note">rounded-sm / md / lg / xl / full, shadow-xs / sm / md. <code>shadow-md</code> используйте только для всплывающих элементов.</p>
+</section>
+            <section id="typography" class="sg-section">
+    <h2>Типографика</h2>
+    <p>Inter Variable, self-hosted. Базовый размер 14px (<code>text-sm</code>) для интерфейса, 16px для длинного текста. Кириллица и латиница одним шрифтом.</p>
+
+    <div class="grid gap-6 lg:grid-cols-2">
+        <div class="space-y-4">
+            <h3 class="sg-title">Заголовки</h3>
+            <div>
+                <div class="text-2xl font-semibold tracking-tight">Заголовок страницы</div>
+                <div class="text-xs text-muted-foreground">text-2xl font-semibold tracking-tight, .page-header h1</div>
+            </div>
+            <div>
+                <div class="text-base font-medium">Заголовок карточки</div>
+                <div class="text-xs text-muted-foreground">text-base font-medium, card &gt; header &gt; h2</div>
+            </div>
+        </div>
+
+        <div class="space-y-4">
+            <h3 class="sg-title">Текст</h3>
+            <div>
+                <p class="text-base">Основной текст используется для описаний, инструкций и комментариев. Высота строки 1.5.</p>
+                <div class="text-xs text-muted-foreground">text-base</div>
+            </div>
+            <div>
+                <p class="text-sm">Интерфейсный текст: таблицы, формы, карточки. Это размер по умолчанию для всего, что не «статья».</p>
+                <div class="text-xs text-muted-foreground">text-sm</div>
+            </div>
+            <div>
+                <p class="text-sm text-muted-foreground">Вторичный текст: подсказки, метаданные, «обновлено вчера».</p>
+                <div class="text-xs text-muted-foreground">text-sm text-muted-foreground</div>
+            </div>
+            <div>
+                <p class="text-xs text-muted-foreground">Подпись: под полями, в футерах карточек, для timestamp.</p>
+                <div class="text-xs text-muted-foreground">text-xs text-muted-foreground</div>
+            </div>
+            <div>
+                <p class="text-sm">Ссылка на запись в таблице или карточке: <a href="#typography" class="link">Toyota Hiace</a>, второстепенная: <a href="#typography" class="link" data-variant="plain">Аукцион USS</a>. На <code>&lt;button&gt;</code> тот же класс.</p>
+                <pre class="sg-usage">&lt;a class="link" href="…"&gt;…&lt;/a&gt;   &lt;a class="link" data-variant="plain" href="…"&gt;…&lt;/a&gt;   &lt;button type="button" class="link block truncate"&gt;…&lt;/button&gt;</pre>
+            </div>
+            <div>
+                <p class="text-sm">Числа в таблицах <span class="tabular-nums">1 234 567,89</span> с <code>tabular-nums</code>, чтобы столбики выравнивались. Код и идентификаторы: <code>font-mono</code>: <code class="font-mono text-xs">01a09fa9-cc12</code>.</p>
+            </div>
+        </div>
+    </div>
+</section>
+            <section id="buttons" class="sg-section">
+    <h2>Кнопки</h2>
+    <p>На экране должна быть одна основная кнопка. Для отмены используйте <code>outline</code> или <code>ghost</code>, для опасного действия: <code>destructive</code> с подтверждением.</p>
+
+    <h3 class="sg-title">Варианты</h3>
+    <div class="sg-demo">
+        <button type="button" class="btn">Primary</button>
+        <button type="button" class="btn" data-variant="secondary">Secondary</button>
+        <button type="button" class="btn" data-variant="outline">Outline</button>
+        <button type="button" class="btn" data-variant="ghost">Ghost</button>
+        <button type="button" class="btn" data-variant="destructive">Destructive</button>
+        <button type="button" class="btn" disabled="">Disabled</button>
+    </div>
+
+    <h3 class="sg-title">Размеры</h3>
+    <div class="sg-demo">
+        <button type="button" class="btn" data-size="xs">Extra small</button>
+        <button type="button" class="btn" data-size="sm">Small</button>
+        <button type="button" class="btn">Default</button>
+        <button type="button" class="btn" data-size="lg">Large</button>
+    </div>
+
+    <h3 class="sg-title">С иконкой</h3>
+    <div class="sg-demo">
+        <button type="button" class="btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5v14"></path>
+        </svg>
+            Создать
+        </button>
+        <button type="button" class="btn" data-variant="outline">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"></path><rect x="6" y="14" width="12" height="8" rx="1"></rect>
+        </svg>
+            Печать
+        </button>
+        <button type="button" class="btn" data-variant="outline" data-size="icon" aria-label="Редактировать">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path>
+            <path d="m15 5 4 4"></path>
+        </svg>
+        </button>
+        <button type="button" class="btn" data-variant="ghost" data-size="icon" aria-label="Быстрые действия">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path>
+        </svg>
+        </button>
+        <button type="button" class="btn" data-variant="destructive" data-size="icon-sm" aria-label="Удалить">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+        </svg>
+        </button>
+        <button type="button" class="btn" data-variant="ghost" data-size="icon-xs" aria-label="Выбрать дату">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path>
+        </svg>
+        </button>
+    </div>
+
+    <h3 class="sg-title">Расположение в форме</h3>
+    <div class="sg-demo">
+        <div class="form-actions w-full">
+            <button type="button" class="btn" data-variant="outline">Отмена</button>
+            <button type="button" class="btn">Сохранить</button>
+        </div>
+    </div>
+    <p class="sg-note">На компьютере кнопки стоят справа, основная кнопка последняя. На телефоне они занимают всю ширину и располагаются столбцом, основная кнопка сверху.</p>
+    <pre class="sg-usage">&lt;div class="form-actions"&gt;&lt;button class="btn" data-variant="outline"&gt;Отмена&lt;/button&gt;&lt;button class="btn"&gt;Сохранить&lt;/button&gt;&lt;/div&gt;</pre>
+</section>
+            <section id="forms" class="sg-section">
+            <h2>Формы</h2>
+            <p>
+                Поле собирается только фрагментом: <code>.field</code> с <code>label</code>,
+                элементом ввода, подсказкой и ошибкой внутри. Ошибка обозначается
+                <code>data-invalid="true"</code> на поле +
+                <code>&lt;p role="alert"&gt;</code>. Подписи всегда сверху. Фрагменты
+                <code>…Field</code> работают с <code>th:object</code>, <code>…Control</code> и
+                <code>filter</code> без него: в фильтрах и диалогах.
+            </p>
+
+            <div class="grid gap-8 lg:grid-cols-2">
+                <div>
+                    <h3 class="sg-title">Поля без th:object</h3>
+                    <form class="form" onsubmit="return false;">
+                        <div class="field">
+    <label for="sg-text">Текст</label>
+    <input id="sg-text" name="text" type="text" value="" placeholder="Название">
+    <p>Подсказка под полем</p>
+</div>
+                        <div class="field">
+    <label for="sg-disabled">Недоступно</label>
+    <input id="sg-disabled" name="" type="text" value="Нельзя менять" disabled="disabled">
+    
+</div>
+                        <div class="field">
+            <label for="sg-status-trigger">Выпадающий список</label>
+            <div id="sg-status" class="select" data-placeholder="Выберите статус">
+            <button type="button" id="sg-status-trigger" aria-haspopup="listbox" aria-expanded="false" aria-controls="sg-status-listbox">
+            <span class="truncate text-muted-foreground">Выберите статус</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"></path>
+        </svg>
+        </button>
+            <div data-popover="" aria-hidden="true">
+            <div role="listbox" id="sg-status-listbox" aria-orientation="vertical" aria-labelledby="sg-status-trigger">
+                <div role="option" data-value="">Выберите статус</div>
+                <div role="option" data-value="NEW">Новая</div>
+                <div role="option" data-value="LISTED">В продаже</div>
+                <div role="option" data-value="SOLD">Продана</div>
+            </div>
+        </div>
+            <input type="hidden" name="status" value="">
+        </div>
+            <p>Короткие списки: статусы, типы, да/нет</p>
+        </div>
+                        <div class="field">
+    <label for="sg-brand-trigger">Список с поиском</label>
+    <div id="sg-brand" class="combobox" data-auto-highlight="true" x-data="" x-on:change="if ($event.detail &amp;&amp; $event.detail.value !== undefined) $el.querySelector('[data-value]').classList.toggle('text-muted-foreground', !$event.detail.value)">
+    <button type="button" id="sg-brand-trigger" aria-haspopup="listbox" aria-expanded="false" aria-controls="sg-brand-listbox">
+    <span class="truncate text-muted-foreground" data-value="" data-placeholder="Выберите марку">Выберите марку</span>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"></path>
+        </svg>
+</button>
+    <div data-popover="" aria-hidden="true">
+    <div class="input-group">
+        <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+        </svg></span>
+        <input type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="sg-brand-listbox" placeholder="Марка…" autocomplete="off" spellcheck="false">
+    </div>
+    <div role="listbox" id="sg-brand-listbox" data-empty="Ничего не найдено">
+        <div role="option" data-value="" data-force="">Выберите марку</div>
+        
+            <div role="option" data-value="toyota">Toyota</div>
+            <div role="option" data-value="nissan">Nissan</div>
+            <div role="option" data-value="isuzu">Isuzu</div>
+            <div role="option" data-value="hino">Hino</div>
+        
+        
+    </div>
+    
+</div>
+    <input type="hidden" name="brand" value="">
+</div>
+    <p>Справочники: люди, контрагенты, локации, склады</p>
+    
+</div>
+                        <div class="field" data-invalid="true">
+    <label for="sg-vehicle-trigger">С ошибкой</label>
+    <div id="sg-vehicle" class="combobox" data-auto-highlight="true" x-data="" x-on:change="if ($event.detail &amp;&amp; $event.detail.value !== undefined) $el.querySelector('[data-value]').classList.toggle('text-muted-foreground', !$event.detail.value)">
+    <button type="button" id="sg-vehicle-trigger" aria-haspopup="listbox" aria-expanded="false" aria-controls="sg-vehicle-listbox">
+    <span class="truncate text-muted-foreground" data-value="" data-placeholder="Выберите машину">Выберите машину</span>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"></path>
+        </svg>
+</button>
+    <div data-popover="" aria-hidden="true">
+    <div class="input-group">
+        <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+        </svg></span>
+        <input type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="sg-vehicle-listbox" placeholder="Название или VIN" autocomplete="off" spellcheck="false">
+    </div>
+    <div role="listbox" id="sg-vehicle-listbox" data-empty="Ничего не найдено">
+        <div role="option" data-value="" data-force="">Выберите машину</div>
+        
+            <div role="option" data-value="1">Toyota Hiace</div>
+            <div role="option" data-value="2">Mazda Bongo</div>
+        
+        
+    </div>
+    
+</div>
+    <input type="hidden" name="vehicleId" value="">
+</div>
+    
+    <p role="alert">Выберите машину</p>
+</div>
+                        <div class="field">
+            <label for="sg-multi-trigger">Мультиселект</label>
+            <div id="sg-multi" class="multi-select" x-data="multiSelect" data-placeholder="Все" data-name="sg-multi" @change="sync()">
+                <div class="multi-select-picker popover">
+                    <button type="button" id="sg-multi-trigger" aria-expanded="false" aria-controls="sg-multi-popover">
+                        
+                        <span class="truncate" x-text="picked.length === 0 ? placeholder : picked.length &lt;= 2 ? picked.map(item =&gt; item.name).join(', ') : 'Выбрано: ' + picked.length">Все</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"></path>
+        </svg>
+                    </button>
+                    <div id="sg-multi-popover" data-popover="" aria-hidden="true">
+                        <div class="input-group">
+                            <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+        </svg></span>
+                            <input type="search" x-model="query" placeholder="Поиск…" autocomplete="off" @keydown.escape="query = ''">
+                        </div>
+                        
+                        <label x-show="!query || $el.textContent.toLocaleLowerCase().includes(query.toLocaleLowerCase())">
+                            <input type="checkbox" class="input" name="sg-multi" value="NEW">
+                            <span>Новая</span>
+                        </label><label x-show="!query || $el.textContent.toLocaleLowerCase().includes(query.toLocaleLowerCase())">
+                            <input type="checkbox" class="input" name="sg-multi" value="LISTED" checked="checked">
+                            <span>В продаже</span>
+                        </label><label x-show="!query || $el.textContent.toLocaleLowerCase().includes(query.toLocaleLowerCase())">
+                            <input type="checkbox" class="input" name="sg-multi" value="SOLD">
+                            <span>Продана</span>
+                        </label>
+                        
+                    </div>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+                        <div class="field">
+    <label for="sg-date">Дата</label>
+    <div class="date-picker" x-data="datePicker" x-on:click.outside="open = false" x-on:keydown.escape="open = false">
+        <input type="hidden" name="sg-date" value="" x-ref="value">
+        
+    <div class="input-group">
+        <input type="text" id="sg-date" placeholder="ДД.ММ.ГГГГ" inputmode="numeric" maxlength="10" autocomplete="off" title="Дата в формате ДД.ММ.ГГГГ" x-ref="input" x-on:input="format">
+        <span data-align="inline-end">
+            <button type="button" class="btn" data-variant="ghost" data-size="icon-xs" aria-label="Выбрать дату" x-bind:aria-expanded="open" x-on:click="toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path>
+        </svg>
+            </button>
+        </span>
+    </div>
+    <div data-popover="" data-align="end" aria-hidden="true" x-bind:aria-hidden="!open">
+        <header>
+            <button type="button" class="btn" data-variant="ghost" data-size="icon-sm" aria-label="Назад" x-on:click="shift(-1)" x-bind:aria-label="{days: 'Предыдущий месяц', months: 'Предыдущий год', years: 'Предыдущие годы'}[view]">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m15 18-6-6 6-6"></path>
+        </svg>
+            </button>
+            <button type="button" class="btn" data-variant="ghost" data-size="sm" x-text="title()" x-on:click="zoom" x-bind:disabled="view === 'years'" x-bind:aria-label="view === 'days' ? 'Выбрать месяц' : 'Выбрать год'"></button>
+            <button type="button" class="btn" data-variant="ghost" data-size="icon-sm" aria-label="Вперёд" x-on:click="shift(1)" x-bind:aria-label="{days: 'Следующий месяц', months: 'Следующий год', years: 'Следующие годы'}[view]">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6"></path>
+        </svg>
+            </button>
+        </header>
+        <div role="group" aria-label="Год" data-view="years" x-show="view === 'years'">
+            <template x-for="y in years()" x-bind:key="y">
+                <button type="button" class="btn" data-size="sm" x-text="y" x-bind:data-variant="y === year ? 'primary' : 'ghost'" x-on:click="pickYear(y)"></button>
+            </template>
+        </div>
+        <div role="group" aria-label="Месяц" data-view="months" x-show="view === 'months'">
+            <button type="button" class="btn" data-size="sm" data-month="1" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Янв</button><button type="button" class="btn" data-size="sm" data-month="2" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Фев</button><button type="button" class="btn" data-size="sm" data-month="3" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Мар</button><button type="button" class="btn" data-size="sm" data-month="4" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Апр</button><button type="button" class="btn" data-size="sm" data-month="5" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Май</button><button type="button" class="btn" data-size="sm" data-month="6" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Июн</button><button type="button" class="btn" data-size="sm" data-month="7" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Июл</button><button type="button" class="btn" data-size="sm" data-month="8" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Авг</button><button type="button" class="btn" data-size="sm" data-month="9" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Сен</button><button type="button" class="btn" data-size="sm" data-month="10" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Окт</button><button type="button" class="btn" data-size="sm" data-month="11" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Ноя</button><button type="button" class="btn" data-size="sm" data-month="12" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Дек</button>
+        </div>
+        <div role="group" aria-label="День" x-show="view === 'days'">
+            <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
+            <template x-for="cell in cells()" x-bind:key="cell.key">
+                <button type="button" class="btn" data-size="sm" x-text="cell.day" x-bind:disabled="!cell.day" x-bind:data-variant="cell.selected ? 'primary' : (cell.today ? 'outline' : 'ghost')" x-on:click="pick(cell.day)"></button>
+            </template>
+        </div>
+    </div>
+
+    </div>
+    
+</div>
+                        <div class="field">
+    <label for="sg-money">Денежная сумма</label>
+    <div class="input-group">
+    <span>¥</span>
+    <input type="text" inputmode="numeric" autocomplete="off" id="sg-money" name="amount" x-data="{
+               group(value) {
+                   const digits = String(value).split('.')[0].replace(/[^0-9]/g, '').replace(/^0+(?=\d)/, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                   return (String(value).startsWith('-') ? '-' : '') + digits;
+               },
+               regroup() {
+                   const tail = this.$el.value.length - this.$el.selectionEnd;
+                   this.$el.value = this.group(this.$el.value);
+                   const at = Math.max(0, this.$el.value.length - tail);
+                   if (document.activeElement === this.$el) this.$el.setSelectionRange(at, at);
+               },
+           }" x-init="regroup()" x-on:input="regroup()">
+</div>
+    
+</div>
+                        <div class="field">
+            <label for="sg-files">Файлы</label>
+            <div class="dropzone" x-data="{ over: false, entries: [], seq: 0,
+                          add(list) {
+                              const files = [...list];
+                              const root = this.$root;
+                              if (root.dataset.instant === 'true') {
+                                  root.dispatchEvent(new CustomEvent('dropzone-files', { bubbles: true, detail: files }));
+                                  return;
+                              }
+                              const ready = root.dataset.compress === 'true' ? Promise.all(files.map(f =&gt; compressPhoto(f))) : Promise.resolve(files);
+                              ready.then(list =&gt; {
+                                  if (root.dataset.multiple !== 'true') this.entries = [];
+                                  for (const file of list) {
+                                      if (!this.entries.some(e =&gt; e.file.name === file.name &amp;&amp; e.file.size === file.size))
+                                          this.entries.push({ id: this.seq++, file });
+                                  }
+                                  this.sync();
+                              });
+                          },
+                          remove(id) { this.entries = this.entries.filter(e =&gt; e.id !== id); this.sync() },
+                          sync() {
+                              const dt = new DataTransfer();
+                              this.entries.forEach(e =&gt; dt.items.add(e.file));
+                              this.$refs.input.files = dt.files;
+                          },
+                          drop(e) { this.over = false; this.add(e.dataTransfer.files) },
+                          size(f) { return f.size &lt; 1048576 ? Math.round(f.size / 1024) + ' КБ' : (f.size / 1048576).toFixed(1) + ' МБ' },
+                          stem(name) { return name.replace(/\.[^.]+$/, '') },
+                          ext(name) { const m = name.match(/\.([^.]+)$/); return m ? m[1] : '' } }" x-bind:data-over="over" @dragover.prevent="over = true" @dragleave="over = false" @drop.prevent="drop($event)" data-multiple="true">
+                <label for="sg-files">
+                    <input id="sg-files" name="sg-files" type="file" accept="image/*,application/pdf" x-ref="input" @change="add($el.files); if ($root.dataset.instant === 'true') $el.value = ''" multiple="multiple">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" x2="12" y1="3" y2="15"></line>
+        </svg>
+                    <p>
+                        <strong>Выберите файлы</strong>
+                        или перетащите сюда
+                    </p>
+                    <p>Фото или PDF, до 25 МБ</p>
+                </label>
+                <ul x-show="entries.length" x-cloak="">
+                    <template x-for="(e, i) in entries" :key="e.id">
+                        <li>
+                            <input type="text" name="names" class="input" aria-label="Название файла" maxlength="200" x-init="$el.value = stem(e.file.name)">
+                            
+                            
+                            <span class="badge" data-variant="secondary" data-slot="ext" x-text="ext(e.file.name)" x-show="ext(e.file.name)"></span>
+                            <span data-slot="size" x-text="size(e.file)"></span>
+                            <button type="button" class="btn" data-variant="ghost" data-size="icon-sm" aria-label="Убрать файл" @click="remove(e.id)">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18M6 6l12 12"></path>
+        </svg>
+                            </button>
+                        </li>
+                    </template>
+                </ul>
+                <div data-camera="">
+                    <input id="sg-files-camera" type="file" accept="image/*,application/pdf" capture="environment" x-ref="camera" @change="add($el.files); $el.value = ''">
+                    <button type="button" class="btn w-full sm:w-auto" data-variant="outline" @click="$refs.camera.click()">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path>
+            <circle cx="12" cy="13" r="3"></circle>
+        </svg>
+                        Снять фото
+                    </button>
+                </div>
+            </div>
+        </div>
+                        <div class="field">
+            <label for="sg-qr">QR-код: сканер или камера</label>
+            <div class="scan-field">
+                <div class="input-group">
+                    <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 7V5a2 2 0 0 1 2-2h2"></path><path d="M17 3h2a2 2 0 0 1 2 2v2"></path><path d="M21 17v2a2 2 0 0 1-2 2h-2"></path><path d="M7 21H5a2 2 0 0 1-2-2v-2"></path><path d="M7 12h10"></path>
+        </svg></span>
+                    <input id="sg-qr" name="qr" type="text" autocomplete="off" placeholder="Отсканируйте код">
+                </div>
+                
+                
+                    <button type="button" class="btn" data-variant="outline" data-scan-camera="sg-qr">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path>
+            <circle cx="12" cy="13" r="3"></circle>
+        </svg>
+            Камера
+        </button>
+                
+            </div>
+            
+        </div>
+                        <div class="field">
+            <label for="sg-ean">Штрихкод</label>
+            <div class="scan-field">
+                <div class="input-group">
+                    <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 5v14"></path><path d="M8 5v14"></path><path d="M12 5v14"></path><path d="M17 5v14"></path><path d="M21 5v14"></path>
+        </svg></span>
+                    <input id="sg-ean" name="ean" type="text" autocomplete="off" placeholder="4006381333931" inputmode="numeric">
+                </div>
+                
+                    <button type="button" class="btn" data-variant="outline" data-scan-format="barcode" data-scan-camera="sg-ean">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path>
+            <circle cx="12" cy="13" r="3"></circle>
+        </svg>
+            Камера
+        </button>
+                
+                
+            </div>
+            
+        </div>
+                    </form>
+                </div>
+
+                <div>
+                    <h3 class="sg-title">Выбор</h3>
+                    <form class="form gap-6" onsubmit="return false;">
+                        <div class="field">
+    <label class="label gap-2">
+        <input id="sg-cb-email" type="checkbox" class="input" name="notifyEmail" value="true" x-on:change="if ($el.dataset.model) $data[$el.dataset.model] = $el.checked" checked="checked">
+        <span>Уведомлять по email</span>
+    </label>
+</div>
+                        <div class="field">
+    <label class="label gap-2">
+        <input id="sg-cb-telegram" type="checkbox" class="input" name="notifyTelegram" value="true" x-on:change="if ($el.dataset.model) $data[$el.dataset.model] = $el.checked">
+        <span>Уведомлять в Telegram</span>
+    </label>
+</div>
+                        <div class="field" data-orientation="horizontal">
+    <label for="sg-switch">Переключатель</label>
+    <input id="sg-switch" type="checkbox" role="switch" class="input" name="sg-switch" x-on:change="
+               if ($el.dataset.model) $data[$el.dataset.model] = $el.checked;
+               const target = $el.dataset.fillDate &amp;&amp; document.getElementById($el.dataset.fillDate);
+               if ($el.checked &amp;&amp; target &amp;&amp; !target.value) $nextTick(() =&gt; {
+                   const today = new Date();
+                   target.value = [today.getDate(), today.getMonth() + 1].map(n =&gt; String(n).padStart(2, '0')).join('.') + '.' + today.getFullYear();
+                   target.dispatchEvent(new Event('input'));
+               });
+           " checked="checked">
+</div>
+                    </form>
+
+                    <h3 class="sg-title">
+                        Форма с серверной валидацией (HTMX)
+                    </h3>
+                    <div id="sg-demo-form-wrap" class="rounded-lg border bg-card p-4">
+                        <form action="#" method="post" hx-post="#" hx-target="#sg-demo-form-wrap" hx-swap="innerHTML" class="form" x-data="qrCodeList([])">
+            <div class="field">
+    <label for="name">Название</label>
+    <input type="text" data-rules="{&quot;required&quot;:&quot;Укажите название&quot;,&quot;maxLength&quot;:40,&quot;length&quot;:&quot;Не длиннее 40 символов&quot;}" id="name" name="name" value="">
+    <p>До 40 символов</p>
+    
+</div>
+            <div class="field">
+    <label for="email">Email</label>
+    <input type="email" autocomplete="email" data-rules="{&quot;required&quot;:&quot;Укажите email&quot;,&quot;email&quot;:&quot;Некорректный email&quot;}" id="email" name="email" value="">
+    
+    
+</div>
+            <div class="field">
+    <label for="phone">Телефон</label>
+    <input type="tel" inputmode="tel" autocomplete="off" placeholder="+81 45 123 4567" x-data="phoneMask" x-on:input="reformat()" id="phone" name="phone" value="">
+    
+    
+</div>
+            <div class="field">
+            <label for="role-trigger">Роль</label>
+            <div class="select" x-data="{ filled: false }" x-init="filled = !!$el.querySelector(':scope &gt; input[type=hidden]').value" x-on:change="if ($event.detail &amp;&amp; $event.detail.value !== undefined) filled = !!$event.detail.value" data-clearable="true">
+                <button type="button" id="role-trigger" aria-haspopup="listbox" aria-expanded="false" aria-controls="role-listbox">
+            <span class="truncate text-muted-foreground"></span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"></path>
+        </svg>
+        </button>
+                
+                    <button type="button" data-clear-value="" aria-label="Очистить" x-bind:hidden="!filled" x-on:click="
+                const s = $el.closest('.select');
+                s.querySelectorAll('[role=option][aria-selected]').forEach((o) =&gt; o.removeAttribute('aria-selected'));
+                s.querySelector(':scope &gt; input[type=hidden]').value = '';
+                s.refresh();
+                s.dispatchEvent(new CustomEvent('change', { detail: { value: '', selected: null }, bubbles: true }));
+            " hidden="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18M6 6l12 12"></path>
+        </svg>
+        </button>
+                
+                <div data-popover="" aria-hidden="true">
+            <div role="listbox" id="role-listbox" aria-orientation="vertical" aria-labelledby="role-trigger">
+                
+                <div role="option" data-value="OPERATOR">Оператор</div>
+                <div role="option" data-value="ADMIN">Администратор</div>
+                <div role="option" data-value="VIEWER">Наблюдатель</div>
+            </div>
+        </div>
+                <input type="hidden" data-rules="{&quot;required&quot;:&quot;Выберите роль&quot;}" id="role" name="role" value="">
+            </div>
+            
+            
+        </div>
+            <div class="field">
+    <label for="brand-trigger">Марка</label>
+    <div class="combobox" data-auto-highlight="true" x-data="{ filled: false }" x-init="filled = !!$el.querySelector(':scope &gt; input[type=hidden]').value" x-on:change="if ($event.detail &amp;&amp; $event.detail.value !== undefined) { filled = !!$event.detail.value; $el.querySelector('[data-value]').classList.toggle('text-muted-foreground', !$event.detail.value) }" data-clearable="true">
+        <button type="button" id="brand-trigger" aria-haspopup="listbox" aria-expanded="false" aria-controls="brand-listbox">
+    <span class="truncate text-muted-foreground" data-value="" data-placeholder="Выберите марку">Выберите марку</span>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"></path>
+        </svg>
+</button>
+        <button type="button" data-clear-value="" aria-label="Очистить" x-bind:hidden="!filled" x-on:click="$el.closest('.combobox').clear()" hidden="hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18M6 6l12 12"></path>
+        </svg>
+</button>
+        <div data-popover="" aria-hidden="true">
+    <div class="input-group">
+        <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+        </svg></span>
+        <input type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="brand-listbox" placeholder="Марка…" autocomplete="off" spellcheck="false">
+    </div>
+    <div role="listbox" id="brand-listbox" data-empty="Ничего не найдено">
+        <div role="option" data-value="" data-force="">Выберите марку</div>
+        
+            <div role="option" data-value="toyota">Toyota</div>
+            <div role="option" data-value="nissan">Nissan</div>
+            <div role="option" data-value="isuzu">Isuzu</div>
+            <div role="option" data-value="hino">Hino</div>
+        
+        
+    </div>
+    
+</div>
+        <input type="hidden" id="brand" name="brand" value="">
+    </div>
+    
+    
+</div>
+            <div class="field">
+    <label for="note">Комментарий</label>
+    <textarea rows="3" id="note" name="note"></textarea>
+    
+    
+</div>
+            <div class="field">
+            <label for="barcode">Штрихкод</label>
+            <div class="scan-field">
+                <div class="input-group">
+                    <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 5v14"></path><path d="M8 5v14"></path><path d="M12 5v14"></path><path d="M17 5v14"></path><path d="M21 5v14"></path>
+        </svg></span>
+                    <input type="text" inputmode="numeric" autocomplete="off" placeholder="4006381333931" x-on:keydown.enter.prevent="" id="barcode" name="barcode" value="">
+                </div>
+                <button type="button" class="btn" data-variant="outline" data-scan-format="barcode" data-scan-camera="barcode">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path>
+            <circle cx="12" cy="13" r="3"></circle>
+        </svg>
+            Камера
+        </button>
+            </div>
+            
+            
+        </div>
+            <div class="field" x-init="
+                const initialInputs = [...$el.querySelectorAll('[data-initial-code]')];
+                if (!codes.length) codes = initialInputs.map((input) =&gt; input.value);
+                initialInputs.forEach((input) =&gt; input.remove());
+            ">
+            <label for="sg-codes">QR-коды</label>
+            <div class="scan-field">
+                <div class="input-group">
+                    <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 7V5a2 2 0 0 1 2-2h2"></path><path d="M17 3h2a2 2 0 0 1 2 2v2"></path><path d="M21 17v2a2 2 0 0 1-2 2h-2"></path><path d="M7 21H5a2 2 0 0 1-2-2v-2"></path><path d="M7 12h10"></path>
+        </svg></span>
+                    <input id="sg-codes" type="text" autocomplete="off" placeholder="Отсканируйте код" x-model="draft" x-on:keydown.enter.prevent="add()">
+                    <button type="button" class="btn" data-variant="outline" data-size="sm" x-on:click="add()">
+                        Добавить
+                    </button>
+                </div>
+                <button type="button" class="btn" data-variant="outline" data-scan-camera="sg-codes">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path>
+            <circle cx="12" cy="13" r="3"></circle>
+        </svg>
+            Камера
+        </button>
+            </div>
+            <p>Несколько серийных экземпляров одной позиции</p>
+            
+            
+            <ul class="flex flex-wrap gap-2" x-show="codes.length">
+                <template x-for="code in codes" x-bind:key="code">
+                    <li class="badge gap-1 font-mono" data-variant="secondary">
+                        <span x-text="code"></span>
+                        <button type="button" class="btn" data-variant="ghost" data-size="icon-sm" aria-label="Убрать код" x-on:click="remove(code)">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18M6 6l12 12"></path>
+        </svg>
+                        </button>
+                        <input type="hidden" name="qrCodes" x-bind:value="code">
+                    </li>
+                </template>
+            </ul>
+        </div>
+            <div class="field lines" x-data="{
+                reindex() {
+                    [...$refs.list.children].forEach((li, i) =&gt; li.querySelectorAll('[data-name]').forEach(el =&gt; el.name = $refs.list.closest('[data-lines]').dataset.lines + '[' + i + '].' + el.dataset.name));
+                },
+                add() {
+                    $refs.list.appendChild($refs.tpl.content.cloneNode(true));
+                    this.reindex();
+                    $refs.list.lastElementChild.querySelector('input[type=text]').focus();
+                },
+                remove(li) {
+                    li.remove();
+                    this.reindex();
+                },
+            }" data-lines="addresses">
+            <label>Адреса</label>
+            <ul class="lines-list" x-ref="list">
+                
+            </ul>
+            <template x-ref="tpl">
+                <li>
+                    <select class="select" data-name="type" aria-label="Тип адреса">
+                        <option value="OFFICE">Офис</option>
+                        <option value="WAREHOUSE">Склад</option>
+                    </select>
+                    <input type="text" class="input" data-name="address" placeholder="Йокогама, Нака-ку, 3-2-1" autocomplete="off">
+                    <button type="button" class="btn" data-variant="ghost" data-size="icon-sm" aria-label="Убрать строку" data-tooltip="Убрать строку" data-align="end" x-on:click="remove($el.closest('li'))">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18M6 6l12 12"></path>
+        </svg>
+                    </button>
+                </li>
+            </template>
+            <button type="button" class="btn w-fit" data-variant="outline" data-size="sm" x-on:click="add()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5v14"></path>
+        </svg>
+                <span>Добавить адрес</span>
+            </button>
+            
+            
+        </div>
+            <div class="form-actions">
+                <button type="reset" class="btn" data-variant="outline">
+                    Сбросить
+                </button>
+                <button type="submit" class="btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="htmx-indicator animate-spin">
+            <path d="M21 12a9 9 0 1 1-6.219-8.56"></path>
+        </svg>
+                    Отправить
+                </button>
+            </div>
+        </form>
+                    </div>
+                    <p class="sg-note">
+                        Отправьте пустую форму. Сервер вернёт ту же форму с ошибками из
+                        Bean Validation. Обновляется только блок формы, без
+                        перезагрузки.
+                    </p>
+                </div>
+            </div>
+            <pre class="sg-usage">~{components/form :: inputField(name='email', label='Email', type='email', hint='…')}   # list='catalog-names' – подсказки из &lt;datalist&gt;
+~{components/form :: inputControl(id='f-name', name='name', label='Имя', value=${…})}   # без th:object; disabled=true – значение только для чтения
+~{components/form :: phoneField(name='phone', label='Телефон')}   # маска японского номера
+~{components/form :: dateField(name='purchaseAt', label='Дата покупки')}   # дата: маска ДД.ММ.ГГГГ и календарь, клик по заголовку открывает выбор месяца, затем года; не зависит от локали браузера; в форму уходит ISO, поле LocalDate с @DateTimeFormat(iso = DATE)
+~{components/form :: dateControl(id='f-from', name='from', label='Дата с', value=${filter.from})}   # то же без th:object
+~{components/form :: monthField(name='firstRegisteredAt', label='Первая регистрация')}   # месяц и год: маска ММ.ГГГГ и выбор месяца в календаре, клик по году открывает выбор года; поле формы YearMonth с @DateTimeFormat(pattern = "MM.yyyy")
+~{components/form :: textareaField(name='note', label='Комментарий', rows=3)}
+~{components/form :: checkbox(name='active', label='Активен', checked=${form.active})}
+~{components/form :: checkboxControl(id='f-delivery', name='withDelivery', label='…', model='delivery')}   # без th:object; model – переменная Alpine
+~{components/form :: switch(name='completed', label='Завершено', checked=${form.completed}, model='completed')}
+~{components/form :: switchControl(id='ended', label='Работа завершена', checked=…, model='ended', fillDate='endDate')}   # fillDate – id даты, которую заполнить сегодняшней
+~{components/money :: money(name='amount', label='Сумма')}   # с th:object
+~{components/money :: moneyControl(id='usage-cost', name='unitCost', label='Цена за единицу')}   # без th:object
+~{components/select :: selectField(name='role', label='Роль', options=${ {ADMIN: 'Администратор'} })}   # короткий список: статусы, типы, да/нет
+~{components/select :: filter(id='f-only', name='only', label='Показывать', options=${ {all: 'Все'} }, selected=${filter.only}, placeholder='Все', hint='…')}   # без th:object, значение в hidden
+~{components/combobox :: combobox(name='masterId', label='Мастер', options=${masters}, clearable=true)}   # справочники (люди, контрагенты, локации, склады): кнопка как select, внутри поиск
+~{components/combobox :: combobox(name='carrierId', label='Перевозчик', options=${carriers}, create='/counterparties/quick?type=CARRIER')}   # быстрое добавление: отдельная кнопка «Добавить» раскрывает поле названия; POST на create возвращает {id, name}, новая запись выбирается без перезагрузки. Несколько типов: createTypes=${creatableLocationTypes}. Подсказка поля ввода — createLabel, по умолчанию «Название»
+~{components/combobox :: filter(id='vehicleId', name='vehicleId', label='Машина', options=${vehicles}, selected=${vehicleId}, placeholder='…', search='…', hint='…', error=${vehicleError})}   # без th:object; hx-* и x-data – на обёртке вокруг
+~{components/combobox :: control(id='deliver-location', name='deliveryLocationId', options=${locations}, selected=null, placeholder='…', search='…')}   # только сам список: в строке dropzone, рядом с другими полями
+~{components/lines :: typedLines(name='addresses', label='Адреса', types=${addressTypes}, typeLabel='Тип адреса', valueName='address', placeholder='…', addLabel='Добавить адрес')}   # список строк «тип + значение»: поле List&lt;…&gt; с id, type и valueName
+~{components/multi-select :: multiSelect(id='f-status', name='status', label='Статус', options=${statuses}, selected=${filter.status})}
+~{components/qr-codes :: qrCodes(id='codes', name='qrCodes', label='QR-коды', hint='…')}   # родителю нужен x-data="qrCodeList(initialCodes)"
+~{components/dropzone :: dropzone(id='files', name='files', label='Файлы', accept='image/*', multiple=true, camera=true, nameLabel='Название фото', row=~{:: #file-row})}   # nameLabel – поле названия в каждой строке (names), nameRequired=true – обязательное; row – дополнительные поля строки
+~{components/scanner :: scanField(id='scan-code', name='code', label='QR-код', submit=true)}   # submit – отправить форму после скана; barcode=true – штрихкод; pick=true – выбрать вариант в x-ref="target" (родителю x-data="scanPick('Код {code} не найден')", подпись необязательна)
+~{components/scanner :: barcodeField(name='barcode', label='Штрихкод', hint='…')}   # штрихкод с th:object
+~{components/scanner :: scannerDialog}   # уже подключён в layouts/app, кнопки камеры находят его сами</pre>
+        </section>
+            <section id="data" class="sg-section">
+    <h2>Данные</h2>
+    <p>Таблица является основным способом показать список на компьютере. На телефоне таблица прокручивается по горизонтали, а ключевые списки показываются карточками.</p>
+
+    <h3 class="sg-title">Вторичные сведения и счётчики</h3>
+    <div class="card" data-size="sm">
+        <header><h3>Все расходы <span class="badge ms-2" data-variant="secondary">29</span></h3></header>
+        <section>
+            <div class="meta-line">
+    
+        <span>Добавлен 15.10.2026 10:00</span>
+    
+        <span>Изменён 15.10.2026 12:30</span>
+    
+</div>
+        </section>
+    </div>
+    <pre class="sg-usage">~{components/meta :: metaLine(items=${ {'Добавлен …', 'Изменён …'} })}
+&lt;span class="badge ms-2" data-variant="secondary"&gt;29&lt;/span&gt;</pre>
+    <p class="sg-note">Вторичные сведения разделяются отступами и переносятся целыми пунктами. Пустые значения пропускаются. Счётчик — отдельный бейдж; заголовок с уточнением — через двоеточие. Декоративные точки-разделители не используем.</p>
+
+    <h3 class="sg-title">Список: шапка, таблица, мобильные карточки</h3>
+    <div class="grid gap-2 rounded-lg border bg-background p-4 [&amp;&gt;.page-header]:mb-0">
+        <div class="page-header">
+            <div>
+                
+                <h1>Транспорт</h1>
+                <p>Машины в работе</p>
+            </div>
+            
+                <div class="page-actions">
+                <div class="input-group w-full sm:w-72">
+            <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+        </svg></span>
+            <input id="sg-q" hx-preserve="" type="search" name="q" value="" placeholder="Название" aria-label="Поиск" autocomplete="off" hx-get="#" hx-trigger="input changed delay:300ms, search" hx-include="#sg-list-filters-form" hx-target="#sg-list-card" hx-select="#sg-list-card" hx-swap="outerHTML" hx-push-url="true" hx-indicator="#sg-q-ind">
+            <span id="sg-q-ind" class="htmx-indicator"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="animate-spin size-4 text-muted-foreground">
+            <path d="M21 12a9 9 0 1 1-6.219-8.56"></path>
+        </svg></span>
+        </div>
+            </div>
+            
+        </div>
+        
+        <form id="sg-list-filters-form" class="card" data-size="sm" data-variant="toolbar" action="#" method="get" hx-get="#" hx-include="#sg-q" hx-target="#sg-list-card" hx-select="#sg-list-card" hx-swap="outerHTML" hx-push-url="true" x-data="{ open: false }">
+            <header role="button" tabindex="0" aria-controls="sg-list-filters" x-bind:aria-expanded="open" @click="open = !open" @keydown.enter.prevent="open = !open" @keydown.space.prevent="open = !open">
+                <h2 class="flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 text-muted-foreground">
+            <path d="M21 4h-7M10 4H3M21 12h-9M8 12H3M21 20h-5M12 20H3M14 2v4M8 10v4M16 18v4"></path>
+        </svg>
+                    Фильтры
+                    
+                </h2>
+                <div class="card-action text-muted-foreground">
+                    <span x-show="!open" class="contents">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4">
+            <path d="m6 9 6 6 6-6"></path>
+        </svg>
+                    </span>
+                    <span x-show="open" class="contents" x-cloak="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4">
+            <path d="m18 15-6-6-6 6"></path>
+        </svg>
+                    </span>
+                </div>
+            </header>
+            <section id="sg-list-filters" x-show="open" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" x-cloak="true">
+                <div id="list-sort" hidden="">
+            <input type="hidden" name="sort" value="name">
+            <input type="hidden" name="dir" value="asc">
+        </div>
+                <div class="field">
+    <label for="sg-f-from">Дата с</label>
+    <div class="date-picker" x-data="datePicker" x-on:click.outside="open = false" x-on:keydown.escape="open = false">
+        <input type="hidden" name="from" value="" x-ref="value">
+        
+    <div class="input-group">
+        <input type="text" id="sg-f-from" placeholder="ДД.ММ.ГГГГ" inputmode="numeric" maxlength="10" autocomplete="off" title="Дата в формате ДД.ММ.ГГГГ" x-ref="input" x-on:input="format">
+        <span data-align="inline-end">
+            <button type="button" class="btn" data-variant="ghost" data-size="icon-xs" aria-label="Выбрать дату" x-bind:aria-expanded="open" x-on:click="toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path>
+        </svg>
+            </button>
+        </span>
+    </div>
+    <div data-popover="" data-align="end" aria-hidden="true" x-bind:aria-hidden="!open">
+        <header>
+            <button type="button" class="btn" data-variant="ghost" data-size="icon-sm" aria-label="Назад" x-on:click="shift(-1)" x-bind:aria-label="{days: 'Предыдущий месяц', months: 'Предыдущий год', years: 'Предыдущие годы'}[view]">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m15 18-6-6 6-6"></path>
+        </svg>
+            </button>
+            <button type="button" class="btn" data-variant="ghost" data-size="sm" x-text="title()" x-on:click="zoom" x-bind:disabled="view === 'years'" x-bind:aria-label="view === 'days' ? 'Выбрать месяц' : 'Выбрать год'"></button>
+            <button type="button" class="btn" data-variant="ghost" data-size="icon-sm" aria-label="Вперёд" x-on:click="shift(1)" x-bind:aria-label="{days: 'Следующий месяц', months: 'Следующий год', years: 'Следующие годы'}[view]">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6"></path>
+        </svg>
+            </button>
+        </header>
+        <div role="group" aria-label="Год" data-view="years" x-show="view === 'years'">
+            <template x-for="y in years()" x-bind:key="y">
+                <button type="button" class="btn" data-size="sm" x-text="y" x-bind:data-variant="y === year ? 'primary' : 'ghost'" x-on:click="pickYear(y)"></button>
+            </template>
+        </div>
+        <div role="group" aria-label="Месяц" data-view="months" x-show="view === 'months'">
+            <button type="button" class="btn" data-size="sm" data-month="1" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Янв</button><button type="button" class="btn" data-size="sm" data-month="2" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Фев</button><button type="button" class="btn" data-size="sm" data-month="3" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Мар</button><button type="button" class="btn" data-size="sm" data-month="4" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Апр</button><button type="button" class="btn" data-size="sm" data-month="5" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Май</button><button type="button" class="btn" data-size="sm" data-month="6" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Июн</button><button type="button" class="btn" data-size="sm" data-month="7" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Июл</button><button type="button" class="btn" data-size="sm" data-month="8" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Авг</button><button type="button" class="btn" data-size="sm" data-month="9" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Сен</button><button type="button" class="btn" data-size="sm" data-month="10" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Окт</button><button type="button" class="btn" data-size="sm" data-month="11" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Ноя</button><button type="button" class="btn" data-size="sm" data-month="12" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Дек</button>
+        </div>
+        <div role="group" aria-label="День" x-show="view === 'days'">
+            <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
+            <template x-for="cell in cells()" x-bind:key="cell.key">
+                <button type="button" class="btn" data-size="sm" x-text="cell.day" x-bind:disabled="!cell.day" x-bind:data-variant="cell.selected ? 'primary' : (cell.today ? 'outline' : 'ghost')" x-on:click="pick(cell.day)"></button>
+            </template>
+        </div>
+    </div>
+
+    </div>
+    
+</div>
+                <div class="field">
+    <label for="sg-f-to">Дата по</label>
+    <div class="date-picker" x-data="datePicker" x-on:click.outside="open = false" x-on:keydown.escape="open = false">
+        <input type="hidden" name="to" value="" x-ref="value">
+        
+    <div class="input-group">
+        <input type="text" id="sg-f-to" placeholder="ДД.ММ.ГГГГ" inputmode="numeric" maxlength="10" autocomplete="off" title="Дата в формате ДД.ММ.ГГГГ" x-ref="input" x-on:input="format">
+        <span data-align="inline-end">
+            <button type="button" class="btn" data-variant="ghost" data-size="icon-xs" aria-label="Выбрать дату" x-bind:aria-expanded="open" x-on:click="toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path>
+        </svg>
+            </button>
+        </span>
+    </div>
+    <div data-popover="" data-align="end" aria-hidden="true" x-bind:aria-hidden="!open">
+        <header>
+            <button type="button" class="btn" data-variant="ghost" data-size="icon-sm" aria-label="Назад" x-on:click="shift(-1)" x-bind:aria-label="{days: 'Предыдущий месяц', months: 'Предыдущий год', years: 'Предыдущие годы'}[view]">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m15 18-6-6 6-6"></path>
+        </svg>
+            </button>
+            <button type="button" class="btn" data-variant="ghost" data-size="sm" x-text="title()" x-on:click="zoom" x-bind:disabled="view === 'years'" x-bind:aria-label="view === 'days' ? 'Выбрать месяц' : 'Выбрать год'"></button>
+            <button type="button" class="btn" data-variant="ghost" data-size="icon-sm" aria-label="Вперёд" x-on:click="shift(1)" x-bind:aria-label="{days: 'Следующий месяц', months: 'Следующий год', years: 'Следующие годы'}[view]">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6"></path>
+        </svg>
+            </button>
+        </header>
+        <div role="group" aria-label="Год" data-view="years" x-show="view === 'years'">
+            <template x-for="y in years()" x-bind:key="y">
+                <button type="button" class="btn" data-size="sm" x-text="y" x-bind:data-variant="y === year ? 'primary' : 'ghost'" x-on:click="pickYear(y)"></button>
+            </template>
+        </div>
+        <div role="group" aria-label="Месяц" data-view="months" x-show="view === 'months'">
+            <button type="button" class="btn" data-size="sm" data-month="1" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Янв</button><button type="button" class="btn" data-size="sm" data-month="2" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Фев</button><button type="button" class="btn" data-size="sm" data-month="3" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Мар</button><button type="button" class="btn" data-size="sm" data-month="4" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Апр</button><button type="button" class="btn" data-size="sm" data-month="5" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Май</button><button type="button" class="btn" data-size="sm" data-month="6" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Июн</button><button type="button" class="btn" data-size="sm" data-month="7" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Июл</button><button type="button" class="btn" data-size="sm" data-month="8" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Авг</button><button type="button" class="btn" data-size="sm" data-month="9" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Сен</button><button type="button" class="btn" data-size="sm" data-month="10" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Окт</button><button type="button" class="btn" data-size="sm" data-month="11" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Ноя</button><button type="button" class="btn" data-size="sm" data-month="12" data-variant="ghost" x-on:click="pickMonth(+$el.dataset.month)" x-bind:data-variant="month === +$el.dataset.month ? 'primary' : 'ghost'">Дек</button>
+        </div>
+        <div role="group" aria-label="День" x-show="view === 'days'">
+            <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
+            <template x-for="cell in cells()" x-bind:key="cell.key">
+                <button type="button" class="btn" data-size="sm" x-text="cell.day" x-bind:disabled="!cell.day" x-bind:data-variant="cell.selected ? 'primary' : (cell.today ? 'outline' : 'ghost')" x-on:click="pick(cell.day)"></button>
+            </template>
+        </div>
+    </div>
+
+    </div>
+    
+</div>
+            </section>
+            <footer x-show="open" class="justify-end gap-2 border-t" x-cloak="true">
+                <a href="#" class="btn" data-variant="outline">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18M6 6l12 12"></path>
+        </svg>
+                    Сбросить
+                </a>
+                <button type="submit" class="btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="htmx-indicator animate-spin">
+            <path d="M21 12a9 9 0 1 1-6.219-8.56"></path>
+        </svg>
+                    Применить
+                </button>
+            </footer>
+        </form>
+        
+
+        <div id="sg-list-card" class="card mt-2" data-size="sm">
+            <header>
+                <h2>
+                    Все машины
+                    <span class="badge ms-2" data-variant="secondary">5</span>
+                </h2>
+            </header>
+            <section>
+                <div class="table-container hidden md:block">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th class="w-12"><span class="sr-only">Фото</span></th>
+                            <th><a class="sort-link" href="#" hx-get="#" hx-target="#sg-list-card" hx-select="#sg-list-card" hx-swap="outerHTML" hx-select-oob="#list-sort" hx-push-url="true" data-active="true" aria-label="Название: сортировать">
+            <span>Название</span>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m5 12 7-7 7 7"></path>
+            <path d="M12 19V5"></path>
+        </svg>
+            
+        </a></th>
+                            <th>Номер</th>
+                            <th>Статус</th>
+                            <th class="text-right">Обновлено</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><span class="thumb"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+            <circle cx="9" cy="9" r="2"></circle>
+            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+        </svg></span></td>
+                            <td class="font-medium"><a href="#data" class="link" data-variant="plain">Hino Dutro</a></td>
+                            <td class="font-mono text-xs">品川 800 え 34-56</td>
+                            <td><span class="status" data-variant="badge" style="--status: var(--status-teal);">Принята</span></td>
+                            <td class="text-right text-muted-foreground">11.09.2026</td>
+                        </tr>
+                        <tr>
+                            <td><span class="thumb"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+            <circle cx="9" cy="9" r="2"></circle>
+            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+        </svg></span></td>
+                            <td class="font-medium"><a href="#data" class="link" data-variant="plain">Isuzu Elf</a></td>
+                            <td class="font-mono text-xs">足立 100 う 90-12</td>
+                            <td><span class="status" data-variant="badge" style="--status: var(--status-green);">Продана</span></td>
+                            <td class="text-right text-muted-foreground">12.09.2026</td>
+                        </tr>
+                        <tr>
+                            <td><span class="thumb"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+            <circle cx="9" cy="9" r="2"></circle>
+            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+        </svg></span></td>
+                            <td class="font-medium"><a href="#data" class="link" data-variant="plain">Mitsubishi Canter</a></td>
+                            <td class="font-mono text-xs">多摩 400 お 78-90</td>
+                            <td><span class="status" data-variant="badge" style="--status: var(--status-cyan);">К продаже</span></td>
+                            <td class="text-right text-muted-foreground">10.09.2026</td>
+                        </tr>
+                        <tr>
+                            <td><span class="thumb"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+            <circle cx="9" cy="9" r="2"></circle>
+            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+        </svg></span></td>
+                            <td class="font-medium"><a href="#data" class="link" data-variant="plain">Nissan Caravan</a></td>
+                            <td class="font-mono text-xs">練馬 300 い 56-78</td>
+                            <td><span class="status" data-variant="badge" style="--status: var(--status-amber);">В ремонте</span></td>
+                            <td class="text-right text-muted-foreground">вчера, 18:40</td>
+                        </tr>
+                        <tr>
+                            <td><span class="thumb"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+            <circle cx="9" cy="9" r="2"></circle>
+            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+        </svg></span></td>
+                            <td class="font-medium"><a href="#data" class="link" data-variant="plain">Toyota Hiace</a></td>
+                            <td class="font-mono text-xs">品川 500 あ 12-34</td>
+                            <td><span class="status" data-variant="badge" style="--status: var(--status-blue);">В продаже</span></td>
+                            <td class="text-right text-muted-foreground">сегодня, 09:12</td>
+                        </tr>
+                        
+                        </tbody>
+                    </table>
+                </div>
+                <ul class="mobile-records md:hidden">
+                    <li>
+                        <div class="mobile-record-head">
+                            <div class="mobile-record-main">
+                                <a href="#data" class="mobile-record-title">Hino Dutro</a>
+                                <div class="mobile-record-meta">品川 800 え 34-56, 11.09.2026</div>
+                            </div>
+                            <span class="status" data-variant="badge" style="--status: var(--status-teal);">Принята</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="mobile-record-head">
+                            <div class="mobile-record-main">
+                                <a href="#data" class="mobile-record-title">Isuzu Elf</a>
+                                <div class="mobile-record-meta">足立 100 う 90-12, 12.09.2026</div>
+                            </div>
+                            <span class="status" data-variant="badge" style="--status: var(--status-green);">Продана</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="mobile-record-head">
+                            <div class="mobile-record-main">
+                                <a href="#data" class="mobile-record-title">Mitsubishi Canter</a>
+                                <div class="mobile-record-meta">多摩 400 お 78-90, 10.09.2026</div>
+                            </div>
+                            <span class="status" data-variant="badge" style="--status: var(--status-cyan);">К продаже</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="mobile-record-head">
+                            <div class="mobile-record-main">
+                                <a href="#data" class="mobile-record-title">Nissan Caravan</a>
+                                <div class="mobile-record-meta">練馬 300 い 56-78, вчера, 18:40</div>
+                            </div>
+                            <span class="status" data-variant="badge" style="--status: var(--status-amber);">В ремонте</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="mobile-record-head">
+                            <div class="mobile-record-main">
+                                <a href="#data" class="mobile-record-title">Toyota Hiace</a>
+                                <div class="mobile-record-meta">品川 500 あ 12-34, сегодня, 09:12</div>
+                            </div>
+                            <span class="status" data-variant="badge" style="--status: var(--status-blue);">В продаже</span>
+                        </div>
+                    </li>
+                    
+                </ul>
+            </section>
+            <footer class="justify-between border-t">
+                <span class="text-sm text-muted-foreground">Показано с 1 по 5 из 5</span>
+                <nav class="pagination" aria-label="Пагинация">
+    <a href="#" aria-label="Назад" aria-disabled="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4">
+            <path d="m15 18-6-6 6-6"></path>
+        </svg>
+    </a>
+    
+        <a href="#" aria-current="page">1</a>
+        
+    
+        <a href="#">2</a>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        <span>…</span>
+    
+        <a href="#">12</a>
+        
+    
+    <a href="#" aria-label="Вперёд">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4">
+            <path d="m9 18 6-6-6-6"></path>
+        </svg>
+    </a>
+</nav>
+            </footer>
+        </div>
+    </div>
+    <p class="sg-note">На странице шапка оборачивается в <code>&lt;div class="list-toolbar" x-data="stickyToolbar"&gt;</code>: прилипает к верху и получает тень при прокрутке. Поиск кладётся в <code>actions</code> заголовка, фильтры под ним. Карточка списка: таблица от <code>md</code>, ниже <code>mobile-records</code>. Поиск и фильтры перерисовывают только карточку: сервер отдаёт всю страницу, <code>hx-select</code> вырезает блок. Заголовок колонки с сортировкой – <code>sortLink</code>: клик переключает направление, текущая колонка со стрелкой. В модели <code>sort</code> (<code>ListSort</code>), <code>sortInputs</code> кладётся в поля фильтров, чтобы фильтр, поиск и пагинация не сбрасывали сортировку; <code>url</code> – адрес списка с фильтрами, без сортировки.</p>
+    <pre class="sg-usage">~{components/search :: search(id='f-q', value=${filter.q}, placeholder='…', url='/vehicles', include='#vehicle-filters-form', target='#vehicles-card', cls='w-full sm:w-64')}
+~{components/filters :: filters(id='vehicle-filters', url='/vehicles', target='#vehicles-card', open=${filter.hasPanelFilters()}, found=${vehicles.totalElements}, cols=4, search='#f-q', fields=~{:: #vehicle-filter-fields})}
+&lt;ul class="mobile-records md:hidden"&gt;&lt;li&gt;&lt;div class="mobile-record-head"&gt;&lt;div class="mobile-record-main"&gt;&lt;a class="mobile-record-title"/&gt;&lt;div class="mobile-record-meta"/&gt;&lt;/div&gt;…&lt;/div&gt;&lt;dl class="mobile-record-facts"&gt;…&lt;/dl&gt;&lt;/li&gt;&lt;/ul&gt;
+~{components/sort :: sortLink(label='Закупка', key='purchaseAt', sort=${sort}, url=${filterUrl}, target='#vehicles-card', first='desc')}   # внутри th; first – направление при первом клике, по умолчанию asc
+~{components/sort :: sortInputs}   # внутри полей фильтров
+~{components/empty :: resultRow(show=${page.isEmpty()}, columns=7, text='Ничего не найдено')}   # внутри tbody
+~{components/empty :: resultItem(show=${page.isEmpty()}, text='Ничего не найдено')}             # внутри мобильного списка</pre>
+
+    <h3 class="sg-title">Бейджи и статусы</h3>
+    <div class="sg-demo">
+        <span class="badge">Primary</span>
+        <span class="badge" data-variant="secondary">Secondary</span>
+        <span class="badge" data-variant="outline">Outline</span>
+        <span class="badge" data-variant="warning">Warning</span>
+        <span class="badge" data-variant="destructive">Destructive</span>
+    </div>
+    <div class="sg-demo">
+        <span class="badge" data-variant="secondary">Аукцион</span>
+        <span class="badge" data-variant="outline">Приход</span>
+        <span class="badge" data-variant="destructive">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3M12 9v4M12 17h.01"></path>
+        </svg>
+            Нужна фотоопись
+        </span>
+        <span class="badge" data-variant="warning">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2M15 18H9M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path>
+            <circle cx="17" cy="18" r="2"></circle>
+            <circle cx="7" cy="18" r="2"></circle>
+        </svg>
+            Ожидает доставки
+        </span>
+    </div>
+    <div class="sg-demo">
+        
+            <span class="status" style="--status: var(--status-teal);">Принята</span>
+        
+            <span class="status" style="--status: var(--status-amber);">В ремонте</span>
+        
+            <span class="status" style="--status: var(--status-blue);">В продаже</span>
+        
+            <span class="status" style="--status: var(--status-green);">Продана</span>
+        
+    </div>
+    <pre class="sg-usage">~{components/status :: status(code=${vehicle.status.name()}, kind='vehicle')}        # точка и текст
+~{components/status :: statusBadge(code=${vehicle.status.name()}, kind='vehicle')}   # плашка для плотных таблиц
+~{components/status :: typeBadge(key='locationType', code=${l.type.name()})}   # тип из справочника, variant='outline' для операций
+~{components/status :: flagBadge(variant='warning', icon='truck', text='Ожидает доставки')}   # пометка, которую нельзя пропустить; по умолчанию destructive
+&lt;span class="thumb"&gt;&lt;img src="…" alt=""&gt;&lt;/span&gt;   # миниатюра в строке; без фото: &lt;svg th:replace="~{components/icon :: image}"/&gt;</pre>
+    <p class="sg-note">Бейдж используйте для категорий и счётчиков, бейдж с логикой (тип, роль, пометка) только фрагментом. Статус с точкой подходит для состояния сущности в карточках и коротких таблицах; статус с фоном: для длинных списков, где точку легко потерять. <code>kind</code> задаёт раздел, внутри него цвета не повторяются, палитра хранится в <code>--status-*</code> в theme.css.</p>
+
+    <h3 class="sg-title">Галерея фото</h3>
+    <p>Снимки фотоописи: квадратные плитки, клик открывает просмотр, крестик удаляет. Снимают с телефона, ориентация может быть любой, поэтому <code>object-cover</code> в квадрате, а не исходные пропорции.</p>
+    <ul class="gallery max-w-2xl">
+        <li>
+            <button type="button" class="gallery-photo" aria-label="Открыть фото">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+            <circle cx="9" cy="9" r="2"></circle>
+            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+        </svg>
+            </button>
+            <button type="button" class="btn" data-variant="ghost" data-size="icon-sm" aria-label="Удалить фото">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+        </svg>
+            </button>
+        </li>
+        <li>
+            <button type="button" class="gallery-photo" aria-label="Открыть фото">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+            <circle cx="9" cy="9" r="2"></circle>
+            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+        </svg>
+            </button>
+            <button type="button" class="btn" data-variant="ghost" data-size="icon-sm" aria-label="Удалить фото">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+        </svg>
+            </button>
+        </li>
+        <li>
+            <button type="button" class="gallery-photo" aria-label="Открыть фото">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+            <circle cx="9" cy="9" r="2"></circle>
+            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+        </svg>
+            </button>
+            <button type="button" class="btn" data-variant="ghost" data-size="icon-sm" aria-label="Удалить фото">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+        </svg>
+            </button>
+        </li>
+    </ul>
+    <pre class="sg-usage">&lt;ul class="gallery"&gt;&lt;li&gt;&lt;button class="gallery-photo"&gt;&lt;img/&gt;&lt;/button&gt;&lt;button class="btn" data-size="icon-sm"&gt;…&lt;/button&gt;&lt;/li&gt;&lt;/ul&gt;</pre>
+
+    <h3 class="sg-title">Список файлов</h3>
+    <p>Документы и чеки: миниатюра или иконка, название открывает просмотр, справа расширение, размер и действие. Если картинка не загрузилась, вместо неё показывается иконка.</p>
+    <div class="card max-w-2xl">
+        <section>
+            <ul class="item-group" data-divided="" data-viewer-group="">
+                <li class="item" data-size="xs" data-viewer-item="" data-url="images/logo.svg" data-title="Логотип" data-image="true">
+            <button type="button" class="thumb" onclick="openViewer(this)" aria-label="Открыть файл">
+                <img src="images/logo.svg" alt="" loading="lazy" onerror="this.hidden = true; this.nextElementSibling.classList.remove('hidden');">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+            <path d="M10 9H8"></path>
+            <path d="M16 13H8"></path>
+            <path d="M16 17H8"></path>
+        </svg>
+            </button>
+            <div class="min-w-0 flex-1">
+                <button type="button" class="link block max-w-full truncate" onclick="openViewer(this)">Логотип</button>
+                <div class="text-xs text-muted-foreground">Добавлен 25.09.2026 10:00</div>
+            </div>
+            <span class="badge w-12 justify-center font-mono" data-variant="secondary">SVG</span>
+            <span class="badge w-18 shrink-0 justify-center font-mono tabular-nums" data-variant="secondary">4 КБ</span>
+            
+                    <button type="button" class="btn" data-variant="ghost" data-size="icon-sm" aria-label="Удалить файл">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+        </svg>
+                    </button>
+                
+        </li>
+                <li class="item" data-size="xs" data-viewer-item="" data-url="images/logo.svg" data-title="Договор купли-продажи" data-image="false">
+            <button type="button" class="thumb" onclick="openViewer(this)" aria-label="Открыть файл">
+                
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+            <path d="M10 9H8"></path>
+            <path d="M16 13H8"></path>
+            <path d="M16 17H8"></path>
+        </svg>
+            </button>
+            <div class="min-w-0 flex-1">
+                <button type="button" class="link block max-w-full truncate" onclick="openViewer(this)">Договор купли-продажи</button>
+                <div class="text-xs text-muted-foreground">Договор, добавлен 24.09.2026 18:30</div>
+            </div>
+            <span class="badge w-12 justify-center font-mono" data-variant="secondary">PDF</span>
+            <span class="badge w-18 shrink-0 justify-center font-mono tabular-nums" data-variant="secondary">120 КБ</span>
+            
+        </li>
+            </ul>
+            
+        </section>
+    </div>
+    <pre class="sg-usage">&lt;ul class="item-group" data-divided data-viewer-group&gt;&lt;th:block th:each="a : ${attachments}"&gt;
+~{components/file :: fileRow(url=${a.fileUrl}, name=${a.name}, image=${a.image}, extension=${a.extension}, size=${a.fileSizeLabel}, meta='…', openLabel='Открыть документ', action=${canEdit} ? ~{:: #delete} : null)}
+&lt;/th:block&gt;&lt;/ul&gt;   # страница вызывает viewer; слот action видит переменную цикла</pre>
+
+    <h3 class="sg-title">Группы колонок</h3>
+    <p>Когда столбцов много, их собирают в смысловые группы: <code>data-group</code> на первой ячейке группы (в <code>thead</code> и в каждой строке) раздвигает её с соседней слева без линий, только воздухом. Группу можно подсветить: <code>&lt;col data-group="tint"&gt;</code>. Таблица тянется на всю ширину, поэтому одной колонке дают <code>&lt;col class="w-full"&gt;</code>, чтобы она забирала свободное место, остальные жмутся по содержимому и отступы групп становятся видны.</p>
+    <div class="card" data-size="sm">
+        <section>
+            <div class="table-container">
+                <table class="table">
+                    <colgroup>
+                        <col>
+                        <col class="w-full">
+                        <col>
+                        <col span="2" data-group="tint">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>Ставка</th>
+                        <th>Название</th>
+                        <th data-group="">Покупка</th>
+                        <th data-group="">Статус</th>
+                        <th data-group="" class="text-right">Обновлено</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="font-medium tabular-nums">439660</td>
+                        <td>Hino Dutro</td>
+                        <td data-group="" class="tabular-nums">11.09.2026</td>
+                        <td data-group=""><span class="status" data-variant="badge" style="--status: var(--status-teal);">Принята</span></td>
+                        <td data-group="" class="text-right text-muted-foreground">11.09.2026</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium tabular-nums">439660</td>
+                        <td>Isuzu Elf</td>
+                        <td data-group="" class="tabular-nums">12.09.2026</td>
+                        <td data-group=""><span class="status" data-variant="badge" style="--status: var(--status-green);">Продана</span></td>
+                        <td data-group="" class="text-right text-muted-foreground">12.09.2026</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium tabular-nums">439660</td>
+                        <td>Mitsubishi Canter</td>
+                        <td data-group="" class="tabular-nums">10.09.2026</td>
+                        <td data-group=""><span class="status" data-variant="badge" style="--status: var(--status-cyan);">К продаже</span></td>
+                        <td data-group="" class="text-right text-muted-foreground">10.09.2026</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium tabular-nums">439660</td>
+                        <td>Nissan Caravan</td>
+                        <td data-group="" class="tabular-nums">вчера, 18:40</td>
+                        <td data-group=""><span class="status" data-variant="badge" style="--status: var(--status-amber);">В ремонте</span></td>
+                        <td data-group="" class="text-right text-muted-foreground">вчера, 18:40</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium tabular-nums">439660</td>
+                        <td>Toyota Hiace</td>
+                        <td data-group="" class="tabular-nums">сегодня, 09:12</td>
+                        <td data-group=""><span class="status" data-variant="badge" style="--status: var(--status-blue);">В продаже</span></td>
+                        <td data-group="" class="text-right text-muted-foreground">сегодня, 09:12</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+    <pre class="sg-usage">&lt;th data-group&gt;Покупка&lt;/th&gt;   &lt;td data-group&gt;…&lt;/td&gt;   &lt;col span="2" data-group="tint"&gt;</pre>
+
+    <h3 class="sg-title">Плитки с цифрами</h3>
+    <div class="grid gap-4 sm:grid-cols-3">
+        <dl class="stat">
+    <dt>Доходы</dt>
+    <dd>¥4,200,000</dd>
+    <p data-trend="good">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 7h6v6"></path><path d="m22 7-8.5 8.5-5-5L2 17"></path>
+        </svg>
+        
+        <span>+20% к прошлому периоду</span>
+    </p>
+    <p>Продажи машин и запчастей</p>
+</dl>
+        <dl class="stat">
+    <dt>Выручка</dt>
+    <dd>¥14,950,000</dd>
+    
+    <p>Продажи 9 машин</p>
+</dl>
+        <dl class="stat" data-variant="destructive">
+    <dt>Маржа по проданным</dt>
+    <dd>−¥120,000</dd>
+    
+    
+</dl>
+    </div>
+    <pre class="sg-usage">~{components/stat :: stat(label='Доходы', value=${income}, change=${dashboard.income}, hint='…', variant='destructive')}   change: Change(текущее, прошлое, ростХорошо)</pre>
+
+    <h3 class="sg-title">Быстрый выбор периода</h3>
+    
+        <nav class="period-presets" aria-label="Быстрый выбор периода">
+    <div class="button-group">
+        <a class="btn" data-size="sm" href="#" data-variant="outline">Этот месяц</a><a class="btn" data-size="sm" href="#" data-variant="outline">3 месяца</a><a class="btn" data-size="sm" href="#" data-variant="primary" aria-current="true">6 месяцев</a><a class="btn" data-size="sm" href="#" data-variant="outline">12 месяцев</a><a class="btn" data-size="sm" href="#" data-variant="outline">С начала года</a><a class="btn" data-size="sm" href="#" data-variant="outline">Прошлый год</a>
+    </div>
+</nav>
+    
+    <pre class="sg-usage">~{components/period-presets :: periodPresets(url='/finance')}   в модели presets (PeriodPreset.all) и filter (PeriodFilter); выбранный подсвечен</pre>
+
+    <h3 class="sg-title">Период отчёта</h3>
+    <form class="period-toolbar" method="get" action="#" x-data="{ open: false }" hx-swap="outerHTML" hx-push-url="true">
+    <div class="period-toolbar-main">
+        <nav class="period-presets" aria-label="Быстрый выбор периода">
+    <div class="button-group">
+        <a class="btn" data-size="sm" href="#" data-variant="outline">Этот месяц</a><a class="btn" data-size="sm" href="#" data-variant="outline">3 месяца</a><a class="btn" data-size="sm" href="#" data-variant="primary" aria-current="true">6 месяцев</a><a class="btn" data-size="sm" href="#" data-variant="outline">12 месяцев</a><a class="btn" data-size="sm" href="#" data-variant="outline">С начала года</a><a class="btn" data-size="sm" href="#" data-variant="outline">Прошлый год</a>
+    </div>
+</nav>
+        <button type="button" class="btn" data-variant="outline" data-size="sm" @click="open = !open" aria-expanded="false" :aria-expanded="open" aria-controls="demo-period-fields">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path>
+        </svg>
+            Свой период
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"></path>
+        </svg>
+        </button>
+    </div>
+    <div class="period-toolbar-fields" id="demo-period-fields" x-show="open" x-cloak="">
+        <div class="field">
+    <label for="from">С месяца</label>
+    <div class="month-picker" x-data="monthPicker" x-on:click.outside="open = false" x-on:keydown.escape="open = false">
+        <div class="input-group">
+            <input type="text" placeholder="ММ.ГГГГ" inputmode="numeric" maxlength="7" autocomplete="off" pattern="(0[1-9]|1[0-2])\.(19|20)\d{2}" title="Месяц и год в формате ММ.ГГГГ" x-ref="input" x-on:input="format" id="from" name="from" value="06.2026">
+            <span data-align="inline-end">
+                <button type="button" class="btn" data-variant="ghost" data-size="icon-xs" aria-label="Выбрать месяц" x-bind:aria-expanded="open" x-on:click="toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path>
+        </svg>
+                </button>
+            </span>
+        </div>
+        <div data-popover="" aria-hidden="true" x-bind:aria-hidden="!open">
+            <header>
+                <button type="button" class="btn" data-variant="ghost" data-size="icon-sm" aria-label="Назад" x-on:click="shift(-1)" x-bind:aria-label="view === 'years' ? 'Предыдущие годы' : 'Предыдущий год'">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m15 18-6-6 6-6"></path>
+        </svg>
+                </button>
+                <button type="button" class="btn" data-variant="ghost" data-size="sm" aria-label="Выбрать год" x-text="title()" x-on:click="zoom" x-bind:disabled="view === 'years'"></button>
+                <button type="button" class="btn" data-variant="ghost" data-size="icon-sm" aria-label="Вперёд" x-on:click="shift(1)" x-bind:aria-label="view === 'years' ? 'Следующие годы' : 'Следующий год'">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6"></path>
+        </svg>
+                </button>
+            </header>
+            <div role="group" aria-label="Год" x-show="view === 'years'">
+                <template x-for="y in years()" x-bind:key="y">
+                    <button type="button" class="btn" data-size="sm" x-text="y" x-bind:data-variant="y === year ? 'primary' : 'ghost'" x-on:click="pickYear(y)"></button>
+                </template>
+            </div>
+            <div role="group" aria-label="Месяц" x-show="view === 'months'">
+                <button type="button" class="btn" data-size="sm" data-month="1" data-variant="ghost" x-on:click="pick(+$el.dataset.month)" x-bind:data-variant="selected(+$el.dataset.month) ? 'primary' : 'ghost'">Янв</button><button type="button" class="btn" data-size="sm" data-month="2" data-variant="ghost" x-on:click="pick(+$el.dataset.month)" x-bind:data-variant="selected(+$el.dataset.month) ? 'primary' : 'ghost'">Фев</button><button type="button" class="btn" data-size="sm" data-month="3" data-variant="ghost" x-on:click="pick(+$el.dataset.month)" x-bind:data-variant="selected(+$el.dataset.month) ? 'primary' : 'ghost'">Мар</button><button type="button" class="btn" data-size="sm" data-month="4" data-variant="ghost" x-on:click="pick(+$el.dataset.month)" x-bind:data-variant="selected(+$el.dataset.month) ? 'primary' : 'ghost'">Апр</button><button type="button" class="btn" data-size="sm" data-month="5" data-variant="ghost" x-on:click="pick(+$el.dataset.month)" x-bind:data-variant="selected(+$el.dataset.month) ? 'primary' : 'ghost'">Май</button><button type="button" class="btn" data-size="sm" data-month="6" data-variant="ghost" x-on:click="pick(+$el.dataset.month)" x-bind:data-variant="selected(+$el.dataset.month) ? 'primary' : 'ghost'">Июн</button><button type="button" class="btn" data-size="sm" data-month="7" data-variant="ghost" x-on:click="pick(+$el.dataset.month)" x-bind:data-variant="selected(+$el.dataset.month) ? 'primary' : 'ghost'">Июл</button><button type="button" class="btn" data-size="sm" data-month="8" data-variant="ghost" x-on:click="pick(+$el.dataset.month)" x-bind:data-variant="selected(+$el.dataset.month) ? 'primary' : 'ghost'">Авг</button><button type="button" class="btn" data-size="sm" data-month="9" data-variant="ghost" x-on:click="pick(+$el.dataset.month)" x-bind:data-variant="selected(+$el.dataset.month) ? 'primary' : 'ghost'">Сен</button><button type="button" class="btn" data-size="sm" data-month="10" data-variant="ghost" x-on:click="pick(+$el.dataset.month)" x-bind:data-variant="selected(+$el.dataset.month) ? 'primary' : 'ghost'">Окт</button><button type="button" class="btn" data-size="sm" data-month="11" data-variant="ghost" x-on:click="pick(+$el.dataset.month)" x-bind:data-variant="selected(+$el.dataset.month) ? 'primary' : 'ghost'">Ноя</button><button type="button" class="btn" data-size="sm" data-month="12" data-variant="ghost" x-on:click="pick(+$el.dataset.month)" x-bind:data-variant="selected(+$el.dataset.month) ? 'primary' : 'ghost'">Дек</button>
+            </div>
+        </div>
+    </div>
+    
+    
+</div>
+        <div class="field">
+    <label for="to">По месяц</label>
+    <div class="month-picker" x-data="monthPicker" x-on:click.outside="open = false" x-on:keydown.escape="open = false">
+        <div class="input-group">
+            <input type="text" placeholder="ММ.ГГГГ" inputmode="numeric" maxlength="7" autocomplete="off" pattern="(0[1-9]|1[0-2])\.(19|20)\d{2}" title="Месяц и год в формате ММ.ГГГГ" x-ref="input" x-on:input="format" id="to" name="to" value="11.2026">
+            <span data-align="inline-end">
+                <button type="button" class="btn" data-variant="ghost" data-size="icon-xs" aria-label="Выбрать месяц" x-bind:aria-expanded="open" x-on:click="toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path>
+        </svg>
+                </button>
+            </span>
+        </div>
+        <div data-popover="" aria-hidden="true" x-bind:aria-hidden="!open">
+            <header>
+                <button type="button" class="btn" data-variant="ghost" data-size="icon-sm" aria-label="Назад" x-on:click="shift(-1)" x-bind:aria-label="view === 'years' ? 'Предыдущие годы' : 'Предыдущий год'">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m15 18-6-6 6-6"></path>
+        </svg>
+                </button>
+                <button type="button" class="btn" data-variant="ghost" data-size="sm" aria-label="Выбрать год" x-text="title()" x-on:click="zoom" x-bind:disabled="view === 'years'"></button>
+                <button type="button" class="btn" data-variant="ghost" data-size="icon-sm" aria-label="Вперёд" x-on:click="shift(1)" x-bind:aria-label="view === 'years' ? 'Следующие годы' : 'Следующий год'">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6"></path>
+        </svg>
+                </button>
+            </header>
+            <div role="group" aria-label="Год" x-show="view === 'years'">
+                <template x-for="y in years()" x-bind:key="y">
+                    <button type="button" class="btn" data-size="sm" x-text="y" x-bind:data-variant="y === year ? 'primary' : 'ghost'" x-on:click="pickYear(y)"></button>
+                </template>
+            </div>
+            <div role="group" aria-label="Месяц" x-show="view === 'months'">
+                <button type="button" class="btn" data-size="sm" data-month="1" data-variant="ghost" x-on:click="pick(+$el.dataset.month)" x-bind:data-variant="selected(+$el.dataset.month) ? 'primary' : 'ghost'">Янв</button><button type="button" class="btn" data-size="sm" data-month="2" data-variant="ghost" x-on:click="pick(+$el.dataset.month)" x-bind:data-variant="selected(+$el.dataset.month) ? 'primary' : 'ghost'">Фев</button><button type="button" class="btn" data-size="sm" data-month="3" data-variant="ghost" x-on:click="pick(+$el.dataset.month)" x-bind:data-variant="selected(+$el.dataset.month) ? 'primary' : 'ghost'">Мар</button><button type="button" class="btn" data-size="sm" data-month="4" data-variant="ghost" x-on:click="pick(+$el.dataset.month)" x-bind:data-variant="selected(+$el.dataset.month) ? 'primary' : 'ghost'">Апр</button><button type="button" class="btn" data-size="sm" data-month="5" data-variant="ghost" x-on:click="pick(+$el.dataset.month)" x-bind:data-variant="selected(+$el.dataset.month) ? 'primary' : 'ghost'">Май</button><button type="button" class="btn" data-size="sm" data-month="6" data-variant="ghost" x-on:click="pick(+$el.dataset.month)" x-bind:data-variant="selected(+$el.dataset.month) ? 'primary' : 'ghost'">Июн</button><button type="button" class="btn" data-size="sm" data-month="7" data-variant="ghost" x-on:click="pick(+$el.dataset.month)" x-bind:data-variant="selected(+$el.dataset.month) ? 'primary' : 'ghost'">Июл</button><button type="button" class="btn" data-size="sm" data-month="8" data-variant="ghost" x-on:click="pick(+$el.dataset.month)" x-bind:data-variant="selected(+$el.dataset.month) ? 'primary' : 'ghost'">Авг</button><button type="button" class="btn" data-size="sm" data-month="9" data-variant="ghost" x-on:click="pick(+$el.dataset.month)" x-bind:data-variant="selected(+$el.dataset.month) ? 'primary' : 'ghost'">Сен</button><button type="button" class="btn" data-size="sm" data-month="10" data-variant="ghost" x-on:click="pick(+$el.dataset.month)" x-bind:data-variant="selected(+$el.dataset.month) ? 'primary' : 'ghost'">Окт</button><button type="button" class="btn" data-size="sm" data-month="11" data-variant="ghost" x-on:click="pick(+$el.dataset.month)" x-bind:data-variant="selected(+$el.dataset.month) ? 'primary' : 'ghost'">Ноя</button><button type="button" class="btn" data-size="sm" data-month="12" data-variant="ghost" x-on:click="pick(+$el.dataset.month)" x-bind:data-variant="selected(+$el.dataset.month) ? 'primary' : 'ghost'">Дек</button>
+            </div>
+        </div>
+    </div>
+    
+    
+</div>
+        <button type="submit" class="btn">Применить</button>
+    </div>
+</form>
+    <pre class="sg-usage">~{components/period-toolbar :: periodToolbar(id='report-period', url='/finance/company-expenses', target='#company-page')}   filter: PeriodFilter; target обновляет весь отчёт вместе с заголовком и ссылками возврата</pre>
+
+    <h3 class="sg-title">Главная цифра экрана</h3>
+    <section class="hero">
+    <p class="hero-label">Прибыль за период</p>
+    <div class="hero-main">
+        <p class="hero-value" x-data="countUp" data-value="1404600" data-format="money">¥1,404,600</p>
+        <div class="hero-spark" x-data="sparkline" data-points="-860000,310000,480000,560000,300000,610000"></div>
+    </div>
+    <p data-trend="good">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 7h6v6"></path><path d="m22 7-8.5 8.5-5-5L2 17"></path>
+        </svg>
+        
+        <span>+20% к прошлому периоду</span>
+    </p>
+    <p class="hero-hint">Одна на экран: то, ради чего его открывают</p>
+</section>
+    <pre class="sg-usage">~{components/hero :: hero(label='…', value=${text}, amount=${number}, format='money|number|percent', spark='1,2,3', change=${change}, hint='…', variant='destructive')}   число отсчитывается при загрузке; без анимации, если она выключена в системе</pre>
+
+    <h3 class="sg-title">Сводка расходов</h3>
+    <div class="stat-grid">
+        <dl class="stat" data-variant="accent" data-size="lg">
+    <dt>Всего за период</dt>
+    <dd>¥5,173,900</dd>
+    
+    <p>Май — октябрь 2026</p>
+</dl>
+        <dl class="stat" data-size="lg">
+    <dt>В среднем в месяц</dt>
+    <dd>¥862,317</dd>
+    
+    <p>За 6 месяцев</p>
+</dl>
+        <dl class="stat" data-size="lg">
+    <dt>Записей</dt>
+    <dd>29</dd>
+    
+    <p>В 6 категориях</p>
+</dl>
+    </div>
+    <pre class="sg-usage">&lt;div class="stat-grid"&gt;…&lt;/div&gt;   сетка перестраивается по доступной ширине контента
+~{components/stat :: stat(label='…', value='…', size='lg', variant='accent')}   акцент только на главном показателе</pre>
+    <div class="card">
+        <header data-layout="wrap">
+            <div class="card-heading">
+                <h3 class="card-title">Структура расходов</h3>
+                <p class="card-description">Сумма за выбранный период</p>
+            </div>
+            <div class="card-action"><span class="badge" data-variant="secondary">3 категории</span></div>
+        </header>
+        <section><ul class="bars" x-data="reveal" data-kind="expenses" data-layout="stacked">
+    <li style="--i:0" data-sign="positive">
+        <span class="bars-label">
+            
+            Покупка
+        </span>
+        
+        <span class="bars-track" data-side="positive">
+            <span class="bars-fill" style="width:100.00%"></span>
+        </span>
+        <span class="bars-value">¥3,200,000</span>
+    </li>
+    <li style="--i:1" data-sign="positive">
+        <span class="bars-label">
+            
+            Ремонт: подрядчики
+        </span>
+        
+        <span class="bars-track" data-side="positive">
+            <span class="bars-fill" style="width:20.00%"></span>
+        </span>
+        <span class="bars-value">¥640,000</span>
+    </li>
+    <li style="--i:2" data-sign="positive">
+        <span class="bars-label">
+            
+            Перевозки
+        </span>
+        
+        <span class="bars-track" data-side="positive">
+            <span class="bars-fill" style="width:5.60%"></span>
+        </span>
+        <span class="bars-value">¥180,000</span>
+    </li>
+</ul></section>
+    </div>
+    <pre class="sg-usage">~{components/bars :: bars(items=${items}, kind='expenses', layout='stacked', back=null)}
+&lt;header data-layout="wrap"&gt;&lt;div class="card-heading"&gt;&lt;h2 class="card-title"&gt;…&lt;/h2&gt;&lt;p class="card-description"&gt;…&lt;/p&gt;&lt;/div&gt;&lt;div class="card-action"&gt;…&lt;/div&gt;&lt;/header&gt;</pre>
+    <p class="sg-note">Двухстрочные полосы подходят для узких колонок. Заголовок wrap переносит действия, когда места недостаточно.</p>
+
+    <div class="card">
+        <header><h3>Матрица по периодам</h3></header>
+        <section>
+            <div class="table-container" tabindex="0" role="region" aria-label="Пример расходов по месяцам">
+                <table class="table" data-layout="matrix">
+                    <thead><tr><th>Категория</th><th class="text-right">Сентябрь</th><th class="text-right">Октябрь</th><th class="text-right" data-total="">Итого</th></tr></thead>
+                    <tbody><tr><td>Аренда</td><td class="text-right tabular-nums">¥180,000</td><td class="text-right tabular-nums">¥180,000</td><td class="text-right tabular-nums" data-total="">¥360,000</td></tr></tbody>
+                    <tfoot><tr><td>Итого</td><td class="text-right tabular-nums">¥180,000</td><td class="text-right tabular-nums">¥180,000</td><td class="text-right tabular-nums">¥360,000</td></tr></tfoot>
+                </table>
+            </div>
+        </section>
+    </div>
+    <pre class="sg-usage">&lt;table class="table" data-layout="matrix"&gt;…&lt;td data-total&gt;…&lt;/td&gt;&lt;/table&gt;   первая колонка закреплена; итог выделен мягким фоном</pre>
+
+    <h3 class="sg-title">Столбчатый график по месяцам</h3>
+    <div class="card" data-size="sm">
+        <section>
+            <figure class="chart-figure" x-data="columnChart">
+    <script type="application/json" x-ref="data">{"series":[{"key":"income","label":"Выручка"},{"key":"expenses","label":"Расходы"}],"total":{"key":"result","label":"Итог месяца"},"points":[{"label":"Авг 2026","income":1500000,"expenses":2100000,"result":-600000},{"label":"Сен 2026","income":4200000,"expenses":2600000,"result":1600000},{"label":"Окт 2026","income":2900000,"expenses":1800000,"result":1100000}]}</script>
+    <div class="chart" x-ref="plot" role="group" aria-label="Доходы и расходы по месяцам"></div>
+    <ul class="chart-legend">
+        <li class="chart-legend-item" data-series="income">
+            <span class="chart-legend-indicator"></span>
+            <span>Выручка</span>
+        </li>
+        <li class="chart-legend-item" data-series="expenses">
+            <span class="chart-legend-indicator"></span>
+            <span>Расходы</span>
+        </li>
+    </ul>
+    <div class="chart-tooltip" x-ref="tip" hidden=""></div>
+</figure>
+        </section>
+    </div>
+    <pre class="sg-usage">~{components/chart :: columnChart(data=${chart}, json=${chartJson}, label='…')}   JSON собирать в контроллере через ChartJson; цвет серии – data-series в chart.css</pre>
+
+    <h3 class="sg-title">Полосы: структура и маржа</h3>
+    <div class="grid items-start gap-4 lg:grid-cols-2">
+        <div class="card" data-size="sm">
+            <section>
+                <ul class="bars" x-data="reveal" data-kind="expenses">
+    <li style="--i:0" data-sign="positive">
+        <span class="bars-label">
+            
+            Покупка
+        </span>
+        
+        <span class="bars-track" data-side="positive">
+            <span class="bars-fill" style="width:100.00%"></span>
+        </span>
+        <span class="bars-value">¥3,200,000</span>
+    </li>
+    <li style="--i:1" data-sign="positive">
+        <span class="bars-label">
+            
+            Ремонт: подрядчики
+        </span>
+        
+        <span class="bars-track" data-side="positive">
+            <span class="bars-fill" style="width:20.00%"></span>
+        </span>
+        <span class="bars-value">¥640,000</span>
+    </li>
+    <li style="--i:2" data-sign="positive">
+        <span class="bars-label">
+            
+            Перевозки
+        </span>
+        
+        <span class="bars-track" data-side="positive">
+            <span class="bars-fill" style="width:5.60%"></span>
+        </span>
+        <span class="bars-value">¥180,000</span>
+    </li>
+</ul>
+            </section>
+        </div>
+        <div class="card" data-size="sm">
+            <section>
+                <ul class="bars" x-data="reveal" data-kind="margin" data-diverging="true">
+    <li style="--i:0" data-sign="positive">
+        <span class="bars-label">
+            
+            ISUZU ELF
+        </span>
+        <span class="bars-track" data-side="negative">
+            
+        </span>
+        <span class="bars-track" data-side="positive">
+            <span class="bars-fill" style="width:100.00%"></span>
+        </span>
+        <span class="bars-value">¥420,000</span>
+    </li>
+    <li style="--i:1" data-sign="positive">
+        <span class="bars-label">
+            
+            HINO DUTRO
+        </span>
+        <span class="bars-track" data-side="negative">
+            
+        </span>
+        <span class="bars-track" data-side="positive">
+            <span class="bars-fill" style="width:31.00%"></span>
+        </span>
+        <span class="bars-value">¥130,000</span>
+    </li>
+    <li style="--i:2" data-sign="negative">
+        <span class="bars-label">
+            
+            TOYOTA DYNA
+        </span>
+        <span class="bars-track" data-side="negative">
+            <span class="bars-fill" style="width:21.00%"></span>
+        </span>
+        <span class="bars-track" data-side="positive">
+            
+        </span>
+        <span class="bars-value">−¥90,000</span>
+    </li>
+</ul>
+            </section>
+        </div>
+    </div>
+    <pre class="sg-usage">~{components/bars :: bars(items=${List&lt;BarItem&gt;}, kind='expenses|margin', back='/finance', anchor='finance')}   есть отрицательные – полосы расходятся от нуля</pre>
+
+    <h3 class="sg-title">Карточка деталей</h3>
+    <div class="grid items-start gap-4 lg:grid-cols-2">
+        <div class="card">
+            <header>
+                <h2>Toyota Hiace</h2>
+                <p>Микроавтобус, 2021</p>
+                <div class="card-action">
+                    <button type="button" class="btn" data-variant="outline" data-size="sm">Редактировать</button>
+                </div>
+            </header>
+            <section>
+                <dl class="details">
+                    <dt>Номер</dt><dd class="font-mono">品川 500 あ 12-34</dd>
+                    <dt>VIN</dt><dd class="font-mono">JTFSX23P800012345</dd>
+                    <dt>Статус</dt><dd><span class="status" style="--status: var(--status-blue);">В продаже</span></dd>
+                    <dt>Ответственный</dt><dd>Танака Юки</dd>
+                    <dt>Пробег</dt><dd class="tabular-nums">128 450 км</dd>
+                </dl>
+                <hr>
+                <dl class="details" data-layout="rows">
+                    <div><dt>Цена покупки</dt><dd>¥1,250,000</dd></div>
+                    <div><dt>Расходы</dt><dd>¥83,500</dd></div>
+                    <div data-total=""><dt>Итого</dt><dd>¥1,333,500</dd></div>
+                </dl>
+            </section>
+            <footer class="text-xs text-muted-foreground">Создано 12.03.2024, admin</footer>
+        </div>
+
+        <div class="card">
+            <header>
+                <h2>Фотоописи</h2>
+            </header>
+            <section>
+                <ul class="item-group" data-divided="">
+                    <li class="item" data-size="xs">
+                        <div class="min-w-0 flex-1">
+                            <a href="#data" class="link block max-w-full truncate">Приёмка</a>
+                            <div class="text-xs text-muted-foreground">12.03.2026, Танака Юки</div>
+                        </div>
+                        <span class="thumb"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+            <circle cx="9" cy="9" r="2"></circle>
+            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+        </svg></span>
+                        <span class="badge w-14 shrink-0 justify-center tabular-nums" data-variant="secondary">8 фото</span>
+                    </li>
+                    <li class="item" data-size="xs">
+                        <div class="min-w-0 flex-1">
+                            <a href="#data" class="link block max-w-full truncate">Перед продажей</a>
+                            <div class="text-xs text-muted-foreground">12.03.2026, Танака Юки</div>
+                        </div>
+                        <span class="thumb"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+            <circle cx="9" cy="9" r="2"></circle>
+            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+        </svg></span>
+                        <span class="badge w-14 shrink-0 justify-center tabular-nums" data-variant="secondary">8 фото</span>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </div>
+    <pre class="sg-usage">&lt;dl class="details"&gt;&lt;dt&gt;Ключ&lt;/dt&gt;&lt;dd&gt;Значение&lt;/dd&gt;&lt;/dl&gt;
+&lt;dl class="details" data-layout="rows"&gt;&lt;div&gt;&lt;dt&gt;Ключ&lt;/dt&gt;&lt;dd&gt;Значение&lt;/dd&gt;&lt;/div&gt;&lt;div data-total&gt;…&lt;/div&gt;&lt;/dl&gt;
+&lt;ul class="item-group" data-divided&gt;&lt;li class="item" data-size="xs"&gt;…&lt;/li&gt;&lt;/ul&gt;</pre>
+</section>
+            <section id="feedback" class="sg-section">
+    <h2>Обратная связь</h2>
+    <p>Алерт остаётся на странице. Тост появляется после действия и исчезает. Пустое состояние заменяет пустую таблицу.</p>
+
+    <h3 class="sg-title">Алерты</h3>
+    <div class="grid gap-3">
+        <div class="alert" data-variant="success" role="status">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 6 9 17l-5-5"></path>
+        </svg>
+    <h2>Изменения сохранены</h2>
+    
+</div>
+        <div class="alert" data-variant="warning" role="alert">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3M12 9v4M12 17h.01"></path>
+        </svg>
+    <h2>Истекает страховка</h2>
+    <section>У 3 машин страховка заканчивается в течение 14 дней.</section>
+</div>
+        <div class="alert" data-variant="destructive" role="alert">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 8v4M12 16h.01"></path>
+        </svg>
+    <h2>Не удалось сохранить</h2>
+    <section>Проверьте подключение и попробуйте ещё раз.</section>
+</div>
+    </div>
+    <pre class="sg-usage">~{components/alert :: alert(variant='success', title='Сохранено', text='…')}   variant: success | warning | destructive</pre>
+
+    <h3 class="sg-title">Тосты</h3>
+    <div class="sg-demo">
+        <button type="button" class="btn" data-variant="outline" onclick="document.getElementById('toaster').toast({category: 'success', title: 'Изменения сохранены'})">Success</button>
+        <button type="button" class="btn" data-variant="outline" onclick="document.getElementById('toaster').toast({category: 'info', title: 'Печать QR-кодов подключим позже'})">Info</button>
+        <button type="button" class="btn" data-variant="outline" onclick="document.getElementById('toaster').toast({category: 'error', title: 'Ошибка', description: 'Не удалось выполнить запрос'})">Error</button>
+        <button type="button" class="btn" data-variant="outline" onclick="document.getElementById('toaster').toast({category: 'success', title: 'Локация удалена', action: {label: 'Отменить', onclick: 'this.closest(\'.toast\').remove()'}})">С отменой</button>
+    </div>
+    <p class="sg-note">После редиректа: <code>Toast.success(redirect, "…")</code> / <code>Toast.error(redirect, "…")</code>, после удаления: <code>UndoDelete.prepare(redirect, "…", "/…/restore")</code>. В HTMX-ответе: <code>HtmxToast.trigger(…)</code>, заголовок <code>HX-Trigger</code> обрабатывается в <code>fragments/head.html</code>. JS: <code>toaster.toast({category, title, description})</code>.</p>
+
+    <h3 class="sg-title">Пустое состояние</h3>
+    <div class="empty border">
+            <header>
+                <figure>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2M15 18H9M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path>
+            <circle cx="17" cy="18" r="2"></circle>
+            <circle cx="7" cy="18" r="2"></circle>
+        </svg>
+                </figure>
+                <h2>Транспорта пока нет</h2>
+                <p>Добавьте первую машину, чтобы начать вести учёт обслуживания.</p>
+            </header>
+            
+                <footer>
+            <button type="button" class="btn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5v14"></path>
+        </svg>
+                Добавить транспорт
+            </button>
+        </footer>
+            
+        </div>
+    
+    <pre class="sg-usage">~{components/empty :: empty(icon='truck', title='…', text='…', action=~{:: #my-button})}</pre>
+
+    <h3 class="sg-title">Загрузка</h3>
+    <div class="sg-demo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 animate-spin text-muted-foreground">
+            <path d="M21 12a9 9 0 1 1-6.219-8.56"></path>
+        </svg>
+        <span class="text-sm text-muted-foreground">Спиннер в поиске, фильтрах и плитках фото</span>
+    </div>
+    <p class="sg-note">Полноэкранный <code>.page-loader</code> находится в <code>layouts/app.html</code> и скрывает промежуточную разметку до готовности страницы. Здесь он не запускается, потому что перекрыл бы сам стайлгайд.</p>
+    <pre class="sg-usage">&lt;div class="page-loader" role="status"&gt;&lt;div&gt;&lt;svg&gt;…&lt;/svg&gt;&lt;span&gt;Загрузка…&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;</pre>
+</section>
+            <section id="overlays" class="sg-section">
+            <h2>Оверлеи</h2>
+            <p>
+                Диалог подходит для форм и подтверждений. Выпадающее меню собирает второстепенные действия
+                карточки, быстрые действия: всё, что можно сделать со строкой списка. Все элементы
+                закрываются по Esc и клику за их пределами.
+            </p>
+
+            <h3 class="sg-title">Диалог и подтверждение</h3>
+            <div class="sg-demo">
+                <button type="button" class="btn" data-variant="outline" onclick="document.getElementById('sg-dialog').showModal()">
+                    Открыть диалог с формой
+                </button>
+                <button type="button" class="btn" data-variant="destructive" onclick="document.getElementById('sg-confirm').showModal()">
+                    Удалить (с подтверждением)
+                </button>
+            </div>
+            <pre class="sg-usage">~{components/confirm :: confirm(id='delete-1', title='Удалить …?', text='…', action=~{:: #delete-1-action})}   открыть: getElementById('delete-1').showModal()</pre>
+
+            <dialog id="sg-dialog" class="dialog" aria-labelledby="sg-dialog-title" onclick="if (event.target === this) this.close();">
+                <div>
+                    <header>
+                        <h2 id="sg-dialog-title">Новый пользователь</h2>
+                        <p>Пароль будет отправлен на указанный email.</p>
+                    </header>
+                    <section>
+                        <form class="form" method="dialog">
+                            <div class="field">
+    <label for="dlg-name">Имя</label>
+    <input id="dlg-name" name="name" type="text" value="" placeholder="Танака Юки">
+    
+</div>
+                            <div class="field">
+            <label for="dlg-role-trigger">Роль</label>
+            <div id="dlg-role" class="select">
+            <button type="button" id="dlg-role-trigger" aria-haspopup="listbox" aria-expanded="false" aria-controls="dlg-role-listbox">
+            <span class="truncate">Оператор</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"></path>
+        </svg>
+        </button>
+            <div data-popover="" aria-hidden="true">
+            <div role="listbox" id="dlg-role-listbox" aria-orientation="vertical" aria-labelledby="dlg-role-trigger">
+                
+                <div role="option" data-value="OPERATOR">Оператор</div>
+                <div role="option" data-value="ADMIN">Администратор</div>
+                <div role="option" data-value="VIEWER">Наблюдатель</div>
+            </div>
+        </div>
+            <input type="hidden" name="role" value="OPERATOR">
+        </div>
+            
+        </div>
+                        </form>
+                    </section>
+                    <footer>
+                        <button type="button" class="btn" data-variant="outline" onclick="this.closest('dialog').close()">
+                            Отмена
+                        </button>
+                        <button type="button" class="btn" onclick="
+                                this.closest('dialog').close();
+                                document
+                                    .getElementById('toaster')
+                                    .toast({
+                                        category: 'success',
+                                        title: 'Пользователь создан',
+                                    });
+                            ">
+                            Создать
+                        </button>
+                    </footer>
+                    <button type="button" class="btn" data-variant="ghost" data-size="icon-sm" aria-label="Закрыть" onclick="this.closest('dialog').close()">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18M6 6l12 12"></path>
+        </svg>
+                    </button>
+                </div>
+            </dialog>
+
+            
+            <dialog id="file-viewer" class="dialog viewer" aria-labelledby="file-viewer-title" onclick="if (event.target === this) this.close();">
+                <div class="sm:max-w-4xl">
+                    <header>
+                        <h2 id="file-viewer-title"></h2>
+                        <p data-counter="" hidden=""></p>
+                    </header>
+                    <section class="flex min-h-0 items-center justify-center">
+                        <img class="max-h-[70vh] w-auto max-w-full rounded-md object-contain" alt="" hidden="">
+                        <iframe class="h-[70vh] w-full rounded-md border" title="Документ" hidden=""></iframe>
+                        <button type="button" class="btn" data-variant="outline" data-size="icon" data-prev="" aria-label="Предыдущий файл">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m15 18-6-6 6-6"></path>
+        </svg>
+                        </button>
+                        <button type="button" class="btn" data-variant="outline" data-size="icon" data-next="" aria-label="Следующий файл">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6"></path>
+        </svg>
+                        </button>
+                    </section>
+                    <footer>
+                        <button type="button" class="btn" data-variant="outline" onclick="this.closest('dialog').close()">
+                            Закрыть
+                        </button>
+                        <a class="btn" href="#" target="_blank" rel="noopener">Открыть в новой вкладке</a>
+                    </footer>
+                    <button type="button" class="btn" data-variant="ghost" data-size="icon-sm" aria-label="Закрыть" onclick="this.closest('dialog').close()">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18M6 6l12 12"></path>
+        </svg>
+                    </button>
+                </div>
+            </dialog>
+        
+
+            <dialog id="sg-confirm" class="alert-dialog" aria-labelledby="sg-confirm-title" aria-describedby="sg-confirm-desc">
+    <div>
+        <header>
+            <h2 id="sg-confirm-title">Удалить Toyota Hiace?</h2>
+            <p id="sg-confirm-desc">Запись и вся история обслуживания будут удалены. Это действие нельзя отменить.</p>
+        </header>
+        <footer>
+            <button type="button" class="btn" data-variant="outline" onclick="this.closest('dialog').close()">Отмена</button>
+            <button id="sg-confirm-action" type="button" class="btn" data-variant="destructive" onclick="
+                        this.closest('dialog').close();
+                        document
+                            .getElementById('toaster')
+                            .toast({ category: 'info', title: 'Удалено' });
+                    ">
+                    Удалить
+                </button>
+        </footer>
+    </div>
+</dialog>
+            
+
+            <h3 class="sg-title">Выгрузка в Excel</h3>
+            <p>
+                Кнопка в шапке карточки списка <code>.card-action</code> открывает выбор колонок. Выгружаются все записи с текущими
+                фильтрами и сортировкой. Выбор запоминается в браузере отдельно для каждого списка.
+            </p>
+            <div class="sg-demo">
+                <button type="button" class="btn" data-variant="outline" data-size="sm" onclick="document.getElementById('sg-export').showModal()">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+            <path d="M8 13h2"></path><path d="M14 13h2"></path><path d="M8 17h2"></path><path d="M14 17h2"></path>
+        </svg>
+    Excel
+</button>
+            </div>
+            <dialog id="sg-export" class="dialog" data-size="lg" aria-labelledby="sg-export-title" x-data="exportColumns" data-url="#" onclick="if (event.target === this) this.close();">
+    <div>
+        <header>
+            <h2 id="sg-export-title">Выгрузка в Excel</h2>
+            <p>В файл попадут все записи с текущими фильтрами и сортировкой.</p>
+        </header>
+        <section>
+            <form id="sg-export-form" class="export-groups" x-on:submit.prevent="download" x-on:change="count = checked().length">
+                <fieldset class="export-group">
+                    <legend>Основное</legend>
+                    <div class="export-group-fields">
+                        
+                            <div class="field">
+    <label class="label gap-2">
+        <input id="sg-export-name" type="checkbox" class="input" name="cols" value="name" x-on:change="if ($el.dataset.model) $data[$el.dataset.model] = $el.checked" checked="checked">
+        <span>Название</span>
+    </label>
+</div>
+                        
+                            <div class="field">
+    <label class="label gap-2">
+        <input id="sg-export-vin" type="checkbox" class="input" name="cols" value="vin" x-on:change="if ($el.dataset.model) $data[$el.dataset.model] = $el.checked">
+        <span>VIN / номер кузова</span>
+    </label>
+</div>
+                        
+                            <div class="field">
+    <label class="label gap-2">
+        <input id="sg-export-status" type="checkbox" class="input" name="cols" value="status" x-on:change="if ($el.dataset.model) $data[$el.dataset.model] = $el.checked" checked="checked">
+        <span>Статус</span>
+    </label>
+</div>
+                        
+                    </div>
+                </fieldset>
+                <fieldset class="export-group">
+                    <legend>Деньги</legend>
+                    <div class="export-group-fields">
+                        
+                            <div class="field">
+    <label class="label gap-2">
+        <input id="sg-export-expenses" type="checkbox" class="input" name="cols" value="expenses" x-on:change="if ($el.dataset.model) $data[$el.dataset.model] = $el.checked">
+        <span>Расходы</span>
+    </label>
+</div>
+                        
+                            <div class="field">
+    <label class="label gap-2">
+        <input id="sg-export-income" type="checkbox" class="input" name="cols" value="income" x-on:change="if ($el.dataset.model) $data[$el.dataset.model] = $el.checked">
+        <span>Доходы</span>
+    </label>
+</div>
+                        
+                            <div class="field">
+    <label class="label gap-2">
+        <input id="sg-export-margin" type="checkbox" class="input" name="cols" value="margin" x-on:change="if ($el.dataset.model) $data[$el.dataset.model] = $el.checked" checked="checked">
+        <span>Маржа</span>
+    </label>
+</div>
+                        
+                    </div>
+                </fieldset>
+            </form>
+        </section>
+        <footer>
+            <div class="export-actions">
+                <button type="button" class="btn" data-variant="ghost" x-on:click="all">Все</button>
+                <button type="button" class="btn" data-variant="ghost" x-on:click="reset">По умолчанию</button>
+            </div>
+            <button type="button" class="btn" data-variant="outline" onclick="this.closest('dialog').close()">Отмена</button>
+            <button type="submit" form="sg-export-form" class="btn" x-bind:disabled="count === 0">Скачать</button>
+        </footer>
+        <button type="button" class="btn" data-variant="ghost" data-size="icon-sm" aria-label="Закрыть" onclick="this.closest('dialog').close()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18M6 6l12 12"></path>
+        </svg>
+        </button>
+    </div>
+</dialog>
+            <pre class="sg-usage">~{components/export :: exportButton(id='vehicles-export')}   # в .card-action шапки карточки списка
+~{components/export :: exportDialog(id='vehicles-export', url='/vehicles/export.xlsx', columns=${exportColumns})}   # ExportColumns&lt;T&gt;, ответ – Xlsx.download(…)</pre>
+
+            <h3 class="sg-title">Просмотр файлов</h3>
+            <p>
+                Клик по миниатюре открывает файл в модалке. Если в группе их
+                несколько, их можно листать стрелками на экране и клавишами ←/→, в
+                шапке счётчик. Картинки показываются в <code>&lt;img&gt;</code>,
+                PDF открывается во <code>&lt;iframe&gt;</code>.
+            </p>
+            <div class="sg-demo" data-viewer-group="">
+                <span class="thumb" data-viewer-item="" onclick="openViewer(this)" role="button" tabindex="0" data-url="images/logo.svg" data-title="Файл 1">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+            <circle cx="9" cy="9" r="2"></circle>
+            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+        </svg>
+                </span><span class="thumb" data-viewer-item="" onclick="openViewer(this)" role="button" tabindex="0" data-url="images/logo.svg" data-title="Файл 2">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+            <circle cx="9" cy="9" r="2"></circle>
+            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+        </svg>
+                </span><span class="thumb" data-viewer-item="" onclick="openViewer(this)" role="button" tabindex="0" data-url="images/logo.svg" data-title="Файл 3">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+            <circle cx="9" cy="9" r="2"></circle>
+            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+        </svg>
+                </span>
+            </div>
+            <pre class="sg-usage">~{components/viewer :: viewer}   # один на страницу
+&lt;ul data-viewer-group&gt;&lt;li data-viewer-item data-url="…" data-title="…" data-image="true"&gt;
+  &lt;button onclick="openViewer(this)"&gt;…&lt;/button&gt;&lt;/li&gt;&lt;/ul&gt;</pre>
+
+            <h3 class="sg-title">Выпадающее меню и подсказки</h3>
+            <div class="sg-demo">
+                <div id="sg-dd" class="dropdown-menu">
+                    <button type="button" id="sg-dd-trigger" class="btn" data-variant="outline" aria-haspopup="menu" aria-controls="sg-dd-menu" aria-expanded="false">
+                        Ещё
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"></path>
+        </svg>
+                    </button>
+                    <div id="sg-dd-popover" data-popover="" data-align="end" aria-hidden="true" class="min-w-56">
+                        <div role="menu" id="sg-dd-menu" aria-labelledby="sg-dd-trigger">
+                            <a role="menuitem" href="#overlays">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2M15 18H9M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path>
+            <circle cx="17" cy="18" r="2"></circle>
+            <circle cx="7" cy="18" r="2"></circle>
+        </svg>
+                                Карточка машины
+                            </a>
+                            <a role="menuitem" href="#overlays">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+            <path d="M3 3v5h5"></path>
+        </svg>
+                                Разместить снова
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" class="btn" data-variant="outline" data-tooltip="Подсказка сверху" data-side="top">
+                    Краткая подсказка
+                </button>
+                <button type="button" class="btn" data-variant="ghost" data-size="icon" data-tooltip="Подсказка слева" data-side="left" aria-label="Быстрые действия">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path>
+        </svg>
+                </button>
+            </div>
+            <p class="sg-note">
+                Краткую подсказку используйте только для иконок без подписи и только на устройствах с указателем.
+                Не скрывайте в ней то, без чего нельзя
+                работать.
+            </p>
+
+            <h3 class="sg-title">Быстрые действия</h3>
+            <p>Молния в строке списка открывает панель с крупными кнопками-плитками: всё, что можно сделать с сущностью, не заходя в карточку. Нативный <code>popover</code> находится в top layer, поэтому его не режут <code>overflow</code> таблицы и карточки; позиция считается от кнопки.</p>
+            <div class="sg-demo">
+                <div class="quick-actions">
+            <button type="button" class="btn" data-variant="ghost" data-size="icon-sm" popovertarget="qa-sg" aria-expanded="false" aria-label="Быстрые действия" data-tooltip="Быстрые действия" data-align="end">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path>
+        </svg>
+            </button>
+            <div id="qa-sg" popover="" class="quick-actions-menu" aria-labelledby="qa-sg-title">
+                <header>
+                    <h3 id="qa-sg-title">Toyota Hiace</h3>
+                    <p>TRH200-0123456</p>
+                </header>
+                <div class="quick-actions-grid">
+                        <a class="quick-action" href="#overlays"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2M15 18H9M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path>
+            <circle cx="17" cy="18" r="2"></circle>
+            <circle cx="7" cy="18" r="2"></circle>
+        </svg>Карточка</a>
+                        <a class="quick-action" href="#overlays"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
+        </svg>Документы</a>
+                        <a class="quick-action" href="#overlays"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect>
+            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+            <path d="M12 11h4"></path>
+            <path d="M12 16h4"></path>
+            <path d="M8 11h.01"></path>
+            <path d="M8 16h.01"></path>
+        </svg>Фотоопись</a>
+                        <a class="quick-action" href="#overlays"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+        </svg>В ремонт</a>
+                        <a class="quick-action" href="#overlays"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m15 12-8.5 8.5c-.83.83-2.17.83-3 0 0 0 0 0 0 0a2.12 2.12 0 0 1 0-3L12 9"></path><path d="M17.64 15 22 10.64"></path><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"></path>
+        </svg>В разбор</a>
+                        <a class="quick-action" href="#overlays"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="6" cy="19" r="3"></circle><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"></path><circle cx="18" cy="5" r="3"></circle>
+        </svg>Доставка</a>
+                    </div>
+            </div>
+        </div>
+                
+            </div>
+            <pre class="sg-usage">~{components/quick-actions :: quickActions(id=${v.id}, title=${v.name}, subtitle=${v.vin}, items=~{:: #qa-items})}
+&lt;a class="quick-action" href="…"&gt;&lt;svg th:replace="~{components/icon :: wrench}"/&gt;В ремонт&lt;/a&gt;   # плитка; для POST используйте &lt;form class="contents"&gt; с &lt;button class="quick-action"&gt;</pre>
+            <p class="sg-note">Размещайте в плитках только действия с текущей записью, от трёх до шести штук. Недоступные для текущего статуса действия не показывайте.</p>
+        </section>
+            <section id="navigation" class="sg-section">
+    <h2>Навигация</h2>
+    <p>Путь назад показывает заголовок страницы. Табы подходят для разделов одной сущности.</p>
+
+    <h3 class="sg-title">Заголовок страницы с действиями</h3>
+    <div class="rounded-lg border bg-card p-4 [&amp;&gt;.page-header]:mb-0">
+        <div class="page-header">
+            <div>
+                <a class="btn page-back" data-variant="outline" data-size="sm" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m15 18-6-6 6-6"></path>
+        </svg>
+                    <span>Транспорт</span>
+                </a>
+                <h1>Toyota Hiace</h1>
+                <p>品川 500 あ 12-34, Микроавтобус</p>
+            </div>
+            
+                <div class="page-actions">
+                <button type="button" class="btn" data-variant="outline">Записать на ТО</button>
+                <button type="button" class="btn">Редактировать</button>
+            </div>
+            
+        </div>
+        
+    </div>
+
+    <pre class="sg-usage">~{components/page-header :: pageHeader(title='…', subtitle='…', backUrl='/…', backLabel='…', actions=~{:: #page-actions})}</pre>
+
+    <h3 class="sg-title">Ссылки на разделы</h3>
+    <nav class="section-links" aria-label="Пример разделов">
+        <a class="section-link" href="#">
+    <span class="section-link-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2M15 18H9M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path>
+            <circle cx="17" cy="18" r="2"></circle>
+            <circle cx="7" cy="18" r="2"></circle>
+        </svg>
+    </span>
+    <span class="section-link-body">
+        <span class="section-link-text">
+            <strong>Машины</strong>
+            <small>Карточки машин и история операций</small>
+        </span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6"></path>
+        </svg>
+    </span>
+</a>
+        <a class="section-link" href="#">
+    <span class="section-link-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 3v16a2 2 0 0 0 2 2h16"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path>
+        </svg>
+    </span>
+    <span class="section-link-body">
+        <span class="section-link-text">
+            <strong>Финансы</strong>
+            <small>Результат продаж и отчёты</small>
+        </span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6"></path>
+        </svg>
+    </span>
+</a>
+    </nav>
+    <pre class="sg-usage">&lt;nav class="section-links" aria-label="Рабочие разделы"&gt;
+  ~{components/section-link :: sectionLink(url='/vehicles', icon='truck', title='Машины', description='…')}
+&lt;/nav&gt;</pre>
+
+    <h3 class="sg-title">Показатели главной</h3>
+    <div class="dashboard-metrics">
+        <a class="dashboard-metric" href="#" data-variant="accent">
+    <span class="dashboard-metric-label">Машины в процессе</span>
+    <strong class="dashboard-metric-value">24</strong>
+    <span class="dashboard-metric-footer">
+        <span>Все, кроме проданных и разобранных</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6"></path>
+        </svg>
+    </span>
+</a>
+        <a class="dashboard-metric" href="#">
+    <span class="dashboard-metric-label">Доставки в пути</span>
+    <strong class="dashboard-metric-value">3</strong>
+    <span class="dashboard-metric-footer">
+        <span>Активные перемещения</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6"></path>
+        </svg>
+    </span>
+</a>
+    </div>
+    <pre class="sg-usage">&lt;div class="dashboard-metrics"&gt;
+  ~{components/dashboard-metric :: dashboardMetric(url='/vehicles', label='…', value=${count}, hint='…', variant='accent')}
+&lt;/div&gt;</pre>
+
+    <h3 class="sg-title">Табы</h3>
+    <div id="sg-tabs" class="tabs">
+        <nav role="tablist" aria-orientation="horizontal">
+            <button type="button" role="tab" id="sg-tab-1" aria-controls="sg-panel-1" aria-selected="true" tabindex="0">Общее</button>
+            <button type="button" role="tab" id="sg-tab-2" aria-controls="sg-panel-2" aria-selected="false" tabindex="-1">История ТО <span class="badge" data-variant="outline">12</span></button>
+            <button type="button" role="tab" id="sg-tab-3" aria-controls="sg-panel-3" aria-selected="false" tabindex="-1">Документы</button>
+        </nav>
+        <div role="tabpanel" id="sg-panel-1" aria-labelledby="sg-tab-1" tabindex="-1" aria-selected="true">
+            <div class="card"><section class="text-sm text-muted-foreground">Основные сведения о машине.</section></div>
+        </div>
+        <div role="tabpanel" id="sg-panel-2" aria-labelledby="sg-tab-2" tabindex="-1" aria-selected="false" hidden="">
+            <div class="card"><section class="text-sm text-muted-foreground">12 записей об обслуживании.</section></div>
+        </div>
+        <div role="tabpanel" id="sg-panel-3" aria-labelledby="sg-tab-3" tabindex="-1" aria-selected="false" hidden="">
+            <div class="card"><section class="text-sm text-muted-foreground">Страховка, техосмотр, регистрация.</section></div>
+        </div>
+    </div>
+</section>
+            <section id="htmx" class="sg-section">
+    <h2>HTMX + Alpine</h2>
+    <p>Правило разделения: <strong>HTMX</strong> отвечает за запросы к серверу (списки, формы, подгрузка). <strong>Alpine</strong> отвечает за поведение в браузере (показать/скрыть, счётчики, локальные табы).</p>
+
+    <div class="mt-6 grid gap-6 lg:grid-cols-2">
+        <div class="card" x-data="{ open: false, count: 0 }">
+            <header>
+                <h2>Alpine: локальное состояние</h2>
+                <p><code>x-data</code>, <code>x-show</code>, <code>@click</code> работают без запросов к серверу</p>
+            </header>
+            <section class="gap-3">
+                <div class="flex items-center gap-3">
+                    <button type="button" class="btn" data-variant="outline" data-size="icon-sm" @click="count--" aria-label="Меньше">−</button>
+                    <span class="w-8 text-center tabular-nums font-medium" x-text="count"></span>
+                    <button type="button" class="btn" data-variant="outline" data-size="icon-sm" @click="count++" aria-label="Больше">+</button>
+                    <button type="button" class="btn" data-variant="ghost" data-size="sm" @click="open = !open" x-text="open ? 'Скрыть детали' : 'Показать детали'"></button>
+                </div>
+                <div x-show="open" x-cloak="" x-transition="" class="rounded-md bg-muted p-3 text-sm text-muted-foreground">
+                    Этот блок показан через <code>x-show</code> с <code>x-transition</code>. Счётчик: <span x-text="count"></span>.
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <h3 class="sg-title">Соглашения</h3>
+    <ul class="grid gap-2 text-sm">
+        <li class="flex gap-2"><span class="text-primary">•</span><span>Сервер отвечает <strong>целой страницей</strong>, нужный блок вырезает <code>hx-select</code> с тем же селектором, что и <code>hx-target</code>, и <code>hx-swap="outerHTML"</code>. Так поиск, фильтры и действия в строке списка работают на обычных контроллерах без отдельных фрагментов. Адрес обновляется через <code>hx-push-url</code>.</span></li>
+        <li class="flex gap-2"><span class="text-primary">•</span><span>Индикатор загрузки использует класс <code>htmx-indicator</code> на спиннере рядом с полем.</span></li>
+        <li class="flex gap-2"><span class="text-primary">•</span><span>Тост после HTMX-запроса: <code>HtmxToast.trigger(response, "success", "…", null)</code>, заголовок <code>HX-Trigger</code> обрабатывается в <code>fragments/head.html</code>.</span></li>
+        <li class="flex gap-2"><span class="text-primary">•</span><span>Debounce на поиске: <code>hx-trigger="input changed delay:300ms"</code>.</span></li>
+        <li class="flex gap-2"><span class="text-primary">•</span><span>Новые элементы после swap Basecoat инициализирует сам (MutationObserver); Alpine делает то же самое. Ничего вручную звать не нужно.</span></li>
+    </ul>
+</section>
+            
+        </div>
+    </div>
+</main>
+<div id="toaster" class="toaster"></div>
+<dialog id="qr-scanner" class="dialog scanner" aria-labelledby="qr-scanner-title" onclick="if (event.target === this) this.close();" data-fallback="../core/js/jsqr.min.js" data-barcode-fallback="../core/js/zxing.min.js">
+                <div>
+                    <header>
+                        <h2 id="qr-scanner-title" data-title="">Сканирование QR-кода</h2>
+                        <p data-status="">Поместите QR-код в рамку</p>
+                    </header>
+                    <section>
+                        <div class="scanner-view">
+                            <video muted="" playsinline=""></video>
+                            <span aria-hidden="true"></span>
+                        </div>
+                    </section>
+                    <footer>
+                        <button type="button" class="btn" data-variant="outline" onclick="this.closest('dialog').close()">
+                            Закрыть
+                        </button>
+                    </footer>
+                </div>
+            </dialog>
+</div>
+</body>
+</html>

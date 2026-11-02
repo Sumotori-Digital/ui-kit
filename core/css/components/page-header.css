@@ -1,0 +1,28 @@
+/* Page header – наш компонент: заголовок страницы с действиями.
+   <div class="page-header"><div><a class="page-back"/><h1/><p/></div><div class="page-actions">…</div></div> */
+@layer components {
+    .page-header {
+        @apply mb-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-start sm:justify-between;
+    }
+
+    .page-header > :first-child {
+        @apply min-w-0;
+    }
+
+    /* Кнопка «назад» над заголовком: к списку или родительской сущности. Явная кнопка (.btn), не мелкая ссылка */
+    .page-back {
+        @apply mb-3;
+    }
+
+    .page-header h1 {
+        @apply text-2xl font-semibold tracking-tight;
+    }
+
+    .page-header p {
+        @apply mt-1 text-sm text-muted-foreground;
+    }
+
+    .page-actions {
+        @apply flex min-w-0 max-w-full flex-wrap gap-2 sm:justify-end;
+    }
+}

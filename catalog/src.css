@@ -1,0 +1,12 @@
+@import "tailwindcss";
+@source "./index.html";
+@import "../core/css/index.css";
+@import "./styleguide.css";
+
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url("../core/fonts/InterVariable.woff2") format("woff2");
+}

@@ -1,0 +1,10 @@
+/* Period presets – быстрый выбор периода: строка кнопок, выбранный период подсвечен */
+@layer components {
+    .period-presets {
+        @apply max-w-full overflow-x-auto;
+    }
+
+    .period-presets .btn {
+        @apply whitespace-nowrap;
+    }
+}

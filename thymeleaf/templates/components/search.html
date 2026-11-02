@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <div
+            th:fragment="search"
+            class="input-group"
+            th:classappend="${cls} ?: 'w-full sm:w-72'"
+        >
+            <span><svg th:replace="~{components/icon :: search}"></svg></span>
+            <input
+                th:id="${id}"
+                hx-preserve
+                type="search"
+                th:name="${name} ?: 'q'"
+                th:value="${value}"
+                th:placeholder="${placeholder}"
+                aria-label="Поиск"
+                autocomplete="off"
+                th:hx-get="@{${url}}"
+                hx-trigger="input changed delay:300ms, search"
+                th:hx-include="${include}"
+                th:hx-target="${target}"
+                th:hx-select="${target}"
+                hx-swap="outerHTML"
+                hx-push-url="true"
+                th:hx-indicator="${'#' + id + '-ind'}"
+            />
+            <span th:id="${id + '-ind'}" class="htmx-indicator"
+                ><svg
+                    th:replace="~{components/icon :: loader(cls='animate-spin size-4 text-muted-foreground')}"
+                ></svg
+            ></span>
+        </div>
+    </body>
+</html>

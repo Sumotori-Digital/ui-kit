@@ -1,0 +1,22 @@
+/* Avatar – внешний вид (форк темы Basecoat «vega»). Структура и поведение: vendor/basecoat/components/avatar.css */
+@layer components {
+    .avatar {
+        @apply rounded-full after:rounded-[inherit];
+    }
+
+    .avatar {
+        @apply size-8;
+    }
+
+    .avatar > span {
+        @apply bg-muted text-muted-foreground rounded-[inherit];
+    }
+
+    .avatar[data-variant='primary'] > span {
+        @apply bg-primary text-primary-foreground font-semibold;
+    }
+
+    .avatar > img {
+        @apply rounded-[inherit];
+    }
+}

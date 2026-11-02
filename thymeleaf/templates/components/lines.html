@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <div
+            th:fragment="typedLines"
+            class="field lines"
+            th:with="invalid=${#fields.hasErrors(name + '*')}, items=${#object == null ? null : #object.__${name}__}"
+            th:attr="data-invalid=${invalid} ? 'true' : null"
+            x-data="{
+                reindex() {
+                    [...$refs.list.children].forEach((li, i) => li.querySelectorAll('[data-name]').forEach(el => el.name = $refs.list.closest('[data-lines]').dataset.lines + '[' + i + '].' + el.dataset.name));
+                },
+                add() {
+                    $refs.list.appendChild($refs.tpl.content.cloneNode(true));
+                    this.reindex();
+                    $refs.list.lastElementChild.querySelector('input[type=text]').focus();
+                },
+                remove(li) {
+                    li.remove();
+                    this.reindex();
+                },
+            }"
+            th:data-lines="${name}"
+        >
+            <label th:text="${label}"></label>
+            <ul class="lines-list" x-ref="list">
+                <li th:each="item, i : ${items}">
+                    <input
+                        type="hidden"
+                        data-name="id"
+                        th:name="${name + '[' + i.index + '].id'}"
+                        th:value="${item.id}"
+                    />
+                    <select
+                        class="select"
+                        data-name="type"
+                        th:name="${name + '[' + i.index + '].type'}"
+                        th:aria-label="${typeLabel}"
+                    >
+                        <option
+                            th:each="t : ${types}"
+                            th:value="${t.key}"
+                            th:text="${t.value}"
+                            th:selected="${item.type != null and t.key == item.type.name()}"
+                        ></option>
+                    </select>
+                    <input
+                        type="text"
+                        class="input"
+                        th:data-name="${valueName}"
+                        th:name="${name + '[' + i.index + '].' + valueName}"
+                        th:value="${item.__${valueName}__}"
+                        th:placeholder="${placeholder}"
+                        autocomplete="off"
+                    />
+                    <button
+                        type="button"
+                        class="btn"
+                        data-variant="ghost"
+                        data-size="icon-sm"
+                        aria-label="Убрать строку"
+                        data-tooltip="Убрать строку"
+                        data-align="end"
+                        x-on:click="remove($el.closest('li'))"
+                    >
+                        <svg th:replace="~{components/icon :: x}"></svg>
+                    </button>
+                </li>
+            </ul>
+            <template x-ref="tpl">
+                <li>
+                    <select class="select" data-name="type" th:aria-label="${typeLabel}">
+                        <option
+                            th:each="t : ${types}"
+                            th:value="${t.key}"
+                            th:text="${t.value}"
+                        ></option>
+                    </select>
+                    <input
+                        type="text"
+                        class="input"
+                        th:data-name="${valueName}"
+                        th:placeholder="${placeholder}"
+                        autocomplete="off"
+                    />
+                    <button
+                        type="button"
+                        class="btn"
+                        data-variant="ghost"
+                        data-size="icon-sm"
+                        aria-label="Убрать строку"
+                        data-tooltip="Убрать строку"
+                        data-align="end"
+                        x-on:click="remove($el.closest('li'))"
+                    >
+                        <svg th:replace="~{components/icon :: x}"></svg>
+                    </button>
+                </li>
+            </template>
+            <button
+                type="button"
+                class="btn w-fit"
+                data-variant="outline"
+                data-size="sm"
+                x-on:click="add()"
+            >
+                <svg th:replace="~{components/icon :: plus}"></svg>
+                <span th:text="${addLabel ?: 'Добавить'}"></span>
+            </button>
+            <p th:if="${hint}" th:text="${hint}"></p>
+            <p
+                role="alert"
+                th:each="error : ${#fields.errors(name + '*')}"
+                th:text="${error}"
+            ></p>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,125 @@
+/* Combobox – внешний вид (форк темы Basecoat «vega»). Структура и поведение: vendor/basecoat/components/combobox.css */
+@layer components {
+    .combobox > button[aria-haspopup='listbox'] {
+        @apply border-input focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 aria-invalid:border-destructive inline-flex h-9 w-full items-center justify-between gap-1.5 rounded-md border bg-transparent py-2 ps-2.5 pe-2 text-sm shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-3 aria-invalid:ring-3 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50;
+    }
+
+    .combobox > button[aria-haspopup='listbox'] > svg {
+        @apply text-muted-foreground size-4 shrink-0;
+    }
+
+    .combobox > button[aria-haspopup='listbox'] > [data-value]:has(+ svg) {
+        @apply min-w-0 flex-1 text-start;
+    }
+
+    .field > .combobox {
+        @apply w-full;
+    }
+
+    .combobox > [data-clear-value] {
+        @apply text-muted-foreground hover:text-foreground absolute inset-e-7 top-1/2 inline-flex size-5 -translate-y-1/2 items-center justify-center rounded-sm outline-none focus-visible:ring-3 focus-visible:ring-ring/50 disabled:hidden [&_svg]:size-3.5;
+    }
+
+    .combobox > [data-clear-value][hidden] {
+        @apply hidden;
+    }
+
+    .combobox[data-clearable] > button[aria-haspopup='listbox'] > [data-value] {
+        @apply pe-6;
+    }
+
+    .combobox > input[role='combobox'] {
+        @apply border-input focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 aria-invalid:border-destructive h-9 rounded-md border bg-transparent py-2 ps-2.5 pe-8 text-sm shadow-xs transition-[color,box-shadow] focus-visible:ring-3 aria-invalid:ring-3;
+    }
+
+    .combobox > svg,
+    .combobox-trigger-icon {
+        @apply text-muted-foreground inset-e-2.5 top-1/2 size-4 -translate-y-1/2;
+    }
+
+    .combobox [data-popover] {
+        @apply bg-popover text-popover-foreground ring-foreground/10 max-h-72 w-full gap-0 rounded-md p-0 shadow-md ring-1 duration-100;
+        transition-property: opacity, scale, translate;
+    }
+
+    .combobox [role='listbox'] {
+        @apply max-h-[min(18rem,var(--available-height,18rem))] scroll-py-1 overflow-y-auto p-1;
+    }
+
+    .combobox [role='listbox']:not(:has([data-value]:not([aria-hidden='true']))) {
+        @apply p-0;
+    }
+
+    .combobox [role='listbox']:not(:has([data-value]:not([aria-hidden='true'])))::before {
+        @apply px-3 py-2 text-center text-sm text-muted-foreground;
+    }
+
+    .combobox [role='heading'] {
+        @apply text-muted-foreground px-2 py-1.5 text-xs;
+    }
+
+    .combobox [role='option'] {
+        @apply gap-2 rounded-sm py-1.5 ps-2 pe-8 text-sm [&_svg:not([class*='size-'])]:size-4;
+    }
+
+    .combobox [role='option'].active,
+    .combobox [role='option']:focus-visible {
+        @apply bg-accent text-accent-foreground [&_svg]:text-accent-foreground;
+    }
+
+    .combobox [role='group'] {
+        @apply scroll-my-1 p-1;
+    }
+
+    .combobox [role='separator'] {
+        @apply bg-border -mx-1 my-1 h-px;
+    }
+
+    .combobox-chips {
+        @apply border-input focus-within:border-ring focus-within:ring-ring/50 has-aria-invalid:ring-destructive/20 has-aria-invalid:border-destructive min-h-9 gap-1.5 rounded-md border bg-transparent bg-clip-padding px-1.5 py-1.5 text-sm shadow-xs transition-[color,box-shadow] focus-within:ring-3 has-aria-invalid:ring-3;
+    }
+
+    .combobox-chip {
+        @apply bg-muted text-foreground h-5.5 gap-1 rounded-sm px-1.5 text-xs font-medium has-[>.combobox-chip-remove]:pe-0;
+    }
+
+    .combobox-chip-remove {
+        @apply -ms-1 opacity-50 hover:opacity-100 [&_svg]:size-3.5;
+    }
+
+    .combobox [data-popover] > .input-group {
+        @apply m-1 mb-0 h-8 w-auto border-input/30 bg-input/30 shadow-none focus-within:border-inherit focus-within:ring-0;
+    }
+
+    .combobox [data-popover] > input[role='combobox'] {
+        @apply mb-1 w-full;
+    }
+
+    .combobox [data-quick-create] {
+        @apply grid gap-2 border-t p-1;
+    }
+
+    .combobox [data-quick-create] > .btn {
+        @apply w-full justify-start;
+    }
+
+    .combobox [data-quick-create] > .btn > span {
+        @apply truncate;
+    }
+
+    .combobox [data-quick-create-form] {
+        @apply grid grid-cols-2 gap-1;
+    }
+
+    .combobox [data-quick-create-form] > input {
+        @apply col-span-full min-w-0;
+    }
+
+    .combobox [data-quick-create-form] > p {
+        @apply text-muted-foreground col-span-full px-1 pt-1 text-xs;
+    }
+
+    .combobox [data-quick-create-form] > p[role='alert'] {
+        @apply text-destructive pb-1;
+    }
+}

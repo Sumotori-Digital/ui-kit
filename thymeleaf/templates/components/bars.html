@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<body>
+<ul th:fragment="bars" class="bars" x-data="reveal" th:with="diverging=${!#lists.isEmpty(items.?[negative()])}"
+    th:attr="data-kind=${kind}, data-layout=${layout}, data-diverging=${diverging} ? 'true' : null">
+    <li th:each="b, it : ${items}" th:attr="data-sign=${b.negative()} ? 'negative' : 'positive'" th:style="'--i:' + ${it.index}">
+        <span class="bars-label">
+            <a th:if="${b.url != null}" class="link" data-variant="plain" th:href="@{${b.url}(back=${back})} + ${anchor != null ? '#' + anchor : ''}" th:text="${b.label}" th:title="${b.label}"></a>
+            <th:block th:if="${b.url == null}" th:text="${b.label}"></th:block>
+        </span>
+        <span th:if="${diverging}" class="bars-track" data-side="negative">
+            <span th:if="${b.negative()}" class="bars-fill" th:style="'width:' + ${#numbers.formatDecimal(b.share * 100, 1, 2, 'POINT')} + '%'"></span>
+        </span>
+        <span class="bars-track" data-side="positive">
+            <span th:unless="${b.negative()}" class="bars-fill" th:style="'width:' + ${#numbers.formatDecimal(b.share * 100, 1, 2, 'POINT')} + '%'"></span>
+        </span>
+        <span class="bars-value" th:text="${@money.format(b.value)}"></span>
+    </li>
+</ul>
+</body>
+</html>

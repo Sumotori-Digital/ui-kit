@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<body>
+<nav th:fragment="periodPresets" class="period-presets" aria-label="Быстрый выбор периода">
+    <div class="button-group">
+        <a th:each="p : ${presets}" class="btn" data-size="sm"
+           th:href="@{${url}(from=${p.fromParam()}, to=${p.toParam()})}"
+           th:attr="data-variant=${p.matches(filter)} ? 'primary' : 'outline', aria-current=${p.matches(filter)} ? 'true' : null"
+           th:text="${p.label}"></a>
+    </div>
+</nav>
+</body>
+</html>

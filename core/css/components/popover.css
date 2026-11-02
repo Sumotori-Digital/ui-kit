@@ -1,0 +1,6 @@
+/* Popover – внешний вид (форк темы Basecoat «vega»). Структура и поведение: vendor/basecoat/components/popover.css */
+@layer components {
+    [data-popover] {
+        @apply bg-popover text-popover-foreground ring-foreground/10 flex flex-col gap-4 rounded-md p-4 text-sm shadow-md ring-1 duration-100;
+    }
+}

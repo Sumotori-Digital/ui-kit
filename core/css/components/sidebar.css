@@ -1,0 +1,201 @@
+/* Sidebar – внешний вид (форк темы Basecoat «vega»). Структура и поведение: vendor/basecoat/components/sidebar.css */
+@layer components {
+    /* Состояние групп применяется до первого показа меню, без мигания раскрытых секций. */
+    .js .sidebar-pending nav > section {
+        @apply invisible;
+    }
+
+    .js .sidebar-pending nav,
+    .js .sidebar-pending + * {
+        transition: none;
+    }
+
+    .js .sidebar-pending .sidebar-group-toggle > svg {
+        transition: none;
+    }
+
+    .sidebar nav {
+        @apply bg-sidebar text-sidebar-foreground;
+    }
+
+    .sidebar nav > .sidebar-resize-handle {
+        @apply absolute inset-y-0 -right-3 m-0 hidden w-3 cursor-col-resize touch-none outline-none md:block;
+    }
+
+    .sidebar-resize-handle::before {
+        content: "";
+        @apply absolute inset-y-0 left-0 w-0.5 bg-transparent transition-colors;
+    }
+
+    .sidebar-resize-handle:is(:hover, :focus-visible)::before,
+    .sidebar-resizing .sidebar-resize-handle::before {
+        @apply bg-primary;
+    }
+
+    .sidebar-resize-handle:focus-visible {
+        @apply ring-2 ring-ring;
+    }
+
+    .sidebar-resizing,
+    .sidebar-resizing * {
+        cursor: col-resize !important;
+        user-select: none !important;
+    }
+
+    .sidebar-resizing .sidebar nav,
+    .sidebar-resizing .sidebar + * {
+        transition: none;
+    }
+
+    .sidebar nav > header,
+    .sidebar nav > footer {
+        @apply gap-2 p-2;
+    }
+
+    /* Логотип в шапке – по центру */
+    .sidebar nav > header {
+        @apply flex-row items-center justify-center;
+    }
+
+    .sidebar-collapse-toggle {
+        @apply hidden w-full justify-start text-muted-foreground md:inline-flex;
+    }
+
+    .sidebar nav > section {
+        @apply gap-2;
+    }
+
+    .sidebar nav [role=separator]:not(.sidebar-resize-handle) {
+        @apply border-sidebar-border mx-2;
+    }
+
+    .sidebar nav > section > [role=group] {
+        @apply p-2;
+    }
+
+    .sidebar nav h3 {
+        @apply text-sidebar-foreground/70 text-xs font-medium;
+    }
+
+    .sidebar-group-toggle {
+        @apply ring-sidebar-ring hover:bg-sidebar-accent hover:text-sidebar-accent-foreground flex h-8 w-full items-center justify-between rounded-md px-2 text-left focus-visible:ring-2 focus-visible:outline-hidden;
+    }
+
+    .sidebar-group-toggle > svg {
+        @apply size-4 shrink-0 transition-transform duration-200;
+    }
+
+    .sidebar-group-toggle[aria-expanded=false] > svg {
+        @apply -rotate-90;
+    }
+
+    .sidebar nav > section > [role=group] > ul {
+        @apply gap-1;
+    }
+
+    .sidebar nav > section > [role=group] {
+        @apply text-sm;
+    }
+
+    .sidebar nav li > :is(a, button),
+    .sidebar nav li > details > summary {
+        @apply ring-sidebar-ring hover:bg-sidebar-accent hover:text-sidebar-accent-foreground active:bg-sidebar-accent active:text-sidebar-accent-foreground gap-2 rounded-md p-2 text-sm focus-visible:ring-2 text-left focus-visible:outline-hidden data-open:hover:bg-sidebar-accent data-open:hover:text-sidebar-accent-foreground [&>svg]:shrink-0 [&>svg]:size-4;
+    }
+
+    .sidebar nav li > :is(a, button):is([aria-current=page], [data-active=true]),
+    .sidebar nav li > details > summary:is([aria-current=page], [data-active=true]) {
+        @apply bg-sidebar-accent text-sidebar-accent-foreground font-medium;
+    }
+
+    .sidebar nav li > :is(a, button):not([data-variant]),
+    .sidebar nav li > details > summary:not([data-variant]),
+    .sidebar nav li > :is(a, button)[data-variant=default],
+    .sidebar nav li > details > summary[data-variant=default] {
+        @apply hover:bg-sidebar-accent hover:text-sidebar-accent-foreground;
+    }
+
+    .sidebar nav li > :is(a, button)[data-variant=outline],
+    .sidebar nav li > details > summary[data-variant=outline] {
+        @apply bg-background shadow-[0_0_0_1px_var(--sidebar-border)] hover:shadow-[0_0_0_1px_var(--sidebar-accent)] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground;
+    }
+
+    .sidebar nav li > :is(a, button):not([data-size]),
+    .sidebar nav li > details > summary:not([data-size]),
+    .sidebar nav li > :is(a, button)[data-size=default],
+    .sidebar nav li > details > summary[data-size=default] {
+        @apply h-8 text-sm;
+    }
+
+    .sidebar nav li > :is(a, button)[data-size=sm],
+    .sidebar nav li > details > summary[data-size=sm] {
+        @apply h-7 text-xs;
+    }
+
+    .sidebar nav li > :is(a, button)[data-size=lg],
+    .sidebar nav li > details > summary[data-size=lg] {
+        @apply h-12 text-sm;
+    }
+
+    .sidebar nav li > details > summary::after {
+        @apply size-4;
+    }
+
+    .sidebar nav li > details::details-content {
+        @apply px-3.5;
+    }
+
+    .sidebar nav ul ul {
+        @apply border-sidebar-border translate-x-px gap-1 border-s px-2.5 py-0.5 rtl:-translate-x-px;
+    }
+
+    .sidebar nav ul ul > li > :is(a, button),
+    .sidebar nav ul ul > li > details > summary {
+        @apply text-sidebar-foreground ring-sidebar-ring hover:bg-sidebar-accent hover:text-sidebar-accent-foreground active:bg-sidebar-accent active:text-sidebar-accent-foreground h-7 gap-2 rounded-md px-2 text-sm focus-visible:ring-2 [&>svg]:size-4;
+    }
+
+    @media (min-width: 768px) {
+        .sidebar-collapsed .sidebar nav > header > a > img {
+            @apply aspect-square object-cover object-left;
+        }
+
+        .sidebar-collapsed .sidebar-collapse-toggle {
+            @apply justify-center px-0;
+        }
+
+        .sidebar-collapsed .sidebar-collapse-toggle > span {
+            @apply sr-only;
+        }
+
+        .sidebar-collapsed .sidebar nav > section > [role=group] > h3 {
+            @apply mx-2 my-1 h-px border-t border-sidebar-border;
+        }
+
+        .sidebar-collapsed .sidebar nav > section > [role=group] > h3 > button {
+            @apply hidden;
+        }
+
+        .sidebar-collapsed .sidebar nav li > a {
+            @apply justify-center px-0;
+        }
+
+        .sidebar-collapsed .sidebar nav li > a > span {
+            @apply sr-only;
+        }
+
+        .sidebar-collapsed .sidebar nav > footer > div:first-of-type {
+            @apply min-h-12 justify-center px-0;
+        }
+
+        .sidebar-collapsed .sidebar nav > footer > div:first-of-type > :not(.avatar) {
+            @apply hidden;
+        }
+
+        .sidebar-collapsed .sidebar nav > footer > div:last-of-type {
+            @apply invisible;
+        }
+
+        .sidebar-collapsed .sidebar-resize-handle {
+            @apply hidden;
+        }
+    }
+}

@@ -1,0 +1,55 @@
+/* Stat – плитка с ключевой цифрой: подпись, значение, изменение к прошлому периоду, пояснение */
+@layer components {
+    .stat-grid {
+        @apply grid gap-4;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+    }
+
+    .stat {
+        @apply ring-foreground/10 bg-card text-card-foreground flex flex-col gap-1 rounded-xl p-4 shadow-xs ring-1;
+    }
+
+    .stat > dt {
+        @apply text-muted-foreground text-sm;
+    }
+
+    .stat > dd {
+        @apply text-2xl font-semibold tracking-tight tabular-nums;
+    }
+
+    .stat[data-variant='destructive'] > dd {
+        @apply text-destructive;
+    }
+
+    .stat[data-variant='accent'] {
+        @apply bg-primary/5 ring-primary/15;
+    }
+
+    .stat[data-variant='accent'] > dd {
+        @apply text-primary;
+    }
+
+    .stat[data-size='lg'] {
+        @apply gap-2 p-6;
+    }
+
+    .stat[data-size='lg'] > dd {
+        @apply text-3xl break-words;
+    }
+
+    .stat > p {
+        @apply text-muted-foreground text-xs;
+    }
+
+    .stat > p[data-trend] {
+        @apply inline-flex items-center gap-1 font-medium [&>svg]:size-3.5;
+    }
+
+    .stat > p[data-trend='good'] {
+        @apply text-success;
+    }
+
+    .stat > p[data-trend='bad'] {
+        @apply text-destructive;
+    }
+}

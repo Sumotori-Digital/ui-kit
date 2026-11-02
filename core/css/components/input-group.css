@@ -1,0 +1,154 @@
+/* Input Group – внешний вид (форк темы Basecoat «vega»). Структура и поведение: vendor/basecoat/components/input-group.css */
+@layer components {
+    .input-group {
+        @apply h-9 has-[>textarea]:h-auto rounded-md border border-input shadow-xs transition-[color,box-shadow] focus-within:border-ring focus-within:ring-3 focus-within:ring-ring/50 has-aria-invalid:border-destructive has-aria-invalid:ring-3 has-aria-invalid:ring-destructive/20;
+    }
+
+    .input-group:has(> :is(input, textarea, select, [data-control]):disabled) {
+        @apply opacity-50;
+    }
+    .input-group > :is(input, select, [data-control]) {
+        @apply px-2.5 py-1 text-sm;
+    }
+
+    /* Иконка перед полем (<span><svg/></span> первым ребёнком) – с тем же отступом от края, что у обычного input */
+    .input-group:not([data-orientation="vertical"]):has(
+            > :is(
+                [data-align="start"],
+                [data-align="inline-start"],
+                span:first-child
+            )
+        )
+        > :is(input, select, [data-control]) {
+        @apply ps-1.5;
+    }
+
+    .input-group > span:first-child:not([data-align]) {
+        @apply ps-2.5;
+    }
+
+    .input-group:not([data-orientation="vertical"]):has(
+            > :is([data-align="end"], [data-align="inline-end"])
+        )
+        > :is(input, select, [data-control]) {
+        @apply pe-1.5;
+    }
+
+    .input-group > textarea {
+        @apply px-2.5 py-2 text-sm;
+    }
+
+    .input-group > :is(span, [role="group"], header, footer),
+    .input-group > :is(svg, kbd, .popover, .dropdown-menu) {
+        @apply gap-2 py-1.5 text-sm font-medium text-muted-foreground select-none [&>svg:not([class*='size-'])]:size-4;
+    }
+
+    .input-group > :is([data-align="start"], [data-align="inline-start"]) {
+        @apply ps-2;
+    }
+
+    .input-group > :is([data-align="end"], [data-align="inline-end"]) {
+        @apply pe-2;
+    }
+
+    .input-group
+        > :is([data-align="start"], [data-align="inline-start"]):has(> button) {
+        @apply -ms-1;
+    }
+
+    .input-group
+        > :is([data-align="end"], [data-align="inline-end"]):has(> button) {
+        @apply -me-1;
+    }
+
+    .input-group
+        > :is([data-align="start"], [data-align="inline-start"]):has(> kbd) {
+        @apply -ms-0.5;
+    }
+
+    .input-group
+        > :is([data-align="end"], [data-align="inline-end"]):has(> kbd) {
+        @apply -me-0.5;
+    }
+
+    .input-group > [data-align="block-start"] {
+        @apply px-2.5 pt-2;
+    }
+
+    .input-group > [data-align="block-end"] {
+        @apply px-2.5 pb-2;
+    }
+
+    .input-group > [data-align="block-start"].border-b {
+        @apply pb-2;
+    }
+
+    .input-group > [data-align="block-end"].border-t {
+        @apply pt-2;
+    }
+    .input-group[data-orientation="vertical"]
+        > :is(header, footer, [role="group"], [data-align]) {
+        @apply px-2.5;
+    }
+
+    .input-group[data-orientation="vertical"]
+        > :is(header[data-align="start"], [data-align="block-start"]) {
+        @apply px-2.5 pt-2;
+    }
+
+    .input-group[data-orientation="vertical"]
+        > :is(footer[data-align="end"], [data-align="block-end"]) {
+        @apply px-2.5 pb-2;
+    }
+
+    .input-group[data-orientation="vertical"]:has(> input)
+        > :is(header[data-align="start"], [data-align="block-start"]) {
+        @apply pt-2;
+    }
+
+    .input-group[data-orientation="vertical"]:has(> input)
+        > :is(footer[data-align="end"], [data-align="block-end"]) {
+        @apply pb-2;
+    }
+
+    .input-group[data-orientation="vertical"]
+        > :is(header[data-align="start"], [data-align="block-start"]).border-b {
+        @apply pb-2;
+    }
+
+    .input-group[data-orientation="vertical"]
+        > :is(footer[data-align="end"], [data-align="block-end"]).border-t {
+        @apply pt-2;
+    }
+
+    .input-group
+        > :is(
+            kbd,
+            span > kbd,
+            [role="group"] > kbd,
+            header > kbd,
+            footer > kbd
+        ) {
+        @apply rounded-[calc(var(--radius)-5px)];
+    }
+
+    .input-group
+        > :is(
+            button,
+            [role="group"] > button,
+            header > button,
+            footer > button
+        ) {
+        @apply gap-2 text-sm shadow-none [&>svg:not([class*='size-'])]:size-3.5;
+    }
+
+    .input-group
+        > :is(
+            button,
+            [role="group"] > button,
+            header > button,
+            footer > button
+        ):has(> svg):not(:has(> :not(svg))) {
+        @apply size-6 rounded-[calc(var(--radius)-5px)] p-0;
+    }
+}

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <a
+            th:fragment="sortLink"
+            class="sort-link"
+            th:with="href=@{${url}(sort=${key}, dir=${sort.next(key, first ?: 'asc')})}"
+            th:href="${href}"
+            th:hx-get="${href}"
+            th:hx-target="${target}"
+            th:hx-select="${target}"
+            hx-swap="outerHTML"
+            hx-select-oob="#list-sort"
+            hx-push-url="true"
+            th:attr="data-active=${sort.is(key)} ? 'true' : null, aria-label=${label} + ': сортировать'"
+        >
+            <span th:text="${label}"></span>
+            <th:block th:if="${sort.is(key) and sort.desc}"><svg th:replace="~{components/icon :: arrow-down(cls=null)}"></svg></th:block>
+            <th:block th:if="${sort.is(key) and !sort.desc}"><svg th:replace="~{components/icon :: arrow-up(cls=null)}"></svg></th:block>
+            <th:block th:unless="${sort.is(key)}"><svg th:replace="~{components/icon :: chevrons-up-down(cls=null)}"></svg></th:block>
+        </a>
+        <div th:fragment="sortInputs" id="list-sort" hidden>
+            <input type="hidden" name="sort" th:value="${sort.key}">
+            <input type="hidden" name="dir" th:value="${sort.dir}">
+        </div>
+    </body>
+</html>

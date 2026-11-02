@@ -1,0 +1,52 @@
+/* Gallery – наш компонент: сетка квадратных фото с просмотром и удалением.
+   <ul class="gallery">
+     <li><button class="gallery-photo"><img src="…" alt=""></button>
+         <button class="btn" data-variant="ghost" data-size="icon-sm">…</button></li>
+   </ul> */
+@layer components {
+    .gallery {
+        @apply grid grid-cols-3 gap-2 sm:grid-cols-4 lg:grid-cols-6;
+    }
+
+    .gallery > li {
+        @apply relative;
+    }
+
+    /* Квадрат вместо разноразмерных фото: снимают их с телефона, ориентация любая */
+    .gallery-photo {
+        @apply block aspect-square w-full cursor-pointer overflow-hidden rounded-md border bg-muted text-muted-foreground;
+    }
+
+    .gallery-photo > img {
+        @apply size-full object-cover;
+    }
+
+    .gallery-photo > svg {
+        @apply m-auto size-5;
+    }
+
+    .gallery-photo:has(> .animate-spin) {
+        @apply relative;
+    }
+
+    .gallery-photo > .animate-spin {
+        @apply hidden;
+    }
+
+    .gallery > li[data-state='busy'] .gallery-photo > .animate-spin {
+        @apply text-foreground absolute inset-0 block;
+    }
+
+    .gallery > li[data-state='busy'] .gallery-photo > img {
+        @apply opacity-50;
+    }
+
+    .gallery > li[data-state='error'] .gallery-photo {
+        @apply border-destructive cursor-default;
+    }
+
+    /* Кнопка поверх фото: на светлом снимке её иначе не видно */
+    .gallery > li > .btn {
+        @apply absolute end-1 top-1 bg-background/80 backdrop-blur-sm;
+    }
+}

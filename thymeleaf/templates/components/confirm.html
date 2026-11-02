@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<body>
+<dialog th:fragment="confirm" th:id="${id}" class="alert-dialog" th:aria-labelledby="${id + '-title'}" th:aria-describedby="${id + '-desc'}">
+    <div>
+        <header>
+            <h2 th:id="${id + '-title'}" th:text="${title}"></h2>
+            <p th:if="${text}" th:id="${id + '-desc'}" th:text="${text}"></p>
+        </header>
+        <footer>
+            <button type="button" class="btn" data-variant="outline" onclick="this.closest('dialog').close()">Отмена</button>
+            <th:block th:insert="${action}"></th:block>
+        </footer>
+    </div>
+</dialog>
+
+<dialog th:fragment="confirmTyped" th:id="${id}" class="dialog" th:aria-labelledby="${id + '-title'}"
+        onclick="if (event.target === this) this.close();">
+    <div>
+        <header>
+            <h2 th:id="${id + '-title'}" th:text="${title}"></h2>
+            <p th:if="${text}" th:text="${text}"></p>
+        </header>
+        <section>
+            <form th:id="${id + '-form'}" class="form" th:action="@{${url}}" method="post">
+                <div class="field">
+                    <label th:for="${id + '-confirmation'}" th:text="|Введите ${expected} для подтверждения|"></label>
+                    <input th:id="${id + '-confirmation'}" type="text" name="confirmation" required autocomplete="off"
+                           spellcheck="false">
+                </div>
+            </form>
+        </section>
+        <footer>
+            <button type="button" class="btn" data-variant="outline" onclick="this.closest('dialog').close()">Отмена</button>
+            <button type="submit" th:form="${id + '-form'}" class="btn" data-variant="destructive" th:text="${button}"></button>
+        </footer>
+    </div>
+</dialog>
+</body>
+</html>

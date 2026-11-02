@@ -1,0 +1,17 @@
+@layer components {
+    .sort-link {
+        @apply -mx-1 inline-flex items-center gap-1 rounded-sm px-1 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none;
+    }
+
+    .sort-link > svg {
+        @apply size-3.5 shrink-0 opacity-40;
+    }
+
+    .sort-link[data-active] {
+        @apply text-foreground;
+    }
+
+    .sort-link[data-active] > svg {
+        @apply opacity-100;
+    }
+}

@@ -1,0 +1,86 @@
+/* Поисковый множественный выбор. */
+@layer components {
+    .multi-select {
+        @apply block min-w-0 w-full;
+    }
+
+    .multi-select-picker {
+        @apply block w-full;
+    }
+
+    .multi-select-picker > button {
+        @apply border-input focus-visible:border-ring focus-visible:ring-ring/50 inline-flex h-9 w-full items-center justify-between gap-1.5 rounded-md border bg-transparent py-2 ps-2.5 pe-2 text-sm shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-3;
+    }
+
+    .multi-select-picker > button > svg {
+        @apply text-muted-foreground size-4 shrink-0;
+    }
+
+    .multi-select-picker > button > [data-placeholder] {
+        @apply text-muted-foreground truncate;
+    }
+
+    .multi-select-picker > [data-popover] {
+        @apply w-full min-w-0 max-w-full max-h-72 gap-0 overflow-y-auto p-1;
+    }
+
+    .multi-select-picker > [data-popover] > .input-group {
+        @apply m-1 mb-1 h-8 w-auto border-input/30 bg-input/30 shadow-none focus-within:border-inherit focus-within:ring-0;
+    }
+
+    .multi-select-picker > [data-popover] > [role='option'] {
+        @apply flex w-full cursor-pointer items-center justify-between gap-2 rounded-sm px-2 py-1.5 text-start text-sm hover:bg-muted;
+    }
+
+    .multi-select-picker > [data-popover] > [role='option'] > span {
+        @apply min-w-0 truncate;
+    }
+
+    .multi-select-picker > [data-popover] > [role='option'] > svg {
+        @apply invisible size-4 shrink-0;
+    }
+
+    .multi-select-picker > [data-popover] > [role='option'][data-selected='true'] > svg {
+        @apply visible;
+    }
+
+    .multi-select-picker > [data-popover] > label {
+        @apply flex cursor-pointer items-center gap-2 rounded-sm px-2 py-1.5 text-sm whitespace-nowrap hover:bg-muted;
+    }
+
+    .multi-select [data-quick-create] {
+        @apply grid gap-2 border-t p-1;
+    }
+
+    .multi-select [data-quick-create] > .btn {
+        @apply w-full justify-start;
+    }
+
+    .multi-select [data-quick-create-form] {
+        @apply grid grid-cols-1 gap-2 p-1;
+    }
+
+    .multi-select [data-quick-create-form] > div {
+        @apply flex flex-wrap gap-1;
+    }
+
+    .multi-select [data-quick-create-form] > p {
+        @apply text-muted-foreground col-span-full px-1 pt-1 text-xs;
+    }
+
+    .multi-select-list {
+        @apply mt-2 divide-y rounded-md border text-sm;
+    }
+
+    .multi-select-list > li {
+        @apply flex min-h-9 items-center gap-2 py-1 ps-3 pe-1;
+    }
+
+    .multi-select-list > li > span {
+        @apply min-w-0 flex-1 truncate;
+    }
+
+    .multi-select-list > li > .btn {
+        @apply text-muted-foreground hover:text-foreground shrink-0;
+    }
+}

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="alert" class="alert"
+     th:with="v=${variant ?: 'info'},
+              icon=${v == 'success'} ? 'check' : (${v == 'warning'} ? 'triangle-alert' : (${v == 'destructive'} ? 'circle-alert' : 'info'))"
+     th:attr="data-variant=${v == 'info'} ? null : ${v},
+              role=${v == 'warning' or v == 'destructive'} ? 'alert' : 'status'">
+    <svg th:replace="~{components/icon :: ${icon}}"></svg>
+    <h2 th:text="${title}"></h2>
+    <section th:if="${text}" th:text="${text}"></section>
+</div>
+</body>
+</html>

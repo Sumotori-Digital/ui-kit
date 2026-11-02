@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <button
+            th:fragment="trigger(id, current, placeholder, aria, invalid, required)"
+            type="button"
+            th:id="${id != null ? id + '-trigger' : null}"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            th:aria-controls="${id != null ? id + '-listbox' : null}"
+            th:aria-label="${aria}"
+            th:attr="aria-invalid=${invalid} ? 'true' : null, aria-required=${required} ? 'true' : null"
+        >
+            <span
+                class="truncate"
+                th:text="${current ?: placeholder}"
+                th:classappend="${current == null} ? 'text-muted-foreground'"
+            ></span>
+            <svg th:replace="~{components/icon :: chevron-down(cls=null)}"></svg>
+        </button>
+
+        <button
+            th:fragment="clear(filled)"
+            type="button"
+            data-clear-value
+            aria-label="Очистить"
+            th:hidden="${!filled}"
+            x-bind:hidden="!filled"
+            x-on:click="
+                const s = $el.closest('.select');
+                s.querySelectorAll('[role=option][aria-selected]').forEach((o) => o.removeAttribute('aria-selected'));
+                s.querySelector(':scope > input[type=hidden]').value = '';
+                s.refresh();
+                s.dispatchEvent(new CustomEvent('change', { detail: { value: '', selected: null }, bubbles: true }));
+            "
+        >
+            <svg th:replace="~{components/icon :: x(cls=null)}"></svg>
+        </button>
+
+        <div
+            th:fragment="listbox(id, options, placeholder)"
+            data-popover
+            aria-hidden="true"
+        >
+            <div
+                role="listbox"
+                th:id="${id != null ? id + '-listbox' : null}"
+                aria-orientation="vertical"
+                th:aria-labelledby="${id != null ? id + '-trigger' : null}"
+            >
+                <div
+                    role="option"
+                    th:if="${placeholder}"
+                    data-value=""
+                    th:text="${placeholder}"
+                ></div>
+                <div
+                    role="option"
+                    th:each="o : ${options}"
+                    th:data-value="${o.key}"
+                    th:text="${o.value}"
+                ></div>
+            </div>
+        </div>
+
+        <div
+            th:fragment="control"
+            th:id="${id}"
+            class="select"
+            th:classappend="${cls}"
+            th:data-placeholder="${placeholder}"
+            th:with="current=${selected != null and !#strings.isEmpty(selected.toString()) ? options.get(selected.toString()) : null}"
+        >
+            <button
+                th:replace="~{:: trigger(id=${id}, current=${current}, placeholder=${placeholder}, aria=${aria}, invalid=false, required=false)}"
+            ></button>
+            <div
+                th:replace="~{:: listbox(id=${id}, options=${options}, placeholder=${placeholder})}"
+            ></div>
+            <input type="hidden" th:name="${name}" th:value="${selected}" />
+        </div>
+
+        <div th:fragment="filter" class="field">
+            <label th:for="${id + '-trigger'}" th:text="${label}"></label>
+            <div
+                th:replace="~{:: control(id=${id}, name=${name}, options=${options}, selected=${selected}, placeholder=${placeholder}, cls=null, aria=null)}"
+            ></div>
+            <p th:if="${hint}" th:text="${hint}"></p>
+        </div>
+
+        <div
+            th:fragment="selectField"
+            class="field"
+            th:with="invalid=${#fields.hasErrors(name)}, rules=${@fieldRules.of(#object, name)}, value=${#object == null ? null : #object.__${name}__}"
+            th:attr="data-invalid=${invalid} ? 'true' : null"
+        >
+            <label th:for="${name + '-trigger'}" th:text="${label}"></label>
+            <div
+                class="select"
+                th:data-placeholder="${placeholder}"
+                th:with="current=${value != null and !#strings.isEmpty(value.toString()) ? options.get(value.toString()) : null}"
+                th:attr="data-clearable=${clearable} ? 'true' : null"
+                x-data="{ filled: false }"
+                x-init="filled = !!$el.querySelector(':scope > input[type=hidden]').value"
+                x-on:change="if ($event.detail && $event.detail.value !== undefined) filled = !!$event.detail.value"
+            >
+                <button
+                    th:replace="~{:: trigger(id=${name}, current=${current}, placeholder=${placeholder}, aria=null, invalid=${invalid}, required=${required})}"
+                ></button>
+                <th:block th:if="${clearable}">
+                    <button
+                        th:replace="~{:: clear(filled=${current != null})}"
+                    ></button>
+                </th:block>
+                <div
+                    th:replace="~{:: listbox(id=${name}, options=${options}, placeholder=${placeholder})}"
+                ></div>
+                <input type="hidden" th:field="*{__${name}__}" th:attr="data-rules=${rules}" />
+            </div>
+            <p th:if="${hint}" th:text="${hint}"></p>
+            <p role="alert" th:if="${invalid}" th:errors="*{__${name}__}"></p>
+        </div>
+    </body>
+</html>

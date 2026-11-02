@@ -1,0 +1,25 @@
+/* Native Select – внешний вид (форк темы Basecoat «vega»). Структура и поведение: vendor/basecoat/components/native-select.css */
+@layer components {
+    .field > select,
+    select.select {
+        @apply border-input placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 aria-invalid:border-destructive h-9 w-fit rounded-md border bg-transparent py-1 ps-2.5 pe-8 text-sm shadow-xs transition-[color,box-shadow] focus-visible:ring-3 aria-invalid:ring-3 data-[size=sm]:h-8;
+        @apply bg-(image:--chevron-down-icon-50) bg-no-repeat bg-position-[center_right_0.625rem] bg-size-[1rem];
+    }
+
+    :is(.field > select, select.select):dir(rtl) {
+        @apply bg-position-[center_left_0.625rem];
+    }
+
+    /* В поле формы – во всю ширину, как input */
+    .field > select.select {
+        @apply w-full;
+    }
+
+    /* Тач: ≥ 44px и шрифт 16px */
+    @media (pointer: coarse) {
+        .native-select > select,
+        select.select {
+            @apply min-h-11 text-base;
+        }
+    }
+}

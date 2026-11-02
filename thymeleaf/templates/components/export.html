@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<body>
+<button th:fragment="exportButton" type="button" class="btn" data-variant="outline" data-size="sm"
+        th:attr="onclick=|document.getElementById('${id}').showModal()|">
+    <svg th:replace="~{components/icon :: file-spreadsheet}"></svg>
+    Excel
+</button>
+
+<dialog th:fragment="exportDialog" th:id="${id}" class="dialog" data-size="lg" th:aria-labelledby="${id + '-title'}"
+        x-data="exportColumns" th:data-url="@{${url}}"
+        onclick="if (event.target === this) this.close();">
+    <div>
+        <header>
+            <h2 th:id="${id + '-title'}">Выгрузка в Excel</h2>
+            <p>В файл попадут все записи с текущими фильтрами и сортировкой.</p>
+        </header>
+        <section>
+            <form th:id="${id + '-form'}" class="export-groups" x-on:submit.prevent="download" x-on:change="count = checked().length">
+                <fieldset th:each="group : ${columns.groups()}" class="export-group">
+                    <legend th:text="${group.key}"></legend>
+                    <div class="export-group-fields">
+                        <th:block th:each="c : ${group.value}">
+                            <div th:replace="~{components/form :: checkboxControl(id=${id + '-' + c.key}, name='cols', value=${c.key}, label=${c.label}, checked=${c.preset})}"></div>
+                        </th:block>
+                    </div>
+                </fieldset>
+            </form>
+        </section>
+        <footer>
+            <div class="export-actions">
+                <button type="button" class="btn" data-variant="ghost" x-on:click="all">Все</button>
+                <button type="button" class="btn" data-variant="ghost" x-on:click="reset">По умолчанию</button>
+            </div>
+            <button type="button" class="btn" data-variant="outline" onclick="this.closest('dialog').close()">Отмена</button>
+            <button type="submit" th:form="${id + '-form'}" class="btn" x-bind:disabled="count === 0">Скачать</button>
+        </footer>
+        <button type="button" class="btn" data-variant="ghost" data-size="icon-sm" aria-label="Закрыть"
+                onclick="this.closest('dialog').close()">
+            <svg th:replace="~{components/icon :: x}"></svg>
+        </button>
+    </div>
+</dialog>
+</body>
+</html>

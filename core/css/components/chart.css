@@ -1,0 +1,186 @@
+/* Chart – внешний вид графиков. Структура и поведение: vendor/basecoat/components/chart.css.
+   Цвет серии задаёт data-series на метке, легенде и строке подсказки */
+@layer components {
+    .chart-figure {
+        @apply m-0 grid;
+    }
+
+    .chart {
+        @apply aspect-auto h-[260px];
+    }
+
+    .chart > svg {
+        @apply block overflow-visible;
+    }
+
+    [data-series='income'] {
+        --series: #2a78d6;
+        --chart-indicator-color: var(--series);
+    }
+
+    [data-series='expenses'] {
+        --series: #eb6834;
+        --chart-indicator-color: var(--series);
+    }
+
+    [data-series='profit'] {
+        --series: #2a78d6;
+        --chart-indicator-color: var(--series);
+    }
+
+    [data-series='loss'] {
+        --series: #e34948;
+        --chart-indicator-color: var(--series);
+    }
+
+    [data-series='cumulative'] {
+        --series: var(--foreground);
+        --chart-indicator-color: var(--series);
+    }
+
+    [data-series='result'] {
+        --series: var(--muted-foreground);
+        --chart-indicator-color: var(--series);
+    }
+
+    .chart-legend-item {
+        @apply text-muted-foreground;
+    }
+
+    .chart-legend-line {
+        @apply h-0.5 w-3 rounded-full;
+    }
+
+    .chart-grid {
+        stroke: var(--border);
+        stroke-width: 1;
+        shape-rendering: crispEdges;
+    }
+
+    .chart-axis {
+        stroke: color-mix(in oklab, var(--muted-foreground) 45%, transparent);
+        stroke-width: 1;
+        shape-rendering: crispEdges;
+    }
+
+    .chart-tick {
+        fill: var(--muted-foreground);
+        font-size: 11px;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .chart-bar {
+        fill: var(--series);
+    }
+
+    .chart-band {
+        fill: transparent;
+    }
+
+    .chart-band.is-active {
+        fill: color-mix(in oklab, var(--muted) 70%, transparent);
+    }
+
+    .chart-hit {
+        fill: transparent;
+        outline: none;
+    }
+
+    .chart-hit:focus-visible {
+        stroke: var(--ring);
+        stroke-width: 2;
+    }
+
+    .chart-tooltip {
+        @apply bg-popover text-popover-foreground ring-foreground/10 gap-1.5 rounded-md px-3 py-2 text-xs shadow-md ring-1;
+    }
+
+    .chart-tooltip > p {
+        @apply text-muted-foreground;
+    }
+
+    .chart-tooltip-indicator {
+        @apply h-0.5 w-3 rounded-full;
+    }
+
+    .chart-tooltip-value {
+        @apply font-sans font-semibold text-foreground;
+    }
+
+    .chart-line {
+        fill: none;
+        stroke: var(--series);
+        stroke-width: 2;
+        stroke-linejoin: round;
+        stroke-linecap: round;
+    }
+
+    .chart-dot {
+        fill: var(--series);
+        stroke: var(--card);
+        stroke-width: 2;
+    }
+
+    .chart-end-label {
+        fill: var(--foreground);
+        font-size: 12px;
+        font-weight: 600;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .chart-tall {
+        @apply h-[320px];
+    }
+
+    .chart-bar {
+        transform-box: view-box;
+    }
+
+    svg[data-state='pending'] .chart-bar {
+        transform: scaleY(0);
+    }
+
+    svg[data-state='playing'] .chart-bar {
+        animation: chart-grow 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    }
+
+    svg[data-state='pending'] .chart-line {
+        stroke-dasharray: 1;
+        stroke-dashoffset: 1;
+    }
+
+    svg[data-state='playing'] .chart-line {
+        stroke-dasharray: 1;
+        animation: chart-draw 1200ms 350ms ease-out both;
+    }
+
+    svg[data-state='pending'] :is(.chart-dot, .chart-end-label) {
+        opacity: 0;
+    }
+
+    svg[data-state='playing'] :is(.chart-dot, .chart-end-label) {
+        animation: chart-fade 400ms 1400ms ease-out both;
+    }
+
+    @keyframes chart-grow {
+        from {
+            transform: scaleY(0);
+        }
+    }
+
+    @keyframes chart-draw {
+        from {
+            stroke-dashoffset: 1;
+        }
+        to {
+            stroke-dashoffset: 0;
+        }
+    }
+
+    @keyframes chart-fade {
+        from {
+            opacity: 0;
+        }
+    }
+
+}

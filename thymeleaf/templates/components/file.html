@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <li
+            th:fragment="fileRow"
+            class="item"
+            data-size="xs"
+            data-viewer-item
+            th:attr="data-url=@{${url}}, data-title=${name}, data-image=${image}"
+        >
+            <button
+                type="button"
+                class="thumb"
+                onclick="openViewer(this)"
+                th:aria-label="${openLabel} ?: 'Открыть файл'"
+            >
+                <img
+                    th:if="${image}"
+                    th:src="@{${url}}"
+                    alt=""
+                    loading="lazy"
+                    onerror="this.hidden = true; this.nextElementSibling.classList.remove('hidden');"
+                />
+                <svg
+                    th:replace="~{components/icon :: file-text(cls=${image} ? 'hidden' : null)}"
+                ></svg>
+            </button>
+            <div class="min-w-0 flex-1">
+                <button
+                    type="button"
+                    class="link block max-w-full truncate"
+                    onclick="openViewer(this)"
+                    th:text="${name}"
+                ></button>
+                <div
+                    class="text-xs text-muted-foreground"
+                    th:if="${meta}"
+                    th:text="${meta}"
+                ></div>
+            </div>
+            <span
+                class="badge w-12 justify-center font-mono"
+                data-variant="secondary"
+                th:if="${!#strings.isEmpty(extension)}"
+                th:text="${extension}"
+            ></span>
+            <span
+                class="badge w-18 shrink-0 justify-center font-mono tabular-nums"
+                data-variant="secondary"
+                th:if="${!#strings.isEmpty(size)}"
+                th:text="${size}"
+            ></span>
+            <th:block th:if="${action}"
+                ><th:block th:insert="${action}"></th:block
+            ></th:block>
+        </li>
+    </body>
+</html>

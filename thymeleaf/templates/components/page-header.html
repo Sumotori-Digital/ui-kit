@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <div th:fragment="pageHeader" class="page-header">
+            <div>
+                <a
+                    th:if="${backUrl}"
+                    class="btn page-back"
+                    data-variant="outline"
+                    data-size="sm"
+                    th:href="@{${backUrl}}"
+                >
+                    <svg th:replace="~{components/icon :: chevron-left}"></svg>
+                    <span th:text="${backLabel ?: 'Назад'}"></span>
+                </a>
+                <h1 th:text="${title}"></h1>
+                <p th:if="${subtitle}" th:text="${subtitle}"></p>
+            </div>
+            <th:block th:if="${actions}">
+                <div class="page-actions" th:insert="${actions}"></div>
+            </th:block>
+        </div>
+    </body>
+</html>

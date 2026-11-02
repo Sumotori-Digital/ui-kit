@@ -1,0 +1,13 @@
+@layer components {
+    .link {
+        @apply font-medium text-primary hover:underline;
+    }
+
+    .link[data-variant="plain"] {
+        @apply font-normal;
+    }
+
+    button.link {
+        @apply cursor-pointer text-start;
+    }
+}

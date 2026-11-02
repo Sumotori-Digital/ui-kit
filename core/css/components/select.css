@@ -1,0 +1,75 @@
+/* Select – внешний вид (форк темы Basecoat «vega»). Структура и поведение: vendor/basecoat/components/select.css */
+@layer components {
+    .select:not(select) > button {
+        @apply w-full border-input focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 aria-invalid:border-destructive h-9 data-[size=sm]:h-8 gap-1.5 rounded-md border bg-transparent py-2 ps-2.5 pe-2 text-sm shadow-xs transition-[color,box-shadow] focus-visible:ring-3 aria-invalid:ring-3 [&_svg:not([class*='size-'])]:size-4;
+    }
+
+    .select:not(select) > button > span {
+        @apply gap-1.5;
+    }
+
+    .select:not(select) > button > svg {
+        @apply text-muted-foreground size-4;
+    }
+
+    .select:not(select) > button[data-clear-value] {
+        @apply text-muted-foreground hover:text-foreground absolute inset-e-7 top-1/2 inline-flex size-5 -translate-y-1/2 items-center justify-center rounded-sm border-0 p-0 shadow-none outline-none focus-visible:ring-3 focus-visible:ring-ring/50 disabled:hidden [&_svg]:size-3.5;
+    }
+
+    .select:not(select) > button[data-clear-value][hidden] {
+        @apply hidden;
+    }
+
+    .select[data-clearable] > button > span {
+        @apply pe-6;
+    }
+
+    .select:not(select) [data-popover] {
+        @apply bg-popover text-popover-foreground ring-foreground/10 rounded-md p-1 shadow-md ring-1 duration-100;
+    }
+
+
+
+
+    .select:not(select) [role='listbox'] {
+        @apply max-h-[min(18rem,var(--available-height,18rem))] scroll-py-1 overflow-y-auto;
+    }
+
+    .select:not(select) [role='listbox']:not(:has([data-value]:not([aria-hidden='true'])))::before {
+        @apply py-6 text-center text-sm;
+    }
+
+    .select:not(select) [role='heading'] {
+        @apply text-muted-foreground px-2 py-1.5 text-xs;
+    }
+
+    .select:not(select) [role='option'] {
+        @apply gap-2 rounded-sm py-1.5 ps-2 pe-8 text-sm [&_svg:not([class*='size-'])]:size-4;
+    }
+
+    .select:not(select) [role='option'].active,
+    .select:not(select) [role='option']:focus-visible {
+        @apply bg-muted text-foreground [&_svg]:text-foreground;
+    }
+
+    .select:not(select) [role='group'] {
+        @apply scroll-my-1 p-1;
+    }
+
+    .select:not(select) [role='separator'] {
+        @apply bg-border -mx-1 my-1 h-px;
+    }
+
+    /* В поле формы – во всю ширину, как input */
+    .field > .select,
+    .field > .select > button {
+        @apply w-full;
+    }
+
+    /* Тач: ≥ 44px и шрифт 16px */
+    @media (pointer: coarse) {
+        .select > button {
+            @apply min-h-11 text-base;
+        }
+    }
+}

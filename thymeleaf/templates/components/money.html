@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="money" class="field" th:with="invalid=${#fields.hasErrors(name)}, rules=${@fieldRules.of(#object, name)}" th:attr="data-invalid=${invalid} ? 'true' : null">
+    <label th:for="${name}" th:text="${label}"></label>
+    <div class="input-group">
+        <span>¥</span>
+        <input type="text" inputmode="numeric" autocomplete="off" th:field="*{__${name}__}" th:placeholder="${placeholder}"
+               th:required="${required}" th:attr="aria-invalid=${invalid} ? 'true' : null, data-rules=${rules}"
+               x-data="{
+                   group(value) {
+                       const digits = String(value).split('.')[0].replace(/[^0-9]/g, '').replace(/^0+(?=\d)/, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                       return (String(value).startsWith('-') ? '-' : '') + digits;
+                   },
+                   regroup() {
+                       const tail = this.$el.value.length - this.$el.selectionEnd;
+                       this.$el.value = this.group(this.$el.value);
+                       const at = Math.max(0, this.$el.value.length - tail);
+                       if (document.activeElement === this.$el) this.$el.setSelectionRange(at, at);
+                   },
+               }"
+               x-init="regroup()"
+               x-on:input="regroup()">
+    </div>
+    <p th:if="${hint}" th:text="${hint}"></p>
+    <p role="alert" th:if="${invalid}" th:errors="*{__${name}__}"></p>
+</div>
+
+<div th:fragment="moneyControl" class="field">
+    <label th:for="${id}" th:text="${label}"></label>
+    <div th:replace="~{:: control(id=${id}, name=${name})}"></div>
+    <p th:if="${hint}" th:text="${hint}"></p>
+</div>
+
+<div th:fragment="control(id, name)" class="input-group">
+    <span>¥</span>
+    <input type="text" inputmode="numeric" autocomplete="off" th:id="${id}" th:name="${name}"
+           x-data="{
+               group(value) {
+                   const digits = String(value).split('.')[0].replace(/[^0-9]/g, '').replace(/^0+(?=\d)/, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                   return (String(value).startsWith('-') ? '-' : '') + digits;
+               },
+               regroup() {
+                   const tail = this.$el.value.length - this.$el.selectionEnd;
+                   this.$el.value = this.group(this.$el.value);
+                   const at = Math.max(0, this.$el.value.length - tail);
+                   if (document.activeElement === this.$el) this.$el.setSelectionRange(at, at);
+               },
+           }"
+           x-init="regroup()"
+           x-on:input="regroup()">
+</div>
+</body>
+</html>

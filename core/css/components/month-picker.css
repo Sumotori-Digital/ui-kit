@@ -1,0 +1,21 @@
+@layer components {
+    .month-picker {
+        @apply relative;
+    }
+
+    .month-picker > [data-popover] {
+        @apply w-64 min-w-0 gap-3 p-3;
+    }
+
+    .month-picker > [data-popover] > header {
+        @apply flex items-center justify-between text-sm font-medium tabular-nums;
+    }
+
+    .month-picker > [data-popover] > header > .btn:disabled {
+        @apply opacity-100;
+    }
+
+    .month-picker > [data-popover] > [role='group'] {
+        @apply grid grid-cols-3 gap-1;
+    }
+}

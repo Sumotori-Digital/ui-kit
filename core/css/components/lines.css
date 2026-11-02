@@ -1,0 +1,26 @@
+@layer components {
+    .lines-list {
+        @apply flex flex-col gap-2;
+    }
+
+    .lines-list:empty {
+        @apply hidden;
+    }
+
+    .lines-list > li {
+        @apply flex items-center gap-1;
+    }
+
+    .lines-list > li > input {
+        @apply min-w-0 flex-1;
+    }
+
+    .lines-list > li > select {
+        @apply w-40 shrink-0;
+    }
+
+    fieldset:disabled .lines-list > li > button,
+    fieldset:disabled .lines > button {
+        @apply hidden;
+    }
+}

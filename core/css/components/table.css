@@ -1,0 +1,95 @@
+/* Table – внешний вид (форк темы Basecoat «vega»). Структура и поведение: vendor/basecoat/components/table.css */
+@layer components {
+    .table-container {
+        @apply relative w-full overflow-x-auto;
+    }
+
+    .table {
+        @apply w-full caption-bottom text-sm;
+    }
+
+    /* Шапка отделена фоном и приглушённым текстом, чтобы не сливалась со строками */
+    .table thead {
+        @apply bg-muted/50 [&_tr]:border-b;
+    }
+
+    .table > tbody:not(:last-of-type) > tr:last-child {
+        @apply border-b;
+    }
+
+    .table > tbody:not(:only-of-type) > tr:not(:last-child) {
+        @apply border-border/50;
+    }
+
+    .table tfoot {
+        @apply bg-muted/50 border-t font-medium [&>tr]:last:border-b-0;
+    }
+
+    .table tr {
+        @apply hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors;
+    }
+
+    .table > tbody:only-of-type > tr:nth-child(even),
+    .table > tbody:not(:only-of-type):nth-of-type(even) > tr {
+        @apply bg-muted/25;
+    }
+
+    /* Ячейки объединены по строкам (rowspan) – подсвечивать по одной строке нельзя:
+       группа строк живёт в своём tbody и подсвечивается целиком */
+    .table[data-hover='group'] tr:hover {
+        @apply bg-transparent;
+    }
+
+    .table[data-hover='group'] tbody:hover > tr {
+        @apply bg-muted/50;
+    }
+
+    .table > tbody:only-of-type > tr:nth-child(even):hover,
+    .table[data-hover='group'] > tbody:nth-of-type(even):hover > tr {
+        @apply bg-muted/60;
+    }
+
+    .table th {
+        @apply text-muted-foreground h-10 px-3 text-start align-middle text-xs font-medium whitespace-nowrap has-[[role=checkbox]]:pe-0;
+    }
+
+    /* Строкам больше воздуха: py-3 вместо p-2, чтобы двухстрочные ячейки и миниатюры не давили друг на друга */
+    .table td {
+        @apply px-3 py-3 align-middle whitespace-nowrap has-[[role=checkbox]]:pe-0;
+    }
+
+    .table caption {
+        @apply text-muted-foreground mt-4 text-sm;
+    }
+
+    /* Смысловые группы колонок: data-group ставится на первую ячейку группы (в thead и в каждой строке).
+       Разделяем только воздухом, без линий: между группами вдвое больше отступа, чем между колонками внутри –
+       соседние столбцы читаются как один блок */
+    .table :is(th, td)[data-group] {
+        @apply ps-6;
+    }
+
+    .table :is(th, td):has(+ :is(th, td)[data-group]) {
+        @apply pe-6;
+    }
+
+    /* Группу можно ещё и подсветить: <col data-group="tint"> в colgroup.
+       Фон колонки лежит под строками, поэтому подсветка строки при наведении работает поверх него */
+    .table col[data-group="tint"] {
+        @apply bg-muted/70;
+    }
+
+    /* Матрица по периодам: категории остаются видимыми при прокрутке. */
+    .table[data-layout='matrix'] :is(th, td):first-child:not([colspan]) {
+        @apply sticky start-0 z-10 min-w-40 max-w-48 whitespace-normal bg-card;
+    }
+
+    .table[data-layout='matrix'] thead th:first-child:not([colspan]),
+    .table[data-layout='matrix'] tfoot td:first-child:not([colspan]) {
+        @apply bg-muted;
+    }
+
+    .table[data-layout='matrix'] [data-total] {
+        @apply bg-primary/5;
+    }
+}

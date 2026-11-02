@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<body>
+<a th:fragment="sectionLink" class="section-link" th:href="@{${url}}">
+    <span class="section-link-icon" aria-hidden="true">
+        <svg th:replace="~{components/icon :: ${icon}}"></svg>
+    </span>
+    <span class="section-link-body">
+        <span class="section-link-text">
+            <strong th:text="${title}"></strong>
+            <small th:if="${description}" th:text="${description}"></small>
+        </span>
+        <svg th:replace="~{components/icon :: chevron-right}"></svg>
+    </span>
+</a>
+</body>
+</html>

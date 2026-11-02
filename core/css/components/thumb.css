@@ -1,0 +1,19 @@
+/* Thumb – наш компонент: миниатюра в строке таблицы. Пока без фото – заглушка с иконкой.
+   <span class="thumb"><svg/></span>   |   <span class="thumb"><img src="…" alt=""></span> */
+@layer components {
+    .thumb {
+        @apply inline-flex size-12 shrink-0 items-center justify-center overflow-hidden rounded-md border bg-muted text-muted-foreground;
+    }
+
+    button.thumb {
+        @apply cursor-pointer;
+    }
+
+    .thumb > svg {
+        @apply size-4;
+    }
+
+    .thumb > img {
+        @apply size-full object-cover;
+    }
+}

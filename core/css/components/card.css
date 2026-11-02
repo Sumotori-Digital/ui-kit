@@ -1,0 +1,116 @@
+/* Card – внешний вид (форк темы Basecoat «vega»). Структура и поведение: vendor/basecoat/components/card.css */
+@layer components {
+    .card {
+        @apply ring-foreground/10 bg-card text-card-foreground overflow-hidden rounded-xl text-sm shadow-xs ring-1 has-[>img:first-child]:pt-0 [&>img:first-child]:rounded-t-xl [&>img:last-child]:rounded-b-xl;
+    }
+
+    .card:has(.multi-select, .combobox, .select:not(select), .dropdown-menu, .date-picker, .month-picker, .form-actions) {
+        @apply overflow-visible;
+    }
+
+    .card {
+        @apply gap-6 py-6;
+    }
+
+    .card[data-size='sm'] {
+        @apply gap-4 py-4;
+    }
+
+    .card > header {
+        @apply gap-1 rounded-t-xl px-6 [.border-b]:pb-6;
+    }
+
+    .card[data-size='sm'] > header {
+        @apply px-4 [.border-b]:pb-4;
+    }
+
+    .card > header > :is(h2, h3, [data-title], .card-title) {
+        @apply text-base leading-normal font-medium;
+    }
+
+    .card[data-size='sm'] > header > :is(h2, h3, [data-title], .card-title) {
+        @apply text-sm;
+    }
+
+    .card > header > :is(p, [data-description], .card-description) {
+        @apply text-muted-foreground text-sm;
+    }
+
+    .card > section {
+        @apply px-6;
+    }
+
+    .card[data-size='sm'] > section {
+        @apply px-4;
+    }
+
+    .card > footer {
+        @apply rounded-b-xl px-6 [.border-t]:pt-6;
+    }
+
+    .card[data-size='sm'] > footer {
+        @apply px-4 [.border-t]:pt-4;
+    }
+
+    /* Таблица во всю ширину карточки: <section> без боковых отступов, но крайние ячейки – с отступом карточки */
+    .card > section:has(> .table-container) {
+        @apply px-0 [&_tr>*:first-child:not([data-group])]:ps-6 [&_tr>*:last-child]:pe-6;
+    }
+
+    .card[data-size='sm'] > section:has(> .table-container) {
+        @apply [&_tr>*:first-child:not([data-group])]:ps-4 [&_tr>*:last-child]:pe-4;
+    }
+
+    /* Шапка-переключатель (панель фильтров): кликается вся верхняя часть карточки,
+       а не только строка заголовка – padding компенсируется отрицательным margin */
+    .card > header[role="button"] {
+        @apply cursor-pointer select-none -my-6 py-6;
+    }
+
+    .card[data-size='sm'] > header[role="button"] {
+        @apply -my-4 py-4;
+    }
+
+    /* Футер со счётчиком и пагинацией – переносится на мобильном, а не сжимается */
+    .card > footer {
+        @apply flex-wrap gap-3;
+    }
+
+    /* Заголовок с несколькими действиями переносит их в отдельный ряд. */
+    .card > header[data-layout='wrap'] {
+        @apply flex flex-wrap items-start justify-between gap-4;
+    }
+
+    .card-heading {
+        @apply grid min-w-0 gap-1;
+    }
+
+    .card-heading > .card-title {
+        @apply text-base font-medium;
+    }
+
+    .card-heading > .card-description {
+        @apply text-sm text-muted-foreground;
+    }
+
+    .card > header[data-layout='wrap'] > .card-action {
+        @apply flex flex-wrap items-center gap-2;
+    }
+
+    /* Фильтры списка выглядят как инструментальная строка под шапкой. */
+    .card[data-variant='toolbar'] {
+        @apply gap-0 rounded-none border-b border-border bg-transparent py-0 shadow-none ring-0;
+    }
+
+    .card[data-variant='toolbar'] > header[role='button'] {
+        @apply m-0 min-h-11 rounded-none px-0 py-2;
+    }
+
+    .card[data-variant='toolbar'] > section {
+        @apply px-0 py-4;
+    }
+
+    .card[data-variant='toolbar'] > footer {
+        @apply px-0 py-4;
+    }
+}

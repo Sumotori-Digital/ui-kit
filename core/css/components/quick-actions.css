@@ -1,0 +1,75 @@
+@layer components {
+    .quick-actions {
+        @apply relative inline-flex;
+    }
+
+    .quick-actions > button[aria-expanded="true"] {
+        @apply bg-muted text-foreground;
+    }
+
+    .quick-actions-menu {
+        @apply bg-popover text-popover-foreground ring-foreground/10 fixed inset-auto m-0 w-72 rounded-xl p-3 text-start shadow-lg ring-1;
+        transition:
+            opacity 0.15s ease,
+            translate 0.15s ease,
+            display 0.15s allow-discrete,
+            overlay 0.15s allow-discrete;
+    }
+
+    .quick-actions-menu:popover-open {
+        @apply opacity-100;
+        translate: 0 0;
+
+        @starting-style {
+            @apply opacity-0;
+            translate: 0 -0.5rem;
+        }
+    }
+
+    .quick-actions-menu:not(:popover-open) {
+        @apply opacity-0;
+        translate: 0 -0.5rem;
+    }
+
+    .quick-actions-menu > header {
+        @apply mb-2 flex flex-col px-1;
+    }
+
+    .quick-actions-menu > header > h3 {
+        @apply truncate text-sm font-medium;
+    }
+
+    .quick-actions-menu > header > p {
+        @apply truncate text-xs text-muted-foreground;
+    }
+
+    .quick-actions-grid {
+        @apply grid grid-cols-3 gap-1.5;
+    }
+
+    .quick-action {
+        @apply flex cursor-pointer flex-col items-center justify-center gap-1.5 rounded-lg border bg-card px-1 py-3 text-center text-xs font-medium transition-colors hover:border-primary/40 hover:bg-primary/5 focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none;
+    }
+
+    .quick-action > svg {
+        @apply size-5 text-primary;
+    }
+
+    .quick-action[data-variant="destructive"] > svg {
+        @apply text-destructive;
+    }
+
+    .quick-action[data-variant="destructive"]:hover {
+        @apply border-destructive/40 bg-destructive/5;
+    }
+
+    .quick-action[data-variant="muted"] > svg {
+        @apply text-muted-foreground;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .quick-actions-menu {
+            transition: none;
+        }
+    }
+}

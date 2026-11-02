@@ -1,0 +1,113 @@
+/* Dropzone – наш компонент: зона выбора/перетаскивания файлов. Разметка – templates/components/dropzone.html
+   <div class="dropzone"><label><input type="file"/><svg/><p>…</p></label><ul><li>…</li></ul></div> */
+@layer components {
+    .dropzone {
+        @apply border-input flex w-full min-w-0 flex-col gap-3 rounded-md border border-dashed p-3 text-sm transition-[color,box-shadow,background-color];
+    }
+
+    /* Кольцо фокуса – только когда с клавиатуры стоим на скрытом input[type=file] */
+    .dropzone:has(> label > input:focus-visible) {
+        @apply border-ring ring-ring/50 ring-3;
+    }
+
+    /* Файл тащат над зоной */
+    .dropzone[data-over="true"] {
+        @apply border-primary bg-primary/5;
+    }
+
+    /* Кликабельная область */
+    .dropzone > label {
+        @apply hover:bg-muted/50 flex w-full cursor-pointer flex-col items-center gap-2 rounded-md p-3 text-center;
+    }
+
+    /* Сам input спрятан: клик по label открывает выбор, фокус остаётся для клавиатуры */
+    .dropzone > label > input[type="file"] {
+        @apply sr-only;
+    }
+
+    .dropzone > label > svg {
+        @apply text-muted-foreground size-6;
+    }
+
+    .dropzone > label > p {
+        @apply text-muted-foreground;
+    }
+
+    .dropzone > label > p > strong {
+        @apply text-foreground font-medium;
+    }
+
+    .dropzone > [data-camera] {
+        @apply self-start;
+    }
+
+    .dropzone > [data-camera] > input[type='file'] {
+        @apply sr-only;
+    }
+
+    /* Выбранные файлы: поля строки (если есть) растягиваются, размер и крестик – справа.
+       На узком экране поля переносятся под имя */
+    .dropzone > ul {
+        @apply bg-background w-full min-w-0 divide-y rounded-md border text-start;
+    }
+
+    /* Строка на sm+: [имя/поле 1] [поле 2] [расширение] [размер] [×] в одну линию.
+       На узком экране – три: [имя ………… ×] / [поле 2 ………………] / [расширение] [размер].
+       Колонки фиксированной ширины: каждая строка – свой grid, с auto они бы разъезжались («510 КБ» шире «99 КБ») */
+    .dropzone > ul > li {
+        @apply grid min-w-0 grid-cols-[1fr_4.5rem_2rem] items-center gap-2 px-2.5 py-2 sm:grid-cols-[1fr_12rem_3rem_4.5rem_2rem];
+    }
+
+    .dropzone > ul > li > :is(input, select, .truncate) {
+        @apply w-full min-w-0;
+    }
+
+    .dropzone > ul > li > :first-child {
+        @apply col-span-2 col-start-1 row-start-1 sm:col-span-1;
+    }
+
+    .dropzone > ul > li > :is(input, select):nth-child(2) {
+        @apply col-span-3 col-start-1 row-start-2 sm:col-span-1 sm:col-start-2 sm:row-start-1;
+    }
+
+    /* Расширение – бейджем */
+    .dropzone > ul > li > [data-slot="ext"] {
+        @apply col-start-1 row-start-3 justify-self-start font-mono uppercase sm:col-start-3 sm:row-start-1 sm:justify-self-center;
+    }
+
+    /* data-slot, не data-size: data-size занят размером кнопки (.btn[data-size=icon-sm]) */
+    .dropzone > ul > li > [data-slot="size"] {
+        @apply text-muted-foreground col-start-2 row-start-3 text-end text-xs tabular-nums sm:col-start-4 sm:row-start-1;
+    }
+
+    .dropzone > ul > li > .btn {
+        @apply col-start-3 row-start-1 justify-self-end sm:col-start-5;
+    }
+
+    /* Строка без второго поля (у фото описи только название): колонка под него не нужна,
+       иначе строка вылезает за зону, а имя схлопывается в ноль */
+    .dropzone > ul > li:not(:has(> :is(input, select):nth-child(2))) {
+        @apply sm:grid-cols-[1fr_3rem_4.5rem_2rem];
+    }
+
+    .dropzone
+        > ul
+        > li:not(:has(> :is(input, select):nth-child(2)))
+        > [data-slot="ext"] {
+        @apply row-start-2 sm:col-start-2 sm:row-start-1;
+    }
+
+    .dropzone
+        > ul
+        > li:not(:has(> :is(input, select):nth-child(2)))
+        > [data-slot="size"] {
+        @apply row-start-2 sm:col-start-3 sm:row-start-1;
+    }
+
+    .dropzone
+        > ul
+        > li:not(:has(> :is(input, select):nth-child(2)))
+        > .btn {
+        @apply sm:col-start-4;
+    }
+}

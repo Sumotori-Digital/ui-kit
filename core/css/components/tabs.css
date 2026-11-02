@@ -1,0 +1,31 @@
+/* Tabs – внешний вид (форк темы Basecoat «vega»). Структура и поведение: vendor/basecoat/components/tabs.css */
+@layer components {
+    .tabs {
+        @apply gap-2;
+    }
+
+    /* Не шире контейнера: на мобильном вкладки переносятся на вторую строку, а не уезжают за экран */
+    .tabs > [role='tablist'] {
+        @apply bg-muted max-w-full flex-wrap rounded-lg p-0.75 min-h-9;
+    }
+
+    .tabs > [role='tablist'] > [role='tab'] {
+        @apply text-foreground/60 hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring gap-1.5 rounded-md border border-transparent px-2 py-1 text-sm font-medium [&_svg:not([class*='size-'])]:size-4 focus-visible:ring-[3px] focus-visible:outline-1;
+    }
+
+    .tabs > [role='tablist'] > [role='tab'][aria-selected='true'] {
+        @apply bg-background text-foreground shadow-sm;
+    }
+
+    .tabs > [role='tablist'] > [role='tab']:has(> svg:first-child) {
+        @apply ps-1.5;
+    }
+
+    .tabs > [role='tablist'] > [role='tab']:has(> svg:last-child) {
+        @apply pe-1.5;
+    }
+
+    .tabs > [role='tabpanel'] {
+        @apply text-sm;
+    }
+}

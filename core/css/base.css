@@ -1,0 +1,32 @@
+/* Базовые стили элементов без классов и служебные хелперы HTMX/Alpine */
+
+@layer base {
+    @media (min-width: 48rem) {
+        html {
+            scrollbar-gutter: stable;
+        }
+    }
+
+    /* Inline-код: идентификаторы, имена классов, пути. Для клавиш – .kbd */
+    code:not(.kbd):not(pre code) {
+        @apply rounded-sm bg-muted px-1 py-0.5 font-mono text-[0.85em] text-foreground;
+    }
+
+    fieldset {
+        @apply min-w-0;
+    }
+}
+
+/* Alpine: скрываем до инициализации, чтобы не мигало */
+[x-cloak] {
+    display: none !important;
+}
+
+/* HTMX: индикатор загрузки показывается только во время запроса */
+.htmx-indicator {
+    display: none;
+}
+.htmx-request .htmx-indicator,
+.htmx-request.htmx-indicator {
+    display: inline-flex;
+}

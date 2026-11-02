@@ -1,0 +1,14 @@
+/* Период отчёта: пресеты и раскрываемый диапазон месяцев. */
+@layer components {
+    .period-toolbar {
+        @apply grid min-w-0 gap-4 border-b border-border pb-6;
+    }
+
+    .period-toolbar-main {
+        @apply flex min-w-0 flex-wrap items-center justify-between gap-3;
+    }
+
+    .period-toolbar-fields {
+        @apply grid items-end gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto];
+    }
+}

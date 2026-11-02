@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <th:block th:fragment="viewer">
+            <dialog
+                id="file-viewer"
+                class="dialog viewer"
+                aria-labelledby="file-viewer-title"
+                onclick="if (event.target === this) this.close();"
+            >
+                <div class="sm:max-w-4xl">
+                    <header>
+                        <h2 id="file-viewer-title"></h2>
+                        <p data-counter hidden></p>
+                    </header>
+                    <section class="flex min-h-0 items-center justify-center">
+                        <img
+                            class="max-h-[70vh] w-auto max-w-full rounded-md object-contain"
+                            alt=""
+                            hidden
+                        />
+                        <iframe
+                            class="h-[70vh] w-full rounded-md border"
+                            title="Документ"
+                            hidden
+                        ></iframe>
+                        <button
+                            type="button"
+                            class="btn"
+                            data-variant="outline"
+                            data-size="icon"
+                            data-prev
+                            aria-label="Предыдущий файл"
+                        >
+                            <svg
+                                th:replace="~{components/icon :: chevron-left}"
+                            ></svg>
+                        </button>
+                        <button
+                            type="button"
+                            class="btn"
+                            data-variant="outline"
+                            data-size="icon"
+                            data-next
+                            aria-label="Следующий файл"
+                        >
+                            <svg
+                                th:replace="~{components/icon :: chevron-right}"
+                            ></svg>
+                        </button>
+                    </section>
+                    <footer>
+                        <button
+                            type="button"
+                            class="btn"
+                            data-variant="outline"
+                            onclick="this.closest('dialog').close()"
+                        >
+                            Закрыть
+                        </button>
+                        <a class="btn" href="#" target="_blank" rel="noopener"
+                            >Открыть в новой вкладке</a
+                        >
+                    </footer>
+                    <button
+                        type="button"
+                        class="btn"
+                        data-variant="ghost"
+                        data-size="icon-sm"
+                        aria-label="Закрыть"
+                        onclick="this.closest('dialog').close()"
+                    >
+                        <svg th:replace="~{components/icon :: x}"></svg>
+                    </button>
+                </div>
+            </dialog>
+        </th:block>
+    </body>
+</html>

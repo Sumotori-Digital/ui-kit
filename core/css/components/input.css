@@ -1,0 +1,49 @@
+/* Input – внешний вид (форк темы Basecoat «vega»). Структура и поведение: vendor/basecoat/components/input.css */
+@layer components {
+    .field > input[type='text']:not(:is(.command > header input, .dialog > * > header input)),
+    .field > input[type='email'],
+    .field > input[type='password'],
+    .field > input[type='number'],
+    .field > input[type='file'],
+    .field > input[type='tel'],
+    .field > input[type='url'],
+    .field > input[type='search']:not(:is(.command > header input, .dialog > * > header input)),
+    .field > input[type='date'],
+    .field > input[type='datetime-local'],
+    .field > input[type='month'],
+    .field > input[type='week'],
+    .field > input[type='time'],
+    .field > input:not([type]),
+    .input[type='text'],
+    .input[type='email'],
+    .input[type='password'],
+    .input[type='number'],
+    .input[type='file'],
+    .input[type='tel'],
+    .input[type='url'],
+    .input[type='search'],
+    .input[type='date'],
+    .input[type='datetime-local'],
+    .input[type='month'],
+    .input[type='week'],
+    .input[type='time'],
+    .input:not([type]) {
+        @apply border-input focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 aria-invalid:border-destructive h-9 rounded-md border bg-transparent px-2.5 py-1 text-base shadow-xs transition-[color,box-shadow] file:h-7 file:text-sm file:font-medium focus-visible:ring-3 aria-invalid:ring-3 md:text-sm;
+    }
+
+    /* Тач: ≥ 44px и шрифт 16px, иначе iOS зумит форму при фокусе */
+    @media (pointer: coarse) {
+        :is(.field > input, .input):not([type='checkbox'], [type='radio'], [type='range'], [type='file']) {
+            @apply min-h-11 text-base;
+        }
+    }
+
+    input[type='number'] {
+        appearance: textfield;
+    }
+
+    input[type='number']::-webkit-inner-spin-button,
+    input[type='number']::-webkit-outer-spin-button {
+        @apply m-0 appearance-none;
+    }
+}

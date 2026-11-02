@@ -1,0 +1,49 @@
+/* Switch – внешний вид (форк темы Basecoat «vega»). Структура и поведение: vendor/basecoat/components/switch.css */
+@layer components {
+    .field > input[type='checkbox'][role='switch'],
+    .input[type='checkbox'][role='switch'] {
+        @apply checked:bg-primary not-checked:bg-input focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 aria-invalid:border-destructive rounded-full border border-transparent shadow-xs focus-visible:ring-3 aria-invalid:ring-3;
+    }
+
+    :is(.field > input[type='checkbox'][role='switch'], .input[type='checkbox'][role='switch']):not([data-size='sm']) {
+        @apply h-[18.4px] w-8;
+    }
+
+    :is(.field > input[type='checkbox'][role='switch'], .input[type='checkbox'][role='switch'])[data-size='sm'] {
+        @apply h-3.5 w-6;
+    }
+
+    :is(.field > input[type='checkbox'][role='switch'], .input[type='checkbox'][role='switch']):before {
+        @apply bg-background rounded-full;
+    }
+
+
+
+    :is(.field > input[type='checkbox'][role='switch'], .input[type='checkbox'][role='switch']):not([data-size='sm']):before {
+        @apply size-4;
+    }
+
+    :is(.field > input[type='checkbox'][role='switch'], .input[type='checkbox'][role='switch'])[data-size='sm']:before {
+        @apply size-3;
+    }
+
+    :is(.field > input[type='checkbox'][role='switch'], .input[type='checkbox'][role='switch']):checked:not([data-size='sm']):before {
+        @apply translate-x-[calc(100%-2px)];
+    }
+
+    :is(.field > input[type='checkbox'][role='switch'], .input[type='checkbox'][role='switch']):checked[data-size='sm']:before {
+        @apply translate-x-[calc(100%-2px)];
+    }
+
+    :is(.field > input[type='checkbox'][role='switch'], .input[type='checkbox'][role='switch']):dir(rtl):checked:not([data-size='sm']):before {
+        @apply -translate-x-[calc(100%-2px)];
+    }
+
+    :is(.field > input[type='checkbox'][role='switch'], .input[type='checkbox'][role='switch']):dir(rtl):checked[data-size='sm']:before {
+        @apply -translate-x-[calc(100%-2px)];
+    }
+
+    :is(.field > input[type='checkbox'][role='switch'], .input[type='checkbox'][role='switch']):not(:checked):before {
+        @apply translate-x-0;
+    }
+}

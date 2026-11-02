@@ -1,0 +1,23 @@
+/* Pagination – наш компонент. <nav class="pagination"><a/> <a aria-current="page"/> <span>…</span> </nav> */
+@layer components {
+    .pagination {
+        @apply flex items-center gap-1;
+    }
+
+    .pagination > a,
+    .pagination > span {
+        @apply inline-flex h-9 min-w-9 items-center justify-center rounded-md px-2 text-sm;
+    }
+
+    .pagination > a {
+        @apply hover:bg-muted;
+    }
+
+    .pagination > a[aria-current='page'] {
+        @apply border border-border bg-background font-medium shadow-xs;
+    }
+
+    .pagination > a[aria-disabled='true'] {
+        @apply pointer-events-none opacity-50;
+    }
+}

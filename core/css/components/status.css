@@ -1,0 +1,30 @@
+/* Status – наш компонент: точка + текст. <span class="status" data-kind="vehicle" data-status="in_repair">В ремонте</span>
+   Легче бейджа, для состояния сущности в таблицах и карточках.
+   Вариант data-variant="badge" – пилюля вместо точки, когда статус должен читаться с первого взгляда.
+   Цвет берётся из палитры --status-* (theme.css) и внутри одного data-kind не повторяется */
+@layer components {
+    .status {
+        --status: var(--status-slate);
+        @apply inline-flex items-center gap-1.5 text-sm;
+    }
+
+    .status::before {
+        content: "";
+        @apply size-2 shrink-0 rounded-full;
+        background-color: var(--status);
+    }
+
+    /* Пилюля: подложка того же цвета, текст – притемнённый, чтобы читался на светлом фоне.
+       Подложка непрозрачная – строка таблицы под ней подсвечивается при наведении и не просвечивает.
+       Ширина фиксированная (min-w-24 хватает самой длинной подписи) – в столбце пилюли стоят ровной колонкой,
+       текст по центру; подпись длиннее – пилюля растянется */
+    .status[data-variant="badge"] {
+        @apply h-5 min-w-24 justify-center rounded-4xl px-2 text-xs font-medium whitespace-nowrap;
+        color: color-mix(in oklab, var(--status) 75%, black);
+        background-color: color-mix(in oklab, var(--status) 18%, white);
+    }
+
+    .status[data-variant="badge"]::before {
+        @apply hidden;
+    }
+}
