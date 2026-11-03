@@ -641,6 +641,16 @@
         <span>Уведомлять в Telegram</span>
     </label>
 </div>
+                        <div class="field" role="radiogroup" aria-label="Доставка">
+                            <label class="label gap-2">
+                                <input type="radio" class="input" name="sg-delivery" value="PICKUP" checked="checked">
+                                <span>Самовывоз</span>
+                            </label>
+                            <label class="label gap-2">
+                                <input type="radio" class="input" name="sg-delivery" value="COURIER">
+                                <span>Курьер</span>
+                            </label>
+                        </div>
                         <div class="field" data-orientation="horizontal">
     <label for="sg-switch">Переключатель</label>
     <input id="sg-switch" type="checkbox" role="switch" class="input" name="sg-switch" x-on:change="

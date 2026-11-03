@@ -1,0 +1,15 @@
+/* Radio – внешний вид (форк темы Basecoat «vega»). Структура и поведение: vendor/basecoat/components/radio.css */
+@layer components {
+    [role='radiogroup'] {
+        @apply grid gap-3;
+    }
+
+    .field > input[type='radio'],
+    .input[type='radio'] {
+        @apply border-input checked:bg-primary checked:text-primary-foreground checked:border-primary aria-invalid:checked:border-primary aria-invalid:border-destructive focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 flex size-4 rounded-full focus-visible:ring-3 aria-invalid:ring-3;
+    }
+
+    :is(.field > input[type='radio'], .input[type='radio']):checked:before {
+        @apply bg-primary-foreground size-2;
+    }
+}
