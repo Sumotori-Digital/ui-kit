@@ -887,3 +887,54 @@ function scanPick(missing) {
         }
     };
 }
+(function () {
+    var gap = 8;
+    function visibleArea(popover) {
+        var left = 0;
+        var right = document.documentElement.clientWidth;
+        for (var el = popover.parentElement; el && el !== document.body; el = el.parentElement) {
+            var style = getComputedStyle(el);
+            if (style.overflowX !== 'visible') {
+                var rect = el.getBoundingClientRect();
+                left = Math.max(left, rect.left);
+                right = Math.min(right, rect.right);
+            }
+            if (style.position === 'fixed') break;
+        }
+        return {left: left + gap, right: right - gap};
+    }
+    function place(popover) {
+        popover.style.left = '';
+        popover.style.right = '';
+        if ('flipped' in popover.dataset) {
+            delete popover.dataset.side;
+            delete popover.dataset.flipped;
+        }
+        if (popover.getAttribute('aria-hidden') === 'true' || !popover.offsetParent) return;
+        var anchor = popover.offsetParent.getBoundingClientRect();
+        var height = popover.offsetHeight;
+        if (
+            !popover.dataset.side &&
+            anchor.bottom + height + gap > window.innerHeight &&
+            anchor.top - height - gap >= 0
+        ) {
+            popover.dataset.side = 'top';
+            popover.dataset.flipped = '';
+        }
+        var width = popover.offsetWidth;
+        var centered = popover.dataset.align === 'center';
+        var left = anchor.left + popover.offsetLeft - (centered ? width / 2 : 0);
+        var area = visibleArea(popover);
+        var shift = 0;
+        if (left + width > area.right) shift = area.right - left - width;
+        if (left + shift < area.left) shift = area.left - left;
+        if (!shift) return;
+        popover.style.left = popover.offsetLeft + shift + 'px';
+        popover.style.right = 'auto';
+    }
+    new MutationObserver(function (records) {
+        records.forEach(function (record) {
+            if (record.target.matches('[data-popover]')) place(record.target);
+        });
+    }).observe(document.documentElement, {attributes: true, attributeFilter: ['aria-hidden'], subtree: true});
+})();
