@@ -10,6 +10,8 @@
     <script src="../core/js/htmx.min.js" defer></script>
     <script src="../core/js/charts.js" defer></script>
     <script src="../core/js/ui-kit.js" defer></script>
+    <script src="../core/js/actions.js" defer></script>
+    <script src="../core/js/input-suggestions.js" defer></script>
     <script src="../core/js/alpine.min.js" defer></script>
     <script src="../core/js/validation.js" defer></script>
 </head>
@@ -938,6 +940,34 @@
 &lt;span class="badge ms-2" data-variant="secondary"&gt;29&lt;/span&gt;</pre>
     <p class="sg-note">Вторичные сведения разделяются отступами и переносятся целыми пунктами. Пустые значения пропускаются. Счётчик — отдельный бейдж; заголовок с уточнением — через двоеточие. Декоративные точки-разделители не используем.</p>
 
+    <h3 class="sg-title">Действия и заголовок карточки</h3>
+    <div class="page-header">
+        <div>
+            <div class="page-title"><h1>Заявка № 104</h1><span class="badge" data-variant="outline">В работе</span></div>
+            <div class="page-metadata"><div class="meta-line"><span>Создана 06.11.2026</span><span>Исполнитель: Алексей</span></div></div>
+        </div>
+        <div class="action-group">
+            <div class="action-group-primary"><button type="button" class="btn">Завершить</button></div>
+            <div class="action-group-secondary"><button type="button" class="btn" data-variant="outline">Добавить</button></div>
+            <details class="action-menu">
+                <summary class="btn" data-variant="outline">Ещё</summary>
+                <div class="action-menu-content">
+                    <button type="button" class="btn" data-variant="ghost">Дублировать</button>
+                    <button type="button" class="btn" data-variant="destructive">Удалить</button>
+                </div>
+            </details>
+        </div>
+    </div>
+    <pre class="sg-usage">~{components/actions :: actions(primary=~{:: #primary}, secondary=~{:: #secondary}, more=~{:: #more})}
+~{components/page-header :: pageHeader(title='…', statusContent=~{:: #status}, metadataContent=~{:: #metadata}, actions=~{:: #actions})}</pre>
+    <p class="sg-note">Основное действие выделяется, частое вспомогательное остаётся рядом, остальные доступны в «Ещё». Меню закрывается после выбора, по клику снаружи и Escape.</p>
+    <h3 class="sg-title">Подсказки свободного ввода</h3>
+    <div class="field" x-data="" x-init="uiKit.textSuggestions.attach($refs.query, {load: (q) => Promise.resolve(['Проверка', 'Подготовка', 'Покраска'].filter(value => value.toLocaleLowerCase().startsWith(q.toLocaleLowerCase())))})">
+        <label for="sg-suggestions">Название</label>
+        <input id="sg-suggestions" x-ref="query" type="text" class="input" placeholder="Введите «по»" />
+    </div>
+    <pre class="sg-usage">uiKit.textSuggestions.attach(input, {load: (query, signal) => fetch(url, {signal}).then(response => response.json())})</pre>
+    <p class="sg-note">Источником значений управляет приложение. Стрелки выбирают вариант, Enter подтверждает, Escape закрывает список. Ручной ввод доступен и при ошибке загрузки.</p>
     <h3 class="sg-title">Список: шапка, таблица, мобильные карточки</h3>
     <div class="grid gap-2 rounded-lg border bg-background p-4 [&amp;&gt;.page-header]:mb-0">
         <div class="page-header">

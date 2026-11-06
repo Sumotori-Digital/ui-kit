@@ -4,10 +4,8 @@
 <a th:fragment="dashboardMetric" class="dashboard-metric" th:href="@{${url}}" th:attr="data-variant=${variant}">
     <span class="dashboard-metric-label" th:text="${label}"></span>
     <strong class="dashboard-metric-value" th:text="${value}"></strong>
-    <span class="dashboard-metric-footer">
-        <span th:if="${hint}" th:text="${hint}"></span>
-        <svg th:replace="~{components/icon :: chevron-right}"></svg>
-    </span>
+    <span class="dashboard-metric-hint" th:if="${hint}" th:text="${hint}"></span>
+    <span class="dashboard-metric-arrow"><svg th:replace="~{components/icon :: chevron-right}"></svg></span>
 </a>
 </body>
 </html>

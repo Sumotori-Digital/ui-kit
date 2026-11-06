@@ -1,11 +1,11 @@
-/* Полноэкранная загрузка скрывает промежуточное состояние компонентов при навигации. */
+/* Загрузка закрывает только область данных: меню и шапка видны сразу. Колесо появляется с задержкой, быстрые переходы его не показывают. */
 @layer components {
     .page-loader {
         display: none;
     }
 
     .js .page-loader {
-        @apply fixed inset-0 z-100 flex items-center justify-center bg-background;
+        @apply fixed inset-x-0 top-14 bottom-0 z-40 flex items-center justify-center bg-background md:top-0 md:start-(--sidebar-width);
         display: flex;
         opacity: 1;
         visibility: visible;
@@ -28,12 +28,23 @@
         @apply size-6 animate-spin text-primary;
     }
 
+    .js .page-loader > div {
+        animation: page-loader-appear 150ms ease 200ms backwards;
+    }
+
+    @keyframes page-loader-appear {
+        from {
+            opacity: 0;
+        }
+    }
+
     @media (prefers-reduced-motion: reduce) {
         .js .page-loader {
             transition: none;
         }
 
-        .page-loader svg {
+        .page-loader svg,
+        .js .page-loader > div {
             animation: none;
         }
     }

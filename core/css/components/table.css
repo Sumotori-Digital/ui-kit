@@ -29,11 +29,6 @@
         @apply hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors;
     }
 
-    .table > tbody:only-of-type > tr:nth-child(even),
-    .table > tbody:not(:only-of-type):nth-of-type(even) > tr {
-        @apply bg-muted/25;
-    }
-
     /* Ячейки объединены по строкам (rowspan) – подсвечивать по одной строке нельзя:
        группа строк живёт в своём tbody и подсвечивается целиком */
     .table[data-hover='group'] tr:hover {
@@ -44,18 +39,13 @@
         @apply bg-muted/50;
     }
 
-    .table > tbody:only-of-type > tr:nth-child(even):hover,
-    .table[data-hover='group'] > tbody:nth-of-type(even):hover > tr {
-        @apply bg-muted/60;
-    }
-
     .table th {
-        @apply text-muted-foreground h-10 px-3 text-start align-middle text-xs font-medium whitespace-nowrap has-[[role=checkbox]]:pe-0;
+        @apply text-muted-foreground h-10 px-2 first:ps-4 last:pe-4 text-start align-middle text-xs font-medium whitespace-nowrap has-[[role=checkbox]]:pe-0;
     }
 
     /* Строкам больше воздуха: py-3 вместо p-2, чтобы двухстрочные ячейки и миниатюры не давили друг на друга */
     .table td {
-        @apply px-3 py-3 align-middle whitespace-nowrap has-[[role=checkbox]]:pe-0;
+        @apply px-2 py-3 first:ps-4 last:pe-4 align-middle whitespace-nowrap tabular-nums has-[[role=checkbox]]:pe-0;
     }
 
     .table caption {
@@ -76,7 +66,7 @@
     /* Группу можно ещё и подсветить: <col data-group="tint"> в colgroup.
        Фон колонки лежит под строками, поэтому подсветка строки при наведении работает поверх него */
     .table col[data-group="tint"] {
-        @apply bg-muted/70;
+        @apply bg-muted/40;
     }
 
     /* Матрица по периодам: категории остаются видимыми при прокрутке. */

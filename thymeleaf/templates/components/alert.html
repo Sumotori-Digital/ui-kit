@@ -9,6 +9,7 @@
     <svg th:replace="~{components/icon :: ${icon}}"></svg>
     <h2 th:text="${title}"></h2>
     <section th:if="${text}" th:text="${text}"></section>
+    <th:block th:if="${action}"><div class="alert-action" th:insert="${action}"></div></th:block>
 </div>
 </body>
 </html>

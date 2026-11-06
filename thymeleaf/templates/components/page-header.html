@@ -13,8 +13,12 @@
                     <svg th:replace="~{components/icon :: chevron-left}"></svg>
                     <span th:text="${backLabel ?: 'Назад'}"></span>
                 </a>
-                <h1 th:text="${title}"></h1>
+                <div class="page-title">
+                    <h1 th:text="${title}"></h1>
+                    <th:block th:if="${statusContent}"><th:block th:insert="${statusContent}"></th:block></th:block>
+                </div>
                 <p th:if="${subtitle}" th:text="${subtitle}"></p>
+                <th:block th:if="${metadataContent}"><div class="page-metadata" th:insert="${metadataContent}"></div></th:block>
             </div>
             <th:block th:if="${actions}">
                 <div class="page-actions" th:insert="${actions}"></div>

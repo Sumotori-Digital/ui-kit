@@ -205,10 +205,20 @@
 (function () {
     var root = document.documentElement;
 
+    var alpineReady = new Promise(function (resolve) {
+        document.addEventListener("alpine:initialized", resolve, { once: true });
+    });
+    var fontsReady = document.fonts ? document.fonts.ready : Promise.resolve();
+    var limit = new Promise(function (resolve) {
+        setTimeout(resolve, 1500);
+    });
+
     function showPage() {
-        requestAnimationFrame(function () {
+        Promise.race([Promise.all([alpineReady, fontsReady]), limit]).then(function () {
             requestAnimationFrame(function () {
-                root.classList.add("page-ready");
+                requestAnimationFrame(function () {
+                    root.classList.add("page-ready");
+                });
             });
         });
     }

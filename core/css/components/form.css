@@ -5,6 +5,6 @@
     }
 
     .form-actions {
-        @apply bg-card sticky bottom-0 z-10 flex flex-wrap justify-end gap-2 border-t py-3;
+        @apply bg-card sticky bottom-0 z-30 flex flex-wrap justify-end gap-2 border-t py-3;
     }
 }

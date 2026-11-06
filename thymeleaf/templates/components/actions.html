@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="actions" class="action-group">
+    <th:block th:if="${primary}"><div class="action-group-primary" th:insert="${primary}"></div></th:block>
+    <th:block th:if="${secondary}"><div class="action-group-secondary" th:insert="${secondary}"></div></th:block>
+    <details th:if="${more}" class="action-menu">
+        <summary class="btn" data-variant="outline">
+            <span th:text="${label ?: 'Ещё'}"></span>
+            <svg th:replace="~{components/icon :: chevron-down}"></svg>
+        </summary>
+        <div class="action-menu-content" th:insert="${more}"></div>
+    </details>
+</div>
+</body>
+</html>

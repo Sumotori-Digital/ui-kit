@@ -1,0 +1,35 @@
+@layer components {
+    .text-suggestions {
+        @apply bg-popover text-popover-foreground ring-foreground/10 fixed z-50 m-0 max-h-60 overflow-y-auto rounded-md border-0 p-1 shadow-md ring-1;
+        inset: auto;
+    }
+
+    .text-suggestions[hidden] {
+        @apply hidden;
+    }
+
+    .dialog > .text-suggestions {
+        @apply max-h-60 max-w-none translate-x-0 translate-y-0 scale-100 gap-0 rounded-md p-1;
+    }
+
+    .dialog > .text-suggestions:not([hidden]) {
+        @apply block;
+    }
+
+    .dialog[open] > .text-suggestions {
+        @apply scale-100;
+    }
+
+    .text-suggestions > [role='option'] {
+        @apply cursor-pointer truncate rounded-sm px-2 py-2 text-sm;
+    }
+
+    .text-suggestions > [role='option'][aria-selected='true'],
+    .text-suggestions > [role='option']:hover {
+        @apply bg-accent text-accent-foreground;
+    }
+
+    .text-suggestions-message {
+        @apply text-muted-foreground px-2 py-2 text-sm;
+    }
+}

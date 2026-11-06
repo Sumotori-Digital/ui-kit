@@ -25,7 +25,7 @@
     }
 
     .card > header > :is(h2, h3, [data-title], .card-title) {
-        @apply text-base leading-normal font-medium;
+        @apply text-base leading-normal font-semibold tracking-tight;
     }
 
     .card[data-size='sm'] > header > :is(h2, h3, [data-title], .card-title) {

@@ -26,3 +26,17 @@
         @apply flex min-w-0 max-w-full flex-wrap gap-2 sm:justify-end;
     }
 }
+
+@layer components {
+    .page-title {
+        @apply flex flex-wrap items-center gap-x-3 gap-y-2;
+    }
+
+    .page-title > h1 {
+        @apply min-w-0 break-words;
+    }
+
+    .page-metadata {
+        @apply mt-2;
+    }
+}

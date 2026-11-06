@@ -62,3 +62,6 @@
 @import "./components/viewer.css";
 
 @import "./base.css";
+
+@import "./components/actions.css";
+@import "./components/text-suggestions.css";
