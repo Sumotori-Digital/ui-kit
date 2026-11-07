@@ -1,0 +1,163 @@
+/* Refinements – тонкая настройка деталей поверх компонентов: переходы, состояния, тени. Подключается последней */
+@layer base {
+    html {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+    }
+
+    ::selection {
+        @apply bg-primary/15;
+    }
+
+    h1,
+    h2,
+    h3 {
+        text-wrap: balance;
+    }
+
+    ::placeholder {
+        @apply text-muted-foreground/70;
+    }
+}
+
+@layer components {
+    .btn {
+        @apply transition-[color,background-color,border-color,box-shadow,transform] duration-150 motion-safe:active:translate-y-px;
+    }
+
+    .btn:not([data-variant]) {
+        box-shadow: 0 1px 2px rgb(0 67 124 / 0.2);
+    }
+
+    .btn:not([data-variant]):hover {
+        box-shadow: 0 2px 6px rgb(0 67 124 / 0.25);
+    }
+
+    .btn[data-variant='outline'] {
+        @apply bg-card shadow-none hover:bg-muted;
+    }
+
+    .card,
+    .stat,
+    .hero,
+    .home-panel,
+    .dashboard-metric {
+        box-shadow: 0 0 0 1px rgb(23 32 44 / 0.08), 0 1px 2px rgb(23 32 44 / 0.04);
+    }
+
+    a.dashboard-metric {
+        @apply transition-[box-shadow,transform] duration-150 motion-safe:hover:-translate-y-px;
+    }
+
+    a.dashboard-metric:hover {
+        box-shadow: 0 0 0 1px rgb(0 93 170 / 0.25), 0 6px 16px rgb(23 32 44 / 0.08);
+    }
+
+    .dashboard-metric-arrow {
+        @apply transition-transform duration-150;
+    }
+
+    a.dashboard-metric:hover .dashboard-metric-arrow {
+        @apply text-primary translate-x-0.5;
+    }
+
+    .table tr {
+        @apply border-border/70;
+    }
+
+    .table > tbody > tr:last-child {
+        @apply border-b-0;
+    }
+
+    .table tbody tr:hover {
+        @apply bg-primary/[0.03];
+    }
+
+    .link {
+        @apply decoration-primary/40 underline-offset-2 transition-colors;
+    }
+
+    .field > input,
+    .input,
+    .field > textarea,
+    .input-group {
+        @apply transition-[border-color,box-shadow] duration-150;
+    }
+
+    .field > input:hover:not(:disabled, :focus),
+    .input:hover:not(:disabled, :focus),
+    .field > textarea:hover:not(:disabled, :focus) {
+        @apply border-muted-foreground/40;
+    }
+
+    .tabs > [role='tablist'] > [role='tab'] {
+        @apply transition-[color,background-color,box-shadow] duration-150;
+    }
+
+    .tabs > [role='tablist'] > [role='tab'][aria-selected='true'] {
+        @apply bg-card font-medium;
+        box-shadow: 0 1px 2px rgb(23 32 44 / 0.08);
+    }
+
+    .sidebar nav h3,
+    .sidebar-group-toggle {
+        @apply text-muted-foreground text-[11px] font-semibold tracking-wider uppercase;
+    }
+
+    .sidebar nav li > :is(a, button) {
+        @apply transition-colors duration-150;
+    }
+
+    .dialog::backdrop,
+    .alert-dialog::backdrop {
+        @apply bg-foreground/20;
+    }
+
+    .dialog > *,
+    .alert-dialog > * {
+        @apply rounded-2xl;
+        box-shadow: 0 20px 50px rgb(23 32 44 / 0.18);
+    }
+
+    .action-menu-content {
+        box-shadow: 0 10px 30px rgb(23 32 44 / 0.14);
+    }
+
+    .action-menu > summary {
+        @apply cursor-pointer select-none;
+    }
+
+    .action-menu[open] > summary > svg {
+        @apply rotate-180;
+    }
+
+    .action-menu > summary > svg {
+        @apply transition-transform duration-150;
+    }
+
+    .toast-content {
+        @apply rounded-xl;
+        box-shadow: 0 10px 30px rgb(23 32 44 / 0.14);
+    }
+
+    .form-actions {
+        @apply bg-card/90 backdrop-blur-sm;
+    }
+
+    .list-toolbar[data-stuck] {
+        @apply bg-background/90 backdrop-blur-sm;
+    }
+
+    .card-collapse > summary:hover > :is(h2, h3) {
+        @apply text-primary;
+    }
+
+    .card-collapse > summary > :is(h2, h3) {
+        @apply transition-colors duration-150;
+    }
+
+    .empty {
+        @apply bg-card/60;
+    }
+}

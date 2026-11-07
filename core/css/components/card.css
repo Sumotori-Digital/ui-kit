@@ -113,4 +113,32 @@
     .card[data-variant='toolbar'] > footer {
         @apply px-0 py-4;
     }
+
+    .card-collapse {
+        @apply px-6;
+    }
+
+    .card-collapse > summary {
+        @apply flex cursor-pointer list-none items-center justify-between gap-3 rounded-md focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-hidden;
+    }
+
+    .card-collapse > summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .card-collapse > summary > :is(h2, h3) {
+        @apply text-base leading-normal font-semibold tracking-tight;
+    }
+
+    .card-collapse > summary > svg {
+        @apply text-muted-foreground size-4 shrink-0 transition-transform;
+    }
+
+    .card-collapse[open] > summary > svg {
+        @apply rotate-180;
+    }
+
+    .card-collapse > section {
+        @apply pt-6;
+    }
 }

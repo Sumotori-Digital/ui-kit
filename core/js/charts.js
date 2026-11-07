@@ -117,12 +117,18 @@ document.addEventListener('alpine:init', function () {
     function onWidthChange(target, callback) {
         var width = target.clientWidth;
         var timer = null;
-        new ResizeObserver(function () {
+        var observer = new ResizeObserver(function () {
+            if (!target.isConnected) {
+                observer.disconnect();
+                clearTimeout(timer);
+                return;
+            }
             if (target.clientWidth === width) return;
             width = target.clientWidth;
             clearTimeout(timer);
             timer = setTimeout(callback, 120);
-        }).observe(target);
+        });
+        observer.observe(target);
     }
 
     function tooltip(tip, plot, x, title, rows) {
@@ -215,6 +221,7 @@ document.addEventListener('alpine:init', function () {
 
                 draw: function () {
                     var plot = this.$refs.plot;
+                    if (!plot) return;
                     var width = plot.clientWidth;
                     var height = plot.clientHeight;
                     if (!width || !height) return;

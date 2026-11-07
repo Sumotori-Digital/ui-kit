@@ -13,7 +13,7 @@
     }
 
     .hero-spark {
-        @apply min-w-0 flex-1 basis-64;
+        @apply min-h-20 min-w-0 flex-1 basis-64;
     }
 
     .hero-value {

@@ -1,24 +1,4 @@
 /* Sidebar – внешний вид (форк темы Basecoat «vega»). Структура и поведение: vendor/basecoat/components/sidebar.css */
-@view-transition {
-    navigation: auto;
-}
-
-::view-transition-group(*) {
-    animation-duration: 120ms;
-}
-
-@media (min-width: 48rem) {
-    .sidebar nav {
-        view-transition-name: sidebar;
-    }
-
-    ::view-transition-old(sidebar),
-    ::view-transition-new(sidebar) {
-        animation: none;
-        mix-blend-mode: normal;
-    }
-}
-
 @layer components {
     /* Состояние групп применяется до первого показа меню, без мигания раскрытых секций. */
     .js .sidebar-pending nav > section {
