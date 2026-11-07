@@ -6,12 +6,15 @@
       hx-swap="outerHTML" hx-push-url="true">
     <div class="period-toolbar-main">
         <nav th:replace="~{components/period-presets :: periodPresets(url=${url})}"></nav>
-        <button type="button" class="btn" data-variant="outline" data-size="sm"
-                @click="open = !open" aria-expanded="false" :aria-expanded="open" th:aria-controls="${id + '-fields'}">
-            <svg th:replace="~{components/icon :: calendar}"></svg>
-            Свой период
-            <svg th:replace="~{components/icon :: chevron-down}"></svg>
-        </button>
+        <div class="period-toolbar-end">
+            <span class="period-toolbar-range" th:if="${range}" th:text="${range}"></span>
+            <button type="button" class="btn" data-variant="outline" data-size="sm"
+                    @click="open = !open" aria-expanded="false" :aria-expanded="open" th:aria-controls="${id + '-fields'}">
+                <svg th:replace="~{components/icon :: calendar}"></svg>
+                Свой период
+                <svg th:replace="~{components/icon :: chevron-down}"></svg>
+            </button>
+        </div>
     </div>
     <div class="period-toolbar-fields" th:id="${id + '-fields'}" x-show="open" x-cloak th:object="${filter}">
         <div th:replace="~{components/form :: monthField(name='from', label='С месяца')}"></div>

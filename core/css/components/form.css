@@ -5,6 +5,10 @@
     }
 
     .form-actions {
-        @apply bg-card sticky bottom-0 z-30 flex flex-wrap justify-end gap-2 border-t py-3;
+        @apply sticky bottom-3 z-30 ms-auto -me-2 flex w-fit max-w-[calc(100%+0.5rem)] flex-wrap items-center justify-end gap-2 rounded-xl border border-transparent p-2 transition-[background-color,border-color,box-shadow] duration-150;
+    }
+
+    .form-actions[data-stuck] {
+        @apply bg-card/90 border-border shadow-md backdrop-blur-sm;
     }
 }

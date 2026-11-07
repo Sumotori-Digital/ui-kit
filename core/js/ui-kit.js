@@ -938,3 +938,99 @@ function scanPick(missing) {
         });
     }).observe(document.documentElement, {attributes: true, attributeFilter: ['aria-hidden'], subtree: true});
 })();
+(function () {
+    var duration = 240;
+    var easing = 'cubic-bezier(0.22, 1, 0.36, 1)';
+    var selector = '.tabs > [role="tablist"]';
+    var carried = null;
+    function selectedTab(list) {
+        return list.querySelector(':scope > [role="tab"][aria-selected="true"]');
+    }
+    function frameOf(tab) {
+        return {x: tab.offsetLeft, y: tab.offsetTop, width: tab.offsetWidth, height: tab.offsetHeight};
+    }
+    function keyframe(frame) {
+        return {transform: 'translate(' + frame.x + 'px, ' + frame.y + 'px)', width: frame.width + 'px', height: frame.height + 'px'};
+    }
+    function slide(indicator, from, to, elapsed) {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        indicator.animate([keyframe(from), keyframe(to)], {duration: duration, easing: easing, delay: -elapsed});
+    }
+    function place(list, animate) {
+        var indicator = list.querySelector(':scope > .tab-indicator');
+        var tab = selectedTab(list);
+        indicator.hidden = !tab || !tab.offsetWidth;
+        if (indicator.hidden) return;
+        var frame = frameOf(tab);
+        var previous = list.tabFrame;
+        list.tabFrame = frame;
+        Object.assign(indicator.style, keyframe(frame));
+        if (animate && previous) slide(indicator, previous, frame, 0);
+    }
+    function indexOf(list) {
+        return Array.prototype.indexOf.call(document.querySelectorAll(selector), list);
+    }
+    function resume(list) {
+        var trip = carried;
+        carried = null;
+        if (!trip || trip.index !== indexOf(list) || trip.count !== list.querySelectorAll(':scope > [role="tab"]').length) return;
+        var elapsed = performance.now() - trip.at;
+        if (elapsed < duration && list.tabFrame) slide(list.querySelector(':scope > .tab-indicator'), trip.from, list.tabFrame, elapsed);
+    }
+    function setup(list) {
+        if (list.querySelector(':scope > .tab-indicator')) return;
+        var indicator = document.createElement('span');
+        indicator.className = 'tab-indicator';
+        indicator.setAttribute('aria-hidden', 'true');
+        list.appendChild(indicator);
+        place(list, false);
+        new MutationObserver(function () {
+            place(list, true);
+        }).observe(list, {attributes: true, attributeFilter: ['aria-selected'], subtree: true});
+        new ResizeObserver(function () {
+            place(list, false);
+        }).observe(list);
+    }
+    function setupAll() {
+        document.querySelectorAll(selector).forEach(setup);
+        var first = carried && document.querySelectorAll(selector)[carried.index];
+        if (first) resume(first);
+    }
+    document.addEventListener('click', function (event) {
+        var tab = event.target.closest && event.target.closest('a[role="tab"]');
+        if (!tab || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        if (tab.getAttribute('aria-selected') === 'true' || tab.getAttribute('aria-disabled') === 'true') return;
+        var list = tab.closest(selector);
+        if (!list || !list.tabFrame) return;
+        carried = {
+            index: indexOf(list),
+            count: list.querySelectorAll(':scope > [role="tab"]').length,
+            from: list.tabFrame,
+            at: performance.now()
+        };
+        list.querySelectorAll(':scope > [role="tab"]').forEach(function (other) {
+            other.setAttribute('aria-selected', String(other === tab));
+        });
+    });
+    document.addEventListener('page:swapped', setupAll);
+    document.addEventListener('htmx:afterSettle', setupAll);
+    setupAll();
+})();
+(function () {
+    var observed = new WeakSet();
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            entry.target.toggleAttribute('data-stuck', entry.intersectionRatio < 1);
+        });
+    }, {rootMargin: '0px 0px -13px 0px', threshold: 1});
+    function observeAll() {
+        document.querySelectorAll('.form-actions').forEach(function (actions) {
+            if (observed.has(actions)) return;
+            observed.add(actions);
+            observer.observe(actions);
+        });
+    }
+    document.addEventListener('page:swapped', observeAll);
+    document.addEventListener('htmx:afterSettle', observeAll);
+    observeAll();
+})();

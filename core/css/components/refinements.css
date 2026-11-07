@@ -34,6 +34,10 @@
         box-shadow: 0 2px 6px rgb(0 67 124 / 0.25);
     }
 
+    form[data-submitting] .btn[type='submit'] {
+        @apply cursor-wait opacity-70;
+    }
+
     .btn[data-variant='outline'] {
         @apply bg-card shadow-none hover:bg-muted;
     }
@@ -139,10 +143,6 @@
     .toast-content {
         @apply rounded-xl;
         box-shadow: 0 10px 30px rgb(23 32 44 / 0.14);
-    }
-
-    .form-actions {
-        @apply bg-card/90 backdrop-blur-sm;
     }
 
     .list-toolbar[data-stuck] {

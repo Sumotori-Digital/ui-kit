@@ -8,6 +8,14 @@
         @apply flex min-w-0 flex-wrap items-center justify-between gap-3;
     }
 
+    .period-toolbar-end {
+        @apply flex min-w-0 flex-wrap items-center gap-3;
+    }
+
+    .period-toolbar-range {
+        @apply text-sm text-muted-foreground tabular-nums;
+    }
+
     .period-toolbar-fields {
         @apply grid items-end gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto];
     }

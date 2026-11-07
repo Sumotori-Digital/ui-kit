@@ -408,10 +408,40 @@
     });
 
     document.addEventListener("htmx:pushedIntoHistory", function () {
-        if (top()) {
+        if (top() && path(top().url) === location.pathname) {
             top().url = here();
             write(trailKey, trail);
         }
+    });
+
+    document.addEventListener("page:swapped", function () {
+        trail = read(trailKey) || trail;
+        record();
+        linkBack();
+    });
+
+    document.addEventListener(
+        "submit",
+        function (event) {
+            var form = event.target;
+            if (event.defaultPrevented || form.method !== "post" || form.target) return;
+            if (form.hasAttribute("hx-post") || form.closest("[hx-post]")) return;
+            if (form.dataset.submitting) {
+                event.preventDefault();
+                return;
+            }
+            form.dataset.submitting = "true";
+            setTimeout(function () {
+                delete form.dataset.submitting;
+            }, 8000);
+        },
+        false,
+    );
+
+    window.addEventListener("pageshow", function () {
+        document.querySelectorAll("form[data-submitting]").forEach(function (form) {
+            delete form.dataset.submitting;
+        });
     });
 
     document.addEventListener("click", function (event) {

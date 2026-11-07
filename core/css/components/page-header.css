@@ -2,7 +2,7 @@
    <div class="page-header"><div><a class="page-back"/><h1/><p/></div><div class="page-actions">…</div></div> */
 @layer components {
     .page-header {
-        @apply mb-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-start sm:justify-between;
+        @apply mb-6 flex flex-col gap-3 sm:min-h-9 sm:flex-row sm:flex-wrap sm:items-start sm:justify-between;
     }
 
     .page-header > :first-child {

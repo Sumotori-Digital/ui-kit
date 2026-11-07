@@ -37,9 +37,23 @@
         return isChoice(control) ? field.querySelector("[aria-haspopup=listbox]") || control : control;
     }
 
+    function foldedAway(element) {
+        var folded = false;
+        for (var node = element; node; node = node.parentElement) {
+            if (node.matches("details:not([open])")) folded = true;
+            if (node.matches("[role=tabpanel][hidden]")) {
+                folded = true;
+                continue;
+            }
+            if (getComputedStyle(node).display === "none") return false;
+        }
+        return folded;
+    }
+
     function active(field, control) {
         var target = targetOf(field, control);
-        return !control.disabled && !target.disabled && !control.closest("fieldset:disabled") && target.getClientRects().length > 0;
+        if (control.disabled || target.disabled || control.closest("fieldset:disabled")) return false;
+        return target.getClientRects().length > 0 || foldedAway(target);
     }
 
     function number(value) {
@@ -164,7 +178,21 @@
         if (!first) return;
         event.preventDefault();
         event.stopImmediatePropagation();
-        first.focus({ preventScroll: true });
-        first.scrollIntoView({ block: "center", behavior: "smooth" });
+        var panel = first.closest("[role=tabpanel][hidden]");
+        var tab = panel && document.querySelector('[role=tab][aria-controls="' + panel.id + '"]');
+        if (tab) tab.click();
+        var collapsed = first.closest("details:not([open])");
+        if (collapsed) collapsed.open = true;
+        function reveal(frames) {
+            first.focus({ preventScroll: true });
+            if (document.activeElement !== first && frames > 0) {
+                requestAnimationFrame(function () {
+                    reveal(frames - 1);
+                });
+                return;
+            }
+            first.scrollIntoView({ block: "center", behavior: "smooth" });
+        }
+        reveal(30);
     }, true);
 })();

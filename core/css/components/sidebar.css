@@ -77,6 +77,10 @@
         @apply text-sidebar-foreground/70 text-xs font-medium;
     }
 
+    .sidebar nav h3 > span {
+        @apply block px-2 pt-2 pb-1;
+    }
+
     .sidebar-group-toggle {
         @apply ring-sidebar-ring hover:bg-sidebar-accent hover:text-sidebar-accent-foreground flex h-8 w-full items-center justify-between rounded-md px-2 text-left focus-visible:ring-2 focus-visible:outline-hidden;
     }
@@ -170,7 +174,7 @@
             @apply mx-2 my-1 h-px border-t border-sidebar-border;
         }
 
-        .sidebar-collapsed .sidebar nav > section > [role=group] > h3 > button {
+        .sidebar-collapsed .sidebar nav > section > [role=group] > h3 > :is(button, span) {
             @apply hidden;
         }
 
