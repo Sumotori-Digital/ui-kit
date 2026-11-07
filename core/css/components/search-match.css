@@ -1,0 +1,6 @@
+@layer components {
+    .search-match {
+        @apply mt-1 min-w-0 text-xs font-normal text-muted-foreground;
+        overflow-wrap: anywhere;
+    }
+}

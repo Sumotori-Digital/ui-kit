@@ -4,6 +4,18 @@
         @apply h-9 has-[>textarea]:h-auto rounded-md border border-input shadow-xs transition-[color,box-shadow] focus-within:border-ring focus-within:ring-3 focus-within:ring-ring/50 has-aria-invalid:border-destructive has-aria-invalid:ring-3 has-aria-invalid:ring-destructive/20;
     }
 
+    .search-field {
+        @apply relative;
+    }
+
+    .search-field > input::-webkit-search-cancel-button {
+        margin-inline-start: 1.5rem;
+    }
+
+    .search-field > .htmx-indicator {
+        @apply pointer-events-none absolute end-8 top-1/2 flex -translate-y-1/2 py-0;
+    }
+
     .input-group:has(> :is(input, textarea, select, [data-control]):disabled) {
         @apply opacity-50;
     }

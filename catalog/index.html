@@ -11,6 +11,9 @@
     <script src="../core/js/charts.js" defer></script>
     <script src="../core/js/ui-kit.js" defer></script>
     <script src="../core/js/actions.js" defer></script>
+    <script src="../core/js/mobile.js" defer></script>
+    <script src="../core/js/photos.js"></script>
+    <script src="../core/js/toast.js"></script>
     <script src="../core/js/input-suggestions.js" defer></script>
     <script src="../core/js/alpine.min.js" defer></script>
     <script src="../core/js/validation.js" defer></script>
@@ -968,6 +971,15 @@
     </div>
     <pre class="sg-usage">uiKit.textSuggestions.attach(input, {load: (query, signal) => fetch(url, {signal}).then(response => response.json())})</pre>
     <p class="sg-note">Источником значений управляет приложение. Стрелки выбирают вариант, Enter подтверждает, Escape закрывает список. Ручной ввод доступен и при ошибке загрузки.</p>
+    <h3 class="sg-title">Мобильная запись операции</h3>
+    <div class="card"><section><div class="table-container">
+        <table class="table" data-mobile="records">
+            <thead><tr><th>Позиция</th><th>Количество</th><th>Сумма</th><th>Действия</th></tr></thead>
+            <tbody><tr><td>Тормозные колодки</td><td>2 шт.</td><td>¥ 4 000</td><td><button type="button" class="btn" data-variant="outline">Изменить</button></td></tr></tbody>
+        </table>
+    </div></section></div>
+    <pre class="sg-usage">&lt;table class="table" data-mobile="records"&gt;…&lt;/table&gt;</pre>
+    <p class="sg-note">На узкой ширине заголовки становятся подписями значений. Действия и формы остаются в той же строке данных. Без JavaScript сохраняется обычная таблица.</p>
     <h3 class="sg-title">Список: шапка, таблица, мобильные карточки</h3>
     <div class="grid gap-2 rounded-lg border bg-background p-4 [&amp;&gt;.page-header]:mb-0">
         <div class="page-header">
@@ -1423,6 +1435,33 @@
         </li>
     </ul>
     <pre class="sg-usage">&lt;ul class="gallery"&gt;&lt;li&gt;&lt;button class="gallery-photo"&gt;&lt;img/&gt;&lt;/button&gt;&lt;button class="btn" data-size="icon-sm"&gt;…&lt;/button&gt;&lt;/li&gt;&lt;/ul&gt;</pre>
+    <h3 class="sg-title">Загрузка с повтором</h3>
+    <div x-data="{ target() { return Promise.resolve('/demo-upload'); }, track(promise) { return promise; } }">
+        <div x-data="photoUploads" data-count="0">
+            <label class="btn" data-variant="outline" for="demo-photo-input">Выбрать фотографии</label>
+            <input id="demo-photo-input" type="file" accept="image/*,.heic,.heif" multiple hidden @change="add($event.target.files); $event.target.value = ''">
+            <ul class="gallery">
+                <template x-for="item in items" :key="item.key">
+                    <li :data-state="item.error ? 'error' : (item.busy ? 'busy' : null)">
+                        <button type="button" class="gallery-photo" disabled aria-label="Предпросмотр"><img :src="item.preview" alt=""></button>
+                        <p class="gallery-label" :data-error="!!item.error" x-text="item.error || item.name"></p>
+                        <button type="button" class="btn" data-variant="outline" x-show="item.error &amp;&amp; item.file" @click="retry(item)">Повторить</button>
+                        <button type="button" class="btn" data-variant="ghost" x-show="item.error" @click="dismiss(item)">Убрать</button>
+                    </li>
+                </template>
+            </ul>
+        </div>
+    </div>
+    <p class="sg-note">Демо не отправляет файлы: транспорт ниже имитирует отсутствие связи. Повтор использует тот же файл. Разметка Thymeleaf: components/gallery :: photo(url, title, deleteUrl) и pending.</p>
+    <script>uiPhotos.upload = function () { return Promise.reject(new Error('Демо: нет связи. Можно повторить загрузку')); };</script>
+    <h3 class="sg-title">Навигация и уведомления</h3>
+    <p class="sg-note">Оболочка приложения подключает sidebar-navigation.js после меню и navigation.js после main. Пути задаёт приложение через data-navigation-exclude. Метка data-ui-toast передаёт серверное уведомление общему модулю.</p>
+    <pre class="sg-usage">&lt;script src="/js/navigation.js" data-ui-navigation data-navigation-exclude="/(files|logout)(/|$)"&gt;&lt;/script&gt;
+&lt;script src="/js/toast.js"&gt;&lt;/script&gt;
+&lt;script data-ui-toast&gt;uiToast({category: 'success', title: 'Сохранено'});&lt;/script&gt;</pre>
+    <button type="button" class="btn" data-variant="outline" onclick="uiToast({category: 'success', title: 'Изменения сохранены'})">Показать уведомление</button>
+
+
 
     <h3 class="sg-title">Список файлов</h3>
     <p>Документы и чеки: миниатюра или иконка, название открывает просмотр, справа расширение, размер и действие. Если картинка не загрузилась, вместо неё показывается иконка.</p>

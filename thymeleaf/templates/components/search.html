@@ -3,7 +3,7 @@
     <body>
         <div
             th:fragment="search"
-            class="input-group"
+            class="input-group search-field"
             th:classappend="${cls} ?: 'w-full sm:w-72'"
         >
             <span><svg th:replace="~{components/icon :: search}"></svg></span>
@@ -31,5 +31,10 @@
                 ></svg
             ></span>
         </div>
+        <th:block th:fragment="match">
+            <p th:if="${match != null}" class="search-match">
+                <span th:text="${match.label} + ': '"></span><span th:text="${match.value}"></span>
+            </p>
+        </th:block>
     </body>
 </html>

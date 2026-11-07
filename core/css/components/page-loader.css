@@ -38,6 +38,39 @@
         }
     }
 
+    .page-progress {
+        @apply bg-primary pointer-events-none fixed inset-x-0 top-0 z-50 h-0.5 origin-left opacity-0;
+    }
+
+    .page-progress[data-state='loading'] {
+        opacity: 1;
+        animation: page-progress-run 8s cubic-bezier(0.1, 0.7, 0.2, 1) forwards;
+    }
+
+    .page-progress[data-state='done'] {
+        animation: page-progress-done 240ms ease-out forwards;
+    }
+
+    @keyframes page-progress-run {
+        from {
+            transform: scaleX(0.08);
+        }
+        to {
+            transform: scaleX(0.92);
+        }
+    }
+
+    @keyframes page-progress-done {
+        from {
+            opacity: 1;
+            transform: scaleX(0.7);
+        }
+        to {
+            opacity: 0;
+            transform: scaleX(1);
+        }
+    }
+
     @media (prefers-reduced-motion: reduce) {
         .js .page-loader {
             transition: none;
@@ -45,6 +78,15 @@
 
         .page-loader svg,
         .js .page-loader > div {
+            animation: none;
+        }
+
+        .page-progress[data-state='loading'] {
+            animation: none;
+            transform: scaleX(0.6);
+        }
+
+        .page-progress[data-state='done'] {
             animation: none;
         }
     }

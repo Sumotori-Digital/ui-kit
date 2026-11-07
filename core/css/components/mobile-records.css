@@ -68,35 +68,4 @@
     .mobile-record-facts dd {
         @apply mt-0.5 min-w-0 text-sm break-words;
     }
-
-    .acceptance-subrecord-head {
-        @apply grid grid-cols-[minmax(0,1fr)_auto] items-start gap-2;
-    }
-
-    .acceptance-subrecord-actions {
-        @apply flex shrink-0 items-center gap-1;
-    }
-
-    .acceptance-subrecord-actions .btn {
-        @apply size-10;
-    }
-
-    .acceptance-photo-strip {
-        @apply -me-3 mt-3 flex gap-2 overflow-x-auto pe-3 pb-2;
-        scrollbar-width: thin;
-    }
-
-    .acceptance-photo-strip .thumb {
-        @apply size-14;
-    }
-
-    @media (max-width: 360px) {
-        .acceptance-subrecord-head {
-            @apply grid-cols-1;
-        }
-
-        .acceptance-subrecord-actions {
-            @apply justify-self-end;
-        }
-    }
 }

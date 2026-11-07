@@ -50,3 +50,39 @@
         @apply absolute end-1 top-1 bg-background/80 backdrop-blur-sm;
     }
 }
+
+@layer components {
+    @media (max-width: 47.99rem) {
+        .gallery {
+            @apply grid-cols-2;
+        }
+
+        .gallery > li {
+            @apply flex min-w-0 flex-wrap items-start gap-1;
+        }
+
+        .gallery > li > .gallery-photo,
+        .gallery > li > p {
+            @apply w-full;
+        }
+
+        .gallery > li > .btn {
+            @apply static m-0;
+        }
+
+    }
+}
+
+@layer components {
+    .gallery-caption {
+        @apply mt-1;
+    }
+
+    .gallery-label {
+        @apply mt-1 truncate text-xs text-muted-foreground;
+    }
+
+    .gallery-label[data-error='true'] {
+        @apply text-destructive;
+    }
+}

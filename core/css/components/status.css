@@ -1,4 +1,4 @@
-/* Status – наш компонент: точка + текст. <span class="status" data-kind="vehicle" data-status="in_repair">В ремонте</span>
+/* Status – наш компонент: точка + текст. <span class="status" data-kind="order" data-status="in_repair">В ремонте</span>
    Легче бейджа, для состояния сущности в таблицах и карточках.
    Вариант data-variant="badge" – пилюля вместо точки, когда статус должен читаться с первого взгляда.
    Цвет берётся из палитры --status-* (theme.css) и внутри одного data-kind не повторяется */

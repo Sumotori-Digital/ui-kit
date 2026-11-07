@@ -66,3 +66,11 @@
 @import "./components/actions.css";
 @import "./components/text-suggestions.css";
 @import "./components/refinements.css";
+
+@import "./components/mobile.css";
+
+@import "./components/workspace.css";
+
+@import "./components/search-match.css";
+
+@import "./components/motion.css";

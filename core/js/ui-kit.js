@@ -1034,3 +1034,51 @@ function scanPick(missing) {
     document.addEventListener('htmx:afterSettle', observeAll);
     observeAll();
 })();
+(function () {
+    var duration = 260;
+    var easing = 'cubic-bezier(0.22, 1, 0.36, 1)';
+    function calm() {
+        return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    }
+    function setupSidebar() {
+        var section = document.querySelector('.sidebar nav > section');
+        if (!section || section.querySelector(':scope > .sidebar-indicator')) return;
+        var indicator = document.createElement('span');
+        indicator.className = 'sidebar-indicator';
+        indicator.setAttribute('aria-hidden', 'true');
+        section.prepend(indicator);
+        var last = null;
+        function place(animate) {
+            var link = section.querySelector('a[aria-current="page"]');
+            indicator.hidden = !link || !link.offsetWidth;
+            if (indicator.hidden) return;
+            var box = section.getBoundingClientRect();
+            var rect = link.getBoundingClientRect();
+            var next = {x: rect.left - box.left + section.scrollLeft, y: rect.top - box.top + section.scrollTop, w: rect.width, h: rect.height};
+            indicator.style.width = next.w + 'px';
+            indicator.style.height = next.h + 'px';
+            indicator.style.transform = 'translate(' + next.x + 'px, ' + next.y + 'px)';
+            if (animate && last && last.y !== next.y && !calm()) {
+                indicator.animate([
+                    {transform: 'translate(' + last.x + 'px, ' + last.y + 'px)'},
+                    {transform: indicator.style.transform}
+                ], {duration: duration, easing: easing});
+            }
+            last = next;
+        }
+        place(false);
+        new MutationObserver(function () {
+            place(true);
+        }).observe(section, {attributes: true, attributeFilter: ['aria-current'], subtree: true});
+        new ResizeObserver(function () {
+            place(false);
+        }).observe(section);
+    }
+    document.addEventListener('htmx:afterSettle', function (event) {
+        var config = event.detail.requestConfig;
+        if (!config || config.verb !== 'get' || calm()) return;
+        var target = event.detail.target;
+        if (target && target.isConnected && target.animate) target.animate({opacity: [0.55, 1]}, {duration: 160, easing: 'ease-out'});
+    });
+    setupSidebar();
+})();

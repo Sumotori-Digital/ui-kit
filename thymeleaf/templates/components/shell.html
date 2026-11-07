@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<body>
+<th:block th:fragment="pageLoader">
+    <div id="page-progress" class="page-progress" aria-hidden="true"></div>
+    <div id="page-loader" class="page-loader" role="status">
+        <div>
+            <svg th:replace="~{components/icon :: loader}" aria-hidden="true"></svg>
+            <span>Загрузка</span>
+        </div>
+    </div>
+</th:block>
+<button th:fragment="sidebarToggle" id="sidebar-toggle" type="button" class="btn" data-variant="ghost" data-size="icon"
+        aria-label="Открыть меню" aria-controls="sidebar" aria-expanded="false"
+        onclick="document.getElementById('sidebar').toggle()">
+    <svg th:replace="~{components/icon :: menu}"></svg>
+</button>
+<button th:fragment="sidebarCollapse" id="sidebar-collapse-toggle" type="button" class="btn sidebar-collapse-toggle"
+        data-variant="ghost" data-size="sm" aria-label="Свернуть боковое меню" aria-controls="sidebar"
+        title="Свернуть боковое меню">
+    <svg th:replace="~{components/icon :: panel-left}"></svg>
+    <span>Свернуть меню</span>
+</button>
+<div th:fragment="sidebarResize" id="sidebar-resize-handle" class="sidebar-resize-handle" role="separator" tabindex="0"
+     aria-label="Ширина бокового меню" aria-orientation="vertical" aria-valuemin="208" aria-valuemax="480"
+     aria-valuenow="256"></div>
+</body>
+</html>

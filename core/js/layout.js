@@ -1,7 +1,7 @@
 (function () {
     var root = document.documentElement;
     var handle = document.getElementById("sidebar-resize-handle");
-    var storageKey = "sumotori.sidebar.width";
+    var storageKey = "ui.sidebar.width";
     var preferredWidth = 256;
     var pointerId = null;
     var startPreferredWidth = 256;
@@ -86,7 +86,7 @@
     });
 })();
 (function () {
-    var storageKey = "sumotori.sidebar.groups";
+    var storageKey = "ui.sidebar.groups";
     var groups = document.querySelectorAll(
         "#sidebar .sidebar-group-toggle",
     );
@@ -149,7 +149,7 @@
     collapse.addEventListener("click", function () {
         var compact = root.classList.toggle("sidebar-collapsed");
         try {
-            localStorage.setItem("sumotori.sidebar.collapsed", String(compact));
+            localStorage.setItem("ui.sidebar.collapsed", String(compact));
         } catch (error) {}
         window.syncSidebarWidth();
         syncGroups();
@@ -311,8 +311,8 @@
     });
 })();
 (function () {
-    var trailKey = "sumotori.trail";
-    var nextKey = "sumotori.trail.next";
+    var trailKey = "ui.trail";
+    var nextKey = "ui.trail.next";
     var limit = 30;
 
     function read(key) {

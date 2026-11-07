@@ -1,0 +1,244 @@
+@layer components {
+    @media (pointer: coarse) {
+        .sidebar nav li > :is(a, button),
+        .sidebar nav li > details > summary,
+        .combobox > button[aria-haspopup='listbox'],
+        .combobox > input[role='combobox'],
+        .combobox [role='option'],
+        .select [role='option'],
+        .multi-select [role='option'],
+        .tabs > [role='tablist'] > [role='tab'] {
+            @apply min-h-11;
+        }
+
+        .combobox > input[role='combobox'],
+        .combobox [data-popover] input,
+        .multi-select [data-popover] input,
+        .select [data-popover] input,
+        .input-group > input {
+            @apply text-base;
+        }
+
+        .combobox > [data-clear-value],
+        .select > button[data-clear-value] {
+            @apply size-11 inset-e-5;
+        }
+
+        .combobox[data-clearable] > button[aria-haspopup='listbox'] > [data-value],
+        .select[data-clearable] > button > span {
+            @apply pe-12;
+        }
+
+        .combobox-chip {
+            @apply min-h-9 h-auto;
+        }
+
+        .combobox-chip-remove {
+            @apply min-h-9 min-w-9;
+        }
+    }
+
+    .action-menu-content {
+        @apply m-0 overflow-y-auto overscroll-contain border-0;
+    }
+
+    .table-navigation {
+        @apply mb-3 hidden items-center gap-2;
+    }
+
+    .table-navigation > select {
+        @apply min-w-0 flex-1;
+    }
+
+    @media (max-width: 47.99rem) {
+        .sidebar {
+            --sidebar-mobile-width: min(20rem, calc(100vw - 3rem));
+        }
+
+        .sidebar nav > section {
+            overscroll-behavior: contain;
+        }
+
+        .page-header {
+            @apply mb-4 gap-3;
+        }
+
+        .page-header h1 {
+            @apply text-xl leading-tight;
+        }
+
+        .page-header > :first-child:has(> .page-back) {
+            @apply grid grid-cols-[2.75rem_minmax(0,1fr)] items-center gap-x-2;
+        }
+
+        .page-header .page-back {
+            @apply col-start-1 row-start-1 m-0 size-11 p-0;
+        }
+
+        .page-header .page-back > span {
+            @apply sr-only;
+        }
+
+        .page-header > :first-child:has(> .page-back) > .page-title {
+            @apply col-start-2 row-start-1;
+        }
+
+        .page-header > :first-child:has(> .page-back) > :is(p, .page-metadata) {
+            @apply col-start-2;
+        }
+
+        .page-title {
+            @apply gap-x-2 gap-y-1;
+        }
+
+        .page-actions {
+            @apply w-full;
+        }
+
+        .tabs > [role='tablist'] {
+            @apply flex-nowrap overflow-x-auto overscroll-x-contain;
+            scrollbar-width: thin;
+        }
+
+        .tabs > [role='tablist'] > [role='tab'] {
+            @apply min-h-11 shrink-0 whitespace-nowrap;
+        }
+
+        .form-actions {
+            bottom: max(0.5rem, env(safe-area-inset-bottom));
+        }
+
+        .form-actions > :is(span, p):not(.btn) {
+            @apply m-0 w-full text-xs;
+        }
+
+        .form-actions > .btn[type='submit'] {
+            @apply min-w-32 flex-1 whitespace-normal;
+        }
+
+        html[data-keyboard-open] .form-actions {
+            @apply static;
+        }
+
+        .toaster {
+            bottom: calc(var(--ui-action-height, 0px) + max(0.5rem, env(safe-area-inset-bottom)) + 0.5rem);
+            max-height: min(40dvh, calc(var(--ui-viewport-height, 100dvh) * 0.4));
+            @apply overflow-y-auto p-2;
+        }
+
+        .dialog > * {
+            @apply max-w-[calc(100%-1rem)] gap-4 p-4;
+            max-height: calc(var(--ui-viewport-height, 100dvh) - 1rem);
+            top: calc(var(--ui-viewport-top, 0px) + var(--ui-viewport-height, 100dvh) / 2);
+        }
+
+        .alert-dialog > * {
+            @apply max-w-[calc(100%-2rem)] gap-4 p-4;
+            max-height: calc(var(--ui-viewport-height, 100dvh) - 2rem);
+            top: calc(var(--ui-viewport-top, 0px) + var(--ui-viewport-height, 100dvh) / 2);
+        }
+
+        .ui-mobile-layer .dialog > * > section {
+            @apply overflow-y-auto overscroll-contain;
+        }
+
+        .dialog > * > footer .btn {
+            @apply min-h-11;
+        }
+
+        .viewer > * {
+            @apply w-full max-w-full rounded-none;
+            max-height: var(--ui-viewport-height, 100dvh);
+        }
+
+        [data-popover][data-mobile-layer] {
+            @apply fixed m-0 overflow-y-auto overscroll-contain;
+        }
+
+        [data-popover][data-mobile-layer][aria-hidden='true'] {
+            @apply hidden;
+        }
+
+        [data-popover][data-mobile-layer]:not(:popover-open) {
+            @apply hidden;
+        }
+
+        .date-picker > [data-popover] {
+            @apply w-[calc(100vw-1rem)] max-w-90 gap-2 p-2;
+        }
+
+        .date-picker > [data-popover] > [role='group'] {
+            @apply gap-0;
+        }
+
+        .date-picker > [data-popover] > [role='group'] > .btn {
+            @apply min-h-11 min-w-0;
+        }
+
+        .table[data-mobile='records'][data-mobile-ready],
+        .table[data-mobile='records'][data-mobile-ready] > tbody {
+            @apply block w-full;
+        }
+
+        .table[data-mobile='records'][data-mobile-ready] > thead {
+            @apply sr-only;
+        }
+
+        .table[data-mobile='records'][data-mobile-ready] > tbody > tr {
+            @apply grid grid-cols-2 gap-x-4 gap-y-3 border-b px-4 py-4;
+        }
+
+        .table[data-mobile='records'][data-mobile-ready] > tbody > tr > :is(td, th) {
+            @apply static m-0 flex min-w-0 max-w-none flex-col gap-1 whitespace-normal border-0 bg-transparent p-0 text-start;
+            overflow-wrap: anywhere;
+        }
+
+        .table[data-mobile='records'][data-mobile-ready] > tbody > tr > :first-child,
+        .table[data-mobile='records'][data-mobile-ready] > tbody > tr > [data-mobile-actions],
+        .table[data-mobile='records'][data-mobile-ready] > tbody > tr > [colspan] {
+            @apply col-span-2;
+        }
+
+        .table[data-mobile='records'][data-mobile-ready] td[data-label]::before {
+            content: attr(data-label);
+            @apply text-xs font-normal text-muted-foreground;
+        }
+
+        .table[data-mobile='records'][data-mobile-ready] td:first-child::before,
+        .table[data-mobile='records'][data-mobile-ready] td[data-mobile-actions]::before {
+            content: none;
+        }
+
+        .table[data-mobile='records'][data-mobile-ready] td:has(.field) {
+            @apply col-span-2;
+        }
+
+        .table[data-mobile='records'][data-mobile-ready] td[data-mobile-actions] {
+            @apply flex-row flex-wrap items-center justify-end gap-2 border-t pt-2;
+        }
+
+        .table[data-mobile='records'][data-mobile-ready] td[data-mobile-priority] {
+            @apply col-span-2 order-first text-base font-semibold;
+        }
+
+        .table[data-mobile='records'][data-mobile-ready] td:first-child {
+            @apply order-first font-medium;
+        }
+
+        .table[data-mobile='records'][data-mobile-ready] > tfoot {
+            @apply block border-t px-4 py-3;
+        }
+
+        .table[data-mobile='records'][data-mobile-ready] > tfoot > tr {
+            @apply flex flex-wrap items-center justify-between gap-2;
+        }
+
+        .table[data-mobile='periods'][data-mobile-ready] [data-mobile-hidden] {
+            display: none;
+        }
+
+        .table-navigation {
+            @apply flex flex-wrap;
+        }
+    }
+}

@@ -1,0 +1,15 @@
+@layer components {
+    .workspace-recovery,
+    .workspace-connection {
+        @apply flex flex-wrap items-center gap-2 rounded-lg border bg-card p-3 text-sm;
+    }
+
+    .workspace-connection {
+        @apply mb-4 border-warning/40;
+    }
+
+    .workspace-recovery > p,
+    .workspace-connection > p {
+        @apply min-w-0 flex-1 basis-64;
+    }
+}

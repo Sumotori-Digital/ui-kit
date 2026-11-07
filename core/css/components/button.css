@@ -69,4 +69,24 @@
             @apply size-11;
         }
     }
+
+    .btn[data-width='full'] {
+        @apply w-full;
+    }
+
+    .btn[data-width='fill'] {
+        @apply flex-1;
+    }
+
+    .btn[data-width='sm'] {
+        @apply w-24;
+    }
+
+    .btn[data-align='field'] {
+        @apply sm:mt-7;
+    }
+
+    .btn[data-align='start'] {
+        @apply me-auto;
+    }
 }

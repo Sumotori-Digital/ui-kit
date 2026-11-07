@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<body>
+<th:block th:fragment="photo(url, title, deleteUrl)">
+        <li
+                                                        data-viewer-item
+            th:attr="data-url=@{${url}}, data-title=${title}"
+        >
+            <button
+                type="button"
+                class="gallery-photo"
+                onclick="openViewer(this)"
+                aria-label="Открыть фото"
+            >
+                <img
+                    th:src="@{${url}}"
+                    alt=""
+                    loading="lazy"
+                    onerror="
+                        this.hidden = true;
+                        this.nextElementSibling.classList.remove(
+                            'hidden',
+                        );
+                    "
+                />
+                <svg
+                    th:replace="~{components/icon :: image(cls='hidden')}"
+                ></svg>
+            </button>
+            <div
+                class="gallery-caption"
+                th:data-tooltip="${title}"
+            >
+                <p
+                    class="gallery-label"
+                    th:text="${title}"
+                ></p>
+            </div>
+            <button
+                type="button"
+                class="btn"
+                data-variant="ghost"
+                data-size="icon-sm"
+                th:if="${deleteUrl != null}"
+                th:attr="data-url=@{${deleteUrl}}"
+                onclick="uiPhotos.requestDelete(this)"
+                aria-label="Удалить фото"
+            >
+                <svg
+                    th:replace="~{components/icon :: trash}"
+                ></svg>
+            </button>
+        </li>
+</th:block>
+<th:block th:fragment="pending">
+        <template
+            x-for="item in items"
+            :key="item.key"
+        >
+            <li
+                :data-viewer-item="item.url ? 'true' : null"
+                :data-url="item.url || null"
+                :data-title="item.name"
+                :data-state="item.error ? 'error' : (item.busy ? 'busy' : null)"
+            >
+                <button
+                    type="button"
+                    class="gallery-photo"
+                    onclick="openViewer(this)"
+                    :disabled="!item.url"
+                    aria-label="Открыть фото"
+                >
+                    <img
+                        x-show="item.preview"
+                        :src="item.preview"
+                        alt=""
+                        @error="item.preview = ''"
+                    />
+                    <svg th:replace="~{components/icon :: loader(cls='animate-spin')}"></svg>
+                </button>
+                <p
+                    class="gallery-label"
+                    :data-error="!!item.error"
+                    x-text="item.error || item.name"
+                ></p>
+                <button
+                    type="button"
+                    class="btn"
+                    data-variant="ghost"
+                    data-size="icon-sm"
+                    x-show="item.deleteUrl"
+                    :data-url="item.deleteUrl"
+                    onclick="uiPhotos.requestDelete(this)"
+                    aria-label="Удалить фото"
+                >
+                    <svg th:replace="~{components/icon :: trash}"></svg>
+                </button>
+                <button
+                    type="button"
+                    class="btn"
+                    data-variant="ghost"
+                    data-size="icon-sm"
+                    x-show="item.error"
+                    @click="dismiss(item)"
+                    aria-label="Убрать"
+                >
+                    <svg th:replace="~{components/icon :: x}"></svg>
+                </button>
+                <button type="button" class="btn" data-variant="outline" x-show="item.error &amp;&amp; item.file" @click="retry(item)">
+                    <svg th:replace="~{components/icon :: rotate-ccw}"></svg>
+                    Повторить
+                </button>
+            </li>
+        </template>
+</th:block>
+</body>
+</html>
