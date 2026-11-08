@@ -60,6 +60,10 @@
             @apply min-h-11;
         }
 
+        .btn[data-size='xs'] {
+            @apply min-h-9 px-3;
+        }
+
         .btn[data-size='icon'] {
             @apply size-11;
         }

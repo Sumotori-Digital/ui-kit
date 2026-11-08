@@ -5,7 +5,7 @@
     }
 
     .form-actions {
-        @apply sticky bottom-3 z-30 ms-auto -me-2 flex w-fit max-w-[calc(100%+0.5rem)] flex-wrap items-center justify-end gap-2 rounded-xl border border-transparent p-2 transition-[background-color,border-color,box-shadow] duration-150;
+        @apply sticky bottom-3 z-30 ms-auto flex w-fit max-w-full flex-wrap items-center justify-end gap-2 rounded-xl border border-transparent p-2 transition-[background-color,border-color,box-shadow] duration-150;
     }
 
     .form-actions[data-stuck] {

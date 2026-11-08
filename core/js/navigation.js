@@ -9,6 +9,15 @@
     var prefetched = null;
     var prefetchTimer = null;
     var prefetchLifetime = 10000;
+    var shown = location.href;
+
+    function unsaved() {
+        return dirty || !!document.querySelector("main [data-navigation-dirty]");
+    }
+
+    function leave() {
+        return !unsaved() || confirm("Есть несохранённые изменения. Уйти со страницы?");
+    }
 
     function boostable(link, event) {
         if (event.defaultPrevented || event.button !== 0) return false;
@@ -126,14 +135,20 @@
                 var main = document.querySelector("main");
                 if (!next || !main) throw new Error("navigation");
                 var toast = parsed.querySelector("script[data-ui-toast]");
-            var trailUrl = new URL(result.url);
+                var trailUrl = new URL(result.url);
                 document.dispatchEvent(new CustomEvent("workspace:before-navigation"));
                 if (push) history.pushState({}, "", trailUrl.pathname + trailUrl.search);
+                shown = location.href;
                 document.title = parsed.title;
                 main.replaceWith(next);
                 runScripts(next);
                 htmx.process(next);
                 window.scrollTo(0, 0);
+                if (push) {
+                    var heading = next.querySelector("h1") || next;
+                    heading.setAttribute("tabindex", "-1");
+                    heading.focus({preventScroll: true});
+                }
                 if (window.markSidebarCurrent) window.markSidebarCurrent(location.pathname);
                 finishProgress();
                 dirty = false;
@@ -148,6 +163,7 @@
             .catch(function (error) {
                 if (request !== current || error.name === "AbortError") return;
                 finishProgress();
+                if (window.markSidebarCurrent) window.markSidebarCurrent(new URL(shown).pathname);
                 if (error instanceof TypeError || !navigator.onLine) {
                     document.dispatchEvent(new CustomEvent("workspace:navigation-failed", {detail: {url: url}}));
                     return;
@@ -162,7 +178,7 @@
             var link = event.target.closest && event.target.closest("a[href]");
             if (!link || !boostable(link, event)) return;
             event.preventDefault();
-            if (dirty && !confirm("Есть несохранённые изменения. Уйти со страницы?")) {
+            if (!leave()) {
                 event.stopImmediatePropagation();
                 return;
             }
@@ -172,6 +188,10 @@
     );
     window.addEventListener("popstate", function (event) {
         if (event.state && event.state.htmx) return;
+        if (!leave()) {
+            history.pushState({}, "", shown);
+            return;
+        }
         navigate(location.href, false);
     });
 
@@ -181,11 +201,12 @@
         if (form.matches("[data-save-url], [data-navigation-ignore-dirty]")) return;
         dirty = true;
     });
-    document.addEventListener("submit", function () {
+    document.addEventListener("submit", function (event) {
+        if (event.defaultPrevented) return;
         dirty = false;
         dropPrefetch();
     });
     window.addEventListener("beforeunload", function (event) {
-        if (dirty) event.preventDefault();
+        if (unsaved()) event.preventDefault();
     });
 })();

@@ -2,6 +2,13 @@ document.addEventListener('htmx:configRequest', function (e) {
     var token = document.querySelector('meta[name="_csrf"]');
     var header = document.querySelector('meta[name="_csrf_header"]');
     if (token && header && header.content) e.detail.headers[header.content] = token.content;
+    var sorting = e.detail.elt;
+    if (sorting && sorting.matches && sorting.matches('select[data-sort-select]')) {
+        var choice = sorting.value.split(':');
+        delete e.detail.parameters[sorting.name];
+        e.detail.parameters.sort = choice[0];
+        e.detail.parameters.dir = choice[1];
+    }
 });
 document.addEventListener('toast', function (e) {
     var toaster = document.getElementById('toaster');
@@ -11,6 +18,16 @@ document.addEventListener('htmx:responseError', function () {
     var toaster = document.getElementById('toaster');
     if (toaster && toaster.toast) toaster.toast({category: 'error', title: 'Ошибка', description: 'Не удалось выполнить запрос'});
 });
+function connectionLost(e) {
+    var toaster = document.getElementById('toaster');
+    if (!toaster || !toaster.toast) return;
+    var reading = !e.detail.requestConfig || e.detail.requestConfig.verb === 'get';
+    toaster.toast(reading
+        ? {category: 'error', title: 'Нет связи с сервером', description: 'Данные не обновились. Повторите действие позже'}
+        : {category: 'error', title: 'Нет связи с сервером', description: 'Неизвестно, сохранилось ли изменение. Обновите страницу и проверьте запись перед повтором'});
+}
+document.addEventListener('htmx:sendError', connectionLost);
+document.addEventListener('htmx:timeout', connectionLost);
 (function () {
     var meta = document.querySelector('meta[name="session-timeout"]');
     if (!meta) return;
@@ -33,6 +50,17 @@ document.addEventListener('htmx:responseError', function () {
     touch();
     document.addEventListener('htmx:afterRequest', touch);
 })();
+function markSortedColumns() {
+    document.querySelectorAll('.sort-link').forEach(function (link) {
+        var cell = link.closest('th');
+        if (!cell) return;
+        if (link.dataset.sortDir) cell.setAttribute('aria-sort', link.dataset.sortDir === 'desc' ? 'descending' : 'ascending');
+        else cell.removeAttribute('aria-sort');
+    });
+}
+document.addEventListener('DOMContentLoaded', markSortedColumns);
+document.addEventListener('htmx:afterSettle', markSortedColumns);
+document.addEventListener('page:swapped', markSortedColumns);
 var searchFocus = null;
 document.addEventListener('htmx:beforeSwap', function (e) {
     var input = document.activeElement;

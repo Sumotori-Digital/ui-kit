@@ -12,13 +12,44 @@
             hx-swap="outerHTML"
             hx-select-oob="#list-sort"
             hx-push-url="true"
-            th:attr="data-active=${sort.is(key)} ? 'true' : null, aria-label=${label} + ': сортировать'"
+            th:attr="data-active=${sort.is(key)} ? 'true' : null,
+                     data-sort-dir=${sort.is(key)} ? ${sort.dir} : null,
+                     aria-label=${sort.is(key)} ? ${label + (sort.desc ? ': по убыванию, изменить сортировку' : ': по возрастанию, изменить сортировку')} : ${label + ': сортировать'}"
         >
             <span th:text="${label}"></span>
             <th:block th:if="${sort.is(key) and sort.desc}"><svg th:replace="~{components/icon :: arrow-down(cls=null)}"></svg></th:block>
             <th:block th:if="${sort.is(key) and !sort.desc}"><svg th:replace="~{components/icon :: arrow-up(cls=null)}"></svg></th:block>
             <th:block th:unless="${sort.is(key)}"><svg th:replace="~{components/icon :: chevrons-up-down(cls=null)}"></svg></th:block>
         </a>
+        <div th:fragment="sortSelect" class="field md:hidden" th:classappend="${cls}">
+            <label th:for="${id}">Сортировка</label>
+            <select
+                th:id="${id}"
+                class="select"
+                name="sortChoice"
+                data-sort-select
+                th:hx-get="@{${url}}"
+                hx-trigger="change"
+                th:hx-target="${target}"
+                th:hx-select="${target}"
+                hx-swap="outerHTML"
+                hx-select-oob="#list-sort"
+                hx-push-url="true"
+            >
+                <th:block th:each="option : ${options}">
+                    <option
+                        th:value="${option.key + ':asc'}"
+                        th:selected="${sort.is(option.key) and !sort.desc}"
+                        th:text="${option.value + ', по возрастанию'}"
+                    ></option>
+                    <option
+                        th:value="${option.key + ':desc'}"
+                        th:selected="${sort.is(option.key) and sort.desc}"
+                        th:text="${option.value + ', по убыванию'}"
+                    ></option>
+                </th:block>
+            </select>
+        </div>
         <div th:fragment="sortInputs" id="list-sort" hidden>
             <input type="hidden" name="sort" th:value="${sort.key}">
             <input type="hidden" name="dir" th:value="${sort.dir}">

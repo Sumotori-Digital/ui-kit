@@ -31,12 +31,6 @@
                         th:replace="~{components/icon :: sliders-horizontal(cls='size-4 text-muted-foreground')}"
                     ></svg>
                     Фильтры
-                    <span
-                        class="font-normal text-muted-foreground"
-                        th:if="${open}"
-                        x-show="!open"
-                        th:text="'Найдено: ' + ${found}"
-                    ></span>
                 </h2>
                 <div class="card-action text-muted-foreground">
                     <span

@@ -1232,6 +1232,15 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="field md:hidden mb-3">
+                    <label for="sg-mobile-sort">Сортировка</label>
+                    <select id="sg-mobile-sort" class="select" name="sortChoice" data-sort-select>
+                        <option value="name:asc" selected>Машина, по возрастанию</option>
+                        <option value="name:desc">Машина, по убыванию</option>
+                        <option value="purchaseAt:asc">Закупка, по возрастанию</option>
+                        <option value="purchaseAt:desc">Закупка, по убыванию</option>
+                    </select>
+                </div>
                 <ul class="mobile-records md:hidden">
                     <li>
                         <div class="mobile-record-head">
@@ -1335,12 +1344,13 @@
             </footer>
         </div>
     </div>
-    <p class="sg-note">На странице шапка оборачивается в <code>&lt;div class="list-toolbar" x-data="stickyToolbar"&gt;</code>: прилипает к верху и получает тень при прокрутке. Поиск кладётся в <code>actions</code> заголовка, фильтры под ним. Карточка списка: таблица от <code>md</code>, ниже <code>mobile-records</code>. Поиск и фильтры перерисовывают только карточку: сервер отдаёт всю страницу, <code>hx-select</code> вырезает блок. Заголовок колонки с сортировкой – <code>sortLink</code>: клик переключает направление, текущая колонка со стрелкой. В модели <code>sort</code> (<code>ListSort</code>), <code>sortInputs</code> кладётся в поля фильтров, чтобы фильтр, поиск и пагинация не сбрасывали сортировку; <code>url</code> – адрес списка с фильтрами, без сортировки.</p>
+    <p class="sg-note">На странице шапка оборачивается в <code>&lt;div class="list-toolbar" x-data="stickyToolbar"&gt;</code>: прилипает к верху и получает тень при прокрутке. Поиск кладётся в <code>actions</code> заголовка, фильтры под ним. Карточка списка: таблица от <code>md</code>, ниже <code>mobile-records</code>. Поиск и фильтры перерисовывают только карточку: сервер отдаёт всю страницу, <code>hx-select</code> вырезает блок. Заголовок колонки с сортировкой – <code>sortLink</code>: клик переключает направление, текущая колонка со стрелкой. В модели <code>sort</code> (<code>ListSort</code>), <code>sortInputs</code> кладётся в поля фильтров, чтобы фильтр, поиск и пагинация не сбрасывали сортировку; <code>url</code> – адрес списка с фильтрами, без сортировки. На телефоне таблица скрыта, поэтому над <code>mobile-records</code> ставится <code>sortSelect</code>: поле и направление одним выбором.</p>
     <pre class="sg-usage">~{components/search :: search(id='f-q', value=${filter.q}, placeholder='…', url='/vehicles', include='#vehicle-filters-form', target='#vehicles-card', cls='w-full sm:w-64')}
-~{components/filters :: filters(id='vehicle-filters', url='/vehicles', target='#vehicles-card', open=${filter.hasPanelFilters()}, found=${vehicles.totalElements}, cols=4, search='#f-q', fields=~{:: #vehicle-filter-fields})}
+~{components/filters :: filters(id='vehicle-filters', url='/vehicles', target='#vehicles-card', open=${filter.hasPanelFilters()}, cols=4, search='#f-q', fields=~{:: #vehicle-filter-fields})}
 &lt;ul class="mobile-records md:hidden"&gt;&lt;li&gt;&lt;div class="mobile-record-head"&gt;&lt;div class="mobile-record-main"&gt;&lt;a class="mobile-record-title"/&gt;&lt;div class="mobile-record-meta"/&gt;&lt;/div&gt;…&lt;/div&gt;&lt;dl class="mobile-record-facts"&gt;…&lt;/dl&gt;&lt;/li&gt;&lt;/ul&gt;
 ~{components/sort :: sortLink(label='Закупка', key='purchaseAt', sort=${sort}, url=${filterUrl}, target='#vehicles-card', first='desc')}   # внутри th; first – направление при первом клике, по умолчанию asc
 ~{components/sort :: sortInputs}   # внутри полей фильтров
+~{components/sort :: sortSelect(id='vehicles-sort', options=${ {'name': 'Машина', 'purchaseAt': 'Закупка'} }, sort=${sort}, url=${filterUrl}, target='#vehicles-card', cls='mb-3')}   # над mobile-records, видна только на телефоне
 ~{components/empty :: resultRow(show=${page.isEmpty()}, columns=7, text='Ничего не найдено')}   # внутри tbody
 ~{components/empty :: resultItem(show=${page.isEmpty()}, text='Ничего не найдено')}             # внутри мобильного списка</pre>
 

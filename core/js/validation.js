@@ -1,6 +1,7 @@
 (function () {
     var initial = new WeakMap();
     var touched = new WeakSet();
+    var sequence = 0;
 
     function rulesOf(control) {
         try {
@@ -35,6 +36,18 @@
 
     function targetOf(field, control) {
         return isChoice(control) ? field.querySelector("[aria-haspopup=listbox]") || control : control;
+    }
+
+    function describe(field) {
+        var control = controlOf(field);
+        if (!control) return;
+        var target = targetOf(field, control);
+        var ids = Array.from(field.querySelectorAll(":scope > p")).map(function (message) {
+            if (!message.id) message.id = "field-message-" + (++sequence);
+            return message.id;
+        });
+        if (ids.length) target.setAttribute("aria-describedby", ids.join(" "));
+        else target.removeAttribute("aria-describedby");
     }
 
     function foldedAway(element) {
@@ -108,6 +121,7 @@
             delete field.dataset.invalid;
             target.removeAttribute("aria-invalid");
             if (alert) alert.remove();
+            describe(field);
             return null;
         }
         field.dataset.invalid = "true";
@@ -119,10 +133,12 @@
         }
         alert.setAttribute("data-live", "");
         alert.textContent = text;
+        describe(field);
         return target;
     }
 
     function prepare(root) {
+        root.querySelectorAll(".field").forEach(describe);
         root.querySelectorAll("form").forEach(function (form) {
             if (form.method !== "post") return;
             form.noValidate = true;
@@ -138,6 +154,9 @@
     });
     document.addEventListener("htmx:afterSwap", function (event) {
         prepare(event.target);
+    });
+    document.addEventListener("page:swapped", function () {
+        prepare(document);
     });
 
     document.addEventListener("focusout", function (event) {

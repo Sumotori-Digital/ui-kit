@@ -57,6 +57,17 @@ test('mobile records keep cell content and associate values with table headers',
     assert.equal(t.dataset.mobileReady, '');
 });
 
+test('mobile records label footer totals by their column despite a spanning caption', () => {
+    const t = table(['Машина', 'Дата', 'Расходы', 'Выручка', 'Маржа'], ['Elf', '01.11', '10', '20', '10']);
+    const caption = element('Итого');
+    caption.colSpan = 2;
+    t.tFoot = {rows: [{cells: [caption, element('10'), element('20'), element('10')]}]};
+    runMobile([t], []);
+    const totals = t.tFoot.rows[0].cells;
+    assert.equal(caption.dataset.label, undefined);
+    assert.deepEqual(totals.slice(1).map(cell => cell.dataset.label), ['Расходы', 'Выручка', 'Маржа']);
+});
+
 test('period selector starts with totals and offers each month and the full matrix', () => {
     const t = table(['Статья', 'Октябрь', 'Ноябрь', 'Итого'], ['Расход', '10', '20', '30']);
     runMobile([], [t]);

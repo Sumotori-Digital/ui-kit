@@ -30,3 +30,7 @@
 .htmx-request.htmx-indicator {
     display: inline-flex;
 }
+
+main [tabindex="-1"]:focus {
+    outline: none;
+}

@@ -16,9 +16,12 @@
                 if (!cell.id) cell.id = 'mobile-column-' + (++sequence) + '-' + index;
                 return {label: cell.textContent.trim(), id: cell.id, priority: cell.hasAttribute('data-mobile-priority')};
             });
-            Array.from(table.tBodies).forEach(function (body) {
+            Array.from(table.tBodies).concat(table.tFoot ? [table.tFoot] : []).forEach(function (body) {
                 Array.from(body.rows).forEach(function (row) {
-                    Array.from(row.cells).forEach(function (cell, index) {
+                    var position = 0;
+                    Array.from(row.cells).forEach(function (cell) {
+                        var index = position;
+                        position += cell.colSpan || 1;
                         if (cell.colSpan > 1) return;
                         var header = labels[index];
                         if (!header) return;
@@ -86,10 +89,12 @@
         document.querySelectorAll('.tabs > [role="tablist"]').forEach(function (list) {
             var active = list.querySelector('[aria-selected="true"], [aria-current="page"]');
             if (!active) return;
-            if (!list.dataset.mobileAligned) {
-                list.scrollLeft = Math.max(0, active.offsetLeft - (list.clientWidth - active.offsetWidth) / 2);
-                list.dataset.mobileAligned = '';
-            }
+            var key = active.id || active.textContent.trim();
+            if (list.dataset.mobileAligned === key) return;
+            var start = active.getBoundingClientRect().left - list.getBoundingClientRect().left + list.scrollLeft;
+            var visible = start >= list.scrollLeft && start + active.offsetWidth <= list.scrollLeft + list.clientWidth;
+            if (!visible) list.scrollLeft = Math.max(0, start - (list.clientWidth - active.offsetWidth) / 2);
+            list.dataset.mobileAligned = key;
         });
     }
 

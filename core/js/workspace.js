@@ -42,7 +42,7 @@
     function save(form, submitted) {
         if (!eligible(form) || restoring) return;
         var state = forms.get(form);
-        if (!state) return;
+        if (!state || (!submitted && !state.touched)) return;
         var values = fields(form);
         var saved = drafts();
         if (JSON.stringify(values) === state.initial && !submitted && !(saved[key(form)] && saved[key(form)].submitted)) delete saved[key(form)];
@@ -86,6 +86,7 @@
             choice.dispatchEvent(new Event('change', {bubbles: true}));
         });
         restoring = false;
+        forms.get(form).touched = true;
         save(form, false);
     }
     function button(label, action) {
@@ -100,7 +101,11 @@
     function prepareForms() {
         document.querySelectorAll('main form').forEach(function (form) {
             if (!eligible(form) || forms.has(form)) return;
-            forms.set(form, {initial: JSON.stringify(fields(form))});
+            forms.set(form, {initial: JSON.stringify(fields(form)), touched: false});
+            if (returned === key(form)) {
+                discard(form);
+                return;
+            }
             var draft = drafts()[key(form)];
             if (!draft) return;
             var banner = document.createElement('div');
@@ -162,21 +167,39 @@
         if (main) main.prepend(notice);
     }
     var arrival = window.performance && window.performance.getEntriesByType ? (window.performance.getEntriesByType('navigation')[0] || {}).type : '';
-    var pending = read('pending');
-    if (pending.key && arrival !== 'back_forward' && Date.now() - pending.at < 300000) {
-        var saved = drafts();
-        delete saved[pending.key];
-        write('forms', saved);
+    var result = document.querySelector('meta[name="ui-save-result"]');
+    var pending = arrival === 'back_forward' ? {} : read('pending');
+    var returned = null;
+    if (pending.key) {
         remove('pending');
+        if (Date.now() - pending.at <= lifetime) {
+            if (result && result.content === 'success') {
+                var saved = drafts();
+                delete saved[pending.key];
+                write('forms', saved);
+            } else returned = pending.key;
+        }
     }
-    function setup(fromHistory) { currentPage = location.pathname + location.search; prepareForms(); if (fromHistory) restorePage(); }
+    function setup(fromHistory) { currentPage = location.pathname + location.search; prepareForms(); returned = null; requestAnimationFrame(rebase); if (fromHistory) restorePage(); }
+    function touch(event) {
+        var state = event.isTrusted && event.target.form && forms.get(event.target.form);
+        if (state) state.touched = true;
+    }
+    function rebase() {
+        document.querySelectorAll('main form').forEach(function (form) {
+            var state = forms.get(form);
+            if (state && !state.touched) state.initial = JSON.stringify(fields(form));
+        });
+    }
     document.addEventListener('input', function (event) {
+        touch(event);
         if (!eligible(event.target.form)) return;
         clearTimeout(timer);
         var form = event.target.form;
         timer = setTimeout(function () { save(form, false); }, 250);
     });
-    document.addEventListener('change', function (event) { if (event.target.form) save(event.target.form, false); });
+    document.addEventListener('change', function (event) { touch(event); if (event.target.form) save(event.target.form, false); });
+    document.addEventListener('alpine:initialized', rebase);
     document.addEventListener('submit', function (event) {
         if (!event.defaultPrevented && eligible(event.target)) save(event.target, true);
         if (new URL(event.target.action, location.href).pathname.endsWith('/logout')) {
