@@ -120,8 +120,8 @@
             @apply static;
         }
 
-        .toaster {
-            bottom: calc(var(--ui-action-height, 0px) + max(0.5rem, env(safe-area-inset-bottom)) + 0.5rem);
+        .toaster:not([data-align]) {
+            top: calc(var(--ui-viewport-top, 0px) + max(0.5rem, env(safe-area-inset-top)));
             max-height: min(40dvh, calc(var(--ui-viewport-height, 100dvh) * 0.4));
             @apply overflow-y-auto p-2;
         }

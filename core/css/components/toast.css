@@ -1,10 +1,45 @@
 /* Toast – внешний вид (форк темы Basecoat «vega»). Структура и поведение: vendor/basecoat/components/toast.css */
 @layer components {
-    .toaster {
-        @apply top-auto bottom-0 flex-col-reverse md:top-0 md:bottom-auto md:flex-col;
+    .toaster:not([data-align]) {
+        @apply top-0 right-auto bottom-auto left-1/2 -translate-x-1/2 flex-col sm:max-w-md;
+    }
+
+    .toaster .toast {
+        animation-name: toast-down;
+    }
+
+    .toaster .toast .toast-content {
+        @apply gap-3 p-4 text-sm;
+
+        svg {
+            @apply size-5;
+        }
+    }
+
+    .toaster .toast[data-category='success'] .toast-content {
+        @apply border-s-4 border-s-success;
+
+        svg {
+            @apply text-success;
+        }
+    }
+
+    .toaster .toast[data-category='error'] .toast-content {
+        @apply border-s-4 border-s-destructive;
+
+        svg {
+            @apply text-destructive;
+        }
     }
 
     .toast-content {
         @apply bg-popover text-popover-foreground border shadow-lg rounded-2xl;
+    }
+}
+
+@keyframes toast-down {
+    from {
+        opacity: 0;
+        transform: translateY(-100%);
     }
 }
