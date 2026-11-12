@@ -14,4 +14,20 @@
     .sort-link[data-active] > svg {
         @apply opacity-100;
     }
+
+    .sort-select {
+        @apply flex items-center gap-2;
+    }
+
+    .sort-select > label {
+        @apply shrink-0 text-sm text-muted-foreground;
+    }
+
+    .sort-select > .select {
+        @apply h-9 w-auto min-w-0 py-1;
+    }
+
+    .card > section:has(> .table-container) > .sort-select {
+        @apply px-4;
+    }
 }

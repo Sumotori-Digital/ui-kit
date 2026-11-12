@@ -21,7 +21,7 @@
             <th:block th:if="${sort.is(key) and !sort.desc}"><svg th:replace="~{components/icon :: arrow-up(cls=null)}"></svg></th:block>
             <th:block th:unless="${sort.is(key)}"><svg th:replace="~{components/icon :: chevrons-up-down(cls=null)}"></svg></th:block>
         </a>
-        <div th:fragment="sortSelect" class="field md:hidden" th:classappend="${cls}">
+        <div th:fragment="sortSelect" class="sort-select md:hidden" th:classappend="${cls}">
             <label th:for="${id}">Сортировка</label>
             <select
                 th:id="${id}"
