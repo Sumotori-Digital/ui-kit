@@ -16,7 +16,7 @@
                th:placeholder="${search ?: 'Поиск…'}" autocomplete="off" spellcheck="false">
     </div>
     <div role="listbox" th:id="${id + '-listbox'}" data-empty="Ничего не найдено">
-        <div role="option" data-value="" data-force th:if="${placeholder}" th:text="${placeholder}"></div>
+        <div role="option" data-value="" th:if="${placeholder}" th:text="${placeholder}"></div>
         <th:block th:if="${groups == null}">
             <div role="option" th:each="o : ${options}" th:data-value="${o.key}" th:text="${o.value}"
                  th:attr="data-code=${codes != null} ? ${codes.get(o.key)} : null"></div>

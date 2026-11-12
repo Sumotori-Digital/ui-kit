@@ -562,6 +562,18 @@ function qrCodeList(codes) {
     };
 }
 document.addEventListener(
+    "change",
+    (e) => {
+        if (
+            !(e instanceof CustomEvent) &&
+            e.target.matches(".combobox [data-popover] input[role='combobox']")
+        ) {
+            e.stopPropagation();
+        }
+    },
+    true,
+);
+document.addEventListener(
     "toggle",
     (e) => {
         const menu = e.target;
