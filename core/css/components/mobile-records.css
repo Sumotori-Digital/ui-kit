@@ -17,6 +17,18 @@
         @apply grid min-w-0 gap-2;
     }
 
+    .mobile-record-head:has(> .quick-actions) {
+        @apply grid-cols-[minmax(0,1fr)_auto];
+    }
+
+    .mobile-record-head > :not(.quick-actions) {
+        @apply col-start-1;
+    }
+
+    .mobile-record-head > .quick-actions {
+        @apply col-start-2 row-span-2 row-start-1 -me-2 -mt-2;
+    }
+
     .mobile-subrecord-head {
         @apply grid min-w-0 grid-cols-[minmax(0,1fr)_auto_auto] items-start gap-2;
     }

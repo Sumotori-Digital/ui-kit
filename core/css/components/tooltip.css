@@ -7,4 +7,11 @@
     [data-tooltip][data-arrow]::after {
         @apply bg-foreground absolute z-60 size-2.5 rotate-45 rounded-[2px];
     }
+
+    @media (hover: none) {
+        [data-tooltip]::before,
+        [data-tooltip][data-arrow]::after {
+            @apply hidden;
+        }
+    }
 }
