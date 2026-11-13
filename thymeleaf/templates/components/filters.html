@@ -9,8 +9,9 @@
             data-variant="toolbar"
             th:action="@{${url}}"
             method="get"
-            th:attr="x-data='{ open: ' + ${open} + ' }'"
+            th:attr="x-data='{ open: ' + ${open ?: false} + ' }'"
             th:hx-get="@{${url}}"
+            th:hx-select-oob="${'#' + id + '-active'}"
             th:hx-include="${search} ?: '#f-q'"
             th:hx-target="${target}"
             th:hx-select="${target}"
@@ -31,11 +32,18 @@
                         th:replace="~{components/icon :: sliders-horizontal(cls='size-4 text-muted-foreground')}"
                     ></svg>
                     Фильтры
+                    <span
+                        th:id="${id + '-active'}"
+                        class="badge"
+                        data-variant="secondary"
+                        th:hidden="${active == null or active == 0}"
+                        th:text="${active}"
+                    ></span>
                 </h2>
                 <div class="card-action text-muted-foreground">
                     <span
                         x-show="!open"
-                        th:attr="x-cloak=${open} ? true : null"
+                        th:attr="x-cloak=${open ?: false} ? true : null"
                         class="contents"
                     >
                         <svg
@@ -44,7 +52,7 @@
                     </span>
                     <span
                         x-show="open"
-                        th:attr="x-cloak=${open} ? null : true"
+                        th:attr="x-cloak=${open ?: false} ? null : true"
                         class="contents"
                     >
                         <svg
@@ -56,14 +64,14 @@
             <section
                 th:id="${id}"
                 x-show="open"
-                th:attr="x-cloak=${open} ? null : true"
+                th:attr="x-cloak=${open ?: false} ? null : true"
                 class="grid gap-4 sm:grid-cols-2"
                 th:classappend="${cols == 3} ? 'lg:grid-cols-3' : 'lg:grid-cols-4'"
                 th:insert="${fields}"
             ></section>
             <footer
                 x-show="open"
-                th:attr="x-cloak=${open} ? null : true"
+                th:attr="x-cloak=${open ?: false} ? null : true"
                 class="justify-end gap-2 border-t"
             >
                 <a th:href="@{${resetUrl ?: url}}" class="btn" data-variant="outline">

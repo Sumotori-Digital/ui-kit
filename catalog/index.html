@@ -1004,14 +1004,14 @@
             
         </div>
         
-        <form id="sg-list-filters-form" class="card" data-size="sm" data-variant="toolbar" action="#" method="get" hx-get="#" hx-include="#sg-q" hx-target="#sg-list-card" hx-select="#sg-list-card" hx-swap="outerHTML" hx-push-url="true" x-data="{ open: false }">
+        <form id="sg-list-filters-form" class="card" data-size="sm" data-variant="toolbar" action="#" method="get" hx-get="#" hx-include="#sg-q" hx-target="#sg-list-card" hx-select="#sg-list-card" hx-swap="outerHTML" hx-push-url="true" hx-select-oob="#sg-list-filters-active" x-data="{ open: false }">
             <header role="button" tabindex="0" aria-controls="sg-list-filters" x-bind:aria-expanded="open" @click="open = !open" @keydown.enter.prevent="open = !open" @keydown.space.prevent="open = !open">
                 <h2 class="flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 text-muted-foreground">
             <path d="M21 4h-7M10 4H3M21 12h-9M8 12H3M21 20h-5M12 20H3M14 2v4M8 10v4M16 18v4"></path>
         </svg>
                     Фильтры
-                    
+                    <span id="sg-list-filters-active" class="badge" data-variant="secondary">1</span>
                 </h2>
                 <div class="card-action text-muted-foreground">
                     <span x-show="!open" class="contents">
@@ -1344,9 +1344,9 @@
             </footer>
         </div>
     </div>
-    <p class="sg-note">На странице шапка оборачивается в <code>&lt;div class="list-toolbar" x-data="stickyToolbar"&gt;</code>: прилипает к верху и получает тень при прокрутке. Поиск кладётся в <code>actions</code> заголовка, фильтры под ним. Карточка списка: таблица от <code>md</code>, ниже <code>mobile-records</code>. Поиск и фильтры перерисовывают только карточку: сервер отдаёт всю страницу, <code>hx-select</code> вырезает блок. Заголовок колонки с сортировкой – <code>sortLink</code>: клик переключает направление, текущая колонка со стрелкой. В модели <code>sort</code> (<code>ListSort</code>), <code>sortInputs</code> кладётся в поля фильтров, чтобы фильтр, поиск и пагинация не сбрасывали сортировку; <code>url</code> – адрес списка с фильтрами, без сортировки. На телефоне таблица скрыта, поэтому над <code>mobile-records</code> ставится <code>sortSelect</code>: поле и направление одним выбором.</p>
+    <p class="sg-note">На странице шапка оборачивается в <code>&lt;div class="list-toolbar" x-data="stickyToolbar"&gt;</code>: прилипает к верху и получает тень при прокрутке. Поиск кладётся в <code>actions</code> заголовка, фильтры под ним. Панель фильтров по умолчанию закрыта, <code>active</code> – число активных фильтров: бейдж рядом с заголовком, обновляется вместе со списком. Раскрыть сразу – <code>open=true</code>. Карточка списка: таблица от <code>md</code>, ниже <code>mobile-records</code>. Поиск и фильтры перерисовывают только карточку: сервер отдаёт всю страницу, <code>hx-select</code> вырезает блок. Заголовок колонки с сортировкой – <code>sortLink</code>: клик переключает направление, текущая колонка со стрелкой. В модели <code>sort</code> (<code>ListSort</code>), <code>sortInputs</code> кладётся в поля фильтров, чтобы фильтр, поиск и пагинация не сбрасывали сортировку; <code>url</code> – адрес списка с фильтрами, без сортировки. На телефоне таблица скрыта, поэтому над <code>mobile-records</code> ставится <code>sortSelect</code>: поле и направление одним выбором.</p>
     <pre class="sg-usage">~{components/search :: search(id='f-q', value=${filter.q}, placeholder='…', url='/vehicles', include='#vehicle-filters-form', target='#vehicles-card', cls='w-full sm:w-64')}
-~{components/filters :: filters(id='vehicle-filters', url='/vehicles', target='#vehicles-card', open=${filter.hasPanelFilters()}, cols=4, search='#f-q', fields=~{:: #vehicle-filter-fields})}
+~{components/filters :: filters(id='vehicle-filters', url='/vehicles', target='#vehicles-card', active=${filter.activeFilters()}, cols=4, search='#f-q', fields=~{:: #vehicle-filter-fields})}
 &lt;ul class="mobile-records md:hidden"&gt;&lt;li&gt;&lt;div class="mobile-record-head"&gt;&lt;div class="mobile-record-main"&gt;&lt;a class="mobile-record-title"/&gt;&lt;div class="mobile-record-meta"/&gt;&lt;/div&gt;…&lt;/div&gt;&lt;dl class="mobile-record-facts"&gt;…&lt;/dl&gt;&lt;/li&gt;&lt;/ul&gt;
 ~{components/sort :: sortLink(label='Закупка', key='purchaseAt', sort=${sort}, url=${filterUrl}, target='#vehicles-card', first='desc')}   # внутри th; first – направление при первом клике, по умолчанию asc
 ~{components/sort :: sortInputs}   # внутри полей фильтров
