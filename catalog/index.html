@@ -317,6 +317,14 @@
     <p>Подсказка под полем</p>
 </div>
                         <div class="field">
+    <div class="field-label">
+        <label for="sg-addon">Значок у подписи</label>
+        <span class="badge" data-variant="secondary">новое</span>
+    </div>
+    <input id="sg-addon" name="addon" type="text" value="">
+    <p>labelAddon – свой элемент справа от подписи</p>
+</div>
+                        <div class="field">
     <label for="sg-disabled">Недоступно</label>
     <input id="sg-disabled" name="" type="text" value="Нельзя менять" disabled="disabled">
     
@@ -895,7 +903,7 @@
                     </p>
                 </div>
             </div>
-            <pre class="sg-usage">~{components/form :: inputField(name='email', label='Email', type='email', hint='…')}   # list='catalog-names' – подсказки из &lt;datalist&gt;
+            <pre class="sg-usage">~{components/form :: inputField(name='email', label='Email', type='email', hint='…')}   # list='catalog-names' – подсказки из &lt;datalist&gt;; labelAddon=~{:: #id} – элемент справа от подписи, есть у inputField, monthField и dateField
 ~{components/form :: inputControl(id='f-name', name='name', label='Имя', value=${…})}   # без th:object; disabled=true – значение только для чтения
 ~{components/form :: phoneField(name='phone', label='Телефон')}   # маска японского номера
 ~{components/form :: dateField(name='purchaseAt', label='Дата покупки')}   # дата: маска ДД.ММ.ГГГГ и календарь, клик по заголовку открывает выбор месяца, затем года; не зависит от локали браузера; в форму уходит ISO, поле LocalDate с @DateTimeFormat(iso = DATE)
@@ -939,7 +947,7 @@
 </div>
         </section>
     </div>
-    <pre class="sg-usage">~{components/meta :: metaLine(items=${ {'Добавлен …', 'Изменён …'} })}
+    <pre class="sg-usage">~{components/meta :: metaLine(items=${ {'Добавлен …', 'Изменён …'} })}   # placement='page' – под карточками на уровне страницы: отступ сверху и выравнивание по содержимому карточки
 &lt;span class="badge ms-2" data-variant="secondary"&gt;29&lt;/span&gt;</pre>
     <p class="sg-note">Вторичные сведения разделяются отступами и переносятся целыми пунктами. Пустые значения пропускаются. Счётчик — отдельный бейдж; заголовок с уточнением — через двоеточие. Декоративные точки-разделители не используем.</p>
 

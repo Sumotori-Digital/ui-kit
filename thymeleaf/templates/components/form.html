@@ -1,8 +1,16 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <body>
+<th:block th:fragment="fieldLabel(id, label, addon)">
+    <div class="field-label" th:if="${addon != null}">
+        <label th:for="${id}" th:text="${label}"></label>
+        <th:block th:replace="${addon}"></th:block>
+    </div>
+    <label th:unless="${addon != null}" th:for="${id}" th:text="${label}"></label>
+</th:block>
+
 <div th:fragment="inputField" class="field" th:with="invalid=${#fields.hasErrors(name)}, rules=${@fieldRules.of(#object, name)}" th:attr="data-invalid=${invalid} ? 'true' : null">
-    <label th:for="${name}" th:text="${label}"></label>
+    <th:block th:replace="~{:: fieldLabel(id=${name}, label=${label}, addon=${labelAddon})}"></th:block>
     <input th:type="${type ?: 'text'}" th:field="*{__${name}__}" th:placeholder="${placeholder}" th:autocomplete="${autocomplete}"
            th:required="${required}" th:autofocus="${autofocus}" th:step="${step}" th:min="${min}"
            th:classappend="${uppercase} ? 'uppercase'"
@@ -20,7 +28,7 @@
 </div>
 
 <div th:fragment="monthField" class="field" th:with="invalid=${#fields.hasErrors(name)}, rules=${@fieldRules.of(#object, name)}" th:attr="data-invalid=${invalid} ? 'true' : null">
-    <label th:for="${name}" th:text="${label}"></label>
+    <th:block th:replace="~{:: fieldLabel(id=${name}, label=${label}, addon=${labelAddon})}"></th:block>
     <div class="month-picker" x-data="monthPicker" x-on:click.outside="open = false" x-on:keydown.escape="open = false">
         <div class="input-group">
             <input type="text" th:field="*{__${name}__}" placeholder="ММ.ГГГГ" inputmode="numeric" maxlength="7" autocomplete="off"
@@ -65,7 +73,7 @@
 </div>
 
 <div th:fragment="dateField" class="field" th:with="invalid=${#fields.hasErrors(name)}, rules=${@fieldRules.of(#object, name)}" th:attr="data-invalid=${invalid} ? 'true' : null">
-    <label th:for="${name}" th:text="${label}"></label>
+    <th:block th:replace="~{:: fieldLabel(id=${name}, label=${label}, addon=${labelAddon})}"></th:block>
     <div class="date-picker" x-data="datePicker" x-on:click.outside="open = false" x-on:keydown.escape="open = false">
         <input type="hidden" th:id="${name + '-value'}" th:field="*{__${name}__}" x-ref="value" th:x-bind:disabled="${disabledWhen}">
         <th:block th:replace="~{:: datePickerBody(id=${name}, required=${required}, invalid=${invalid}, disabledWhen=${disabledWhen}, rules=${rules})}"></th:block>
